@@ -44,10 +44,10 @@ class TablaArticulos{
         TRAEMOS LA CATEGORÍA
         =============================================*/ 
 
-        $item = "id";
+/*         $item = "id";
         $valor = $articulos[$i]["id_marca"];
 
-        $marcas = ControladorMarcas::ctrMostrarMarcas($item, $valor);
+        $marcas = ControladorMarcas::ctrMostrarMarcas($item, $valor); */
         
         /*=============================================
         STOCK
@@ -77,7 +77,7 @@ class TablaArticulos{
             "'.($i+1).'",
             "'.$imagen.'",
             "'.$articulos[$i]["articulo"].'",
-            "'.$marcas["marca"].'",
+            "'.$articulos[$i]["marca"].'",
             "'.$articulos[$i]["modelo"].'",
             "'.$articulos[$i]["nombre"].'",
             "'.$articulos[$i]["color"].'",

@@ -6,9 +6,6 @@ require_once "../modelos/productos.modelo.php";
 require_once "../controladores/categorias.controlador.php";
 require_once "../modelos/categorias.modelo.php";
 
-require_once "../controladores/marcas.controlador.php";
-require_once "../modelos/marcas.modelo.php";
-
 class TablaProductos{
 
     /*=============================================
@@ -40,7 +37,7 @@ class TablaProductos{
         $item = "id";
         $valor = $productos[$i]["id_categoria"];
 
-        $marcas = ControladorMarcas::ctrMostrarMarcas($item, $valor);
+        $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
         
         /*=============================================
         STOCK
@@ -71,7 +68,7 @@ class TablaProductos{
             "'.$imagen.'",
             "'.$productos[$i]["codigo"].'",
             "'.$productos[$i]["descripcion"].'",
-            "'.$marcas["marca"].'",
+            "'.$categorias["categoria"].'",
             "'.$stock.'",
             "'.$productos[$i]["precio_compra"].'",
             "'.$productos[$i]["precio_venta"].'",
