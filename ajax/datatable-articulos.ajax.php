@@ -45,7 +45,7 @@ class TablaArticulos{
         =============================================*/ 
 
         $item = "id";
-        $valor = $articulos[$i]["id_categoria"];
+        $valor = $articulos[$i]["id_marca"];
 
         $marcas = ControladorMarcas::ctrMostrarMarcas($item, $valor);
         
@@ -76,13 +76,15 @@ class TablaArticulos{
             $datosJson .= '[
             "'.($i+1).'",
             "'.$imagen.'",
-            "'.$articulos[$i]["codigo"].'",
-            "'.$articulos[$i]["descripcion"].'",
+            "'.$articulos[$i]["articulo"].'",
             "'.$marcas["marca"].'",
-            "'.$stock.'",
-            "'.$articulos[$i]["precio_compra"].'",
-            "'.$articulos[$i]["precio_venta"].'",
-            "'.$articulos[$i]["fecha"].'",
+            "'.$articulos[$i]["modelo"].'",
+            "'.$articulos[$i]["nombre"].'",
+            "'.$articulos[$i]["color"].'",
+            "'.$articulos[$i]["talla"].'",
+            "'.$articulos[$i]["tipo"].'",
+            "'.$articulos[$i]["estado"].'",
+            "'.$articulos[$i]["stock"].'",
             "'.$botones.'"
             ],';        
             }
