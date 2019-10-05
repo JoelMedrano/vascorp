@@ -3,19 +3,9 @@
 require_once "../controladores/articulos.controlador.php";
 require_once "../modelos/articulos.modelo.php";
 
-require_once "../controladores/marcas.controlador.php";
+/* require_once "../controladores/marcas.controlador.php";
 require_once "../modelos/marcas.modelo.php";
-
-require_once "../controladores/colores.controlador.php";
-require_once "../modelos/colores.modelo.php";
-
-require_once "../controladores/categorias.controlador.php";
-require_once "../modelos/categorias.modelo.php";
-
-require_once "../controladores/productos.controlador.php";
-require_once "../modelos/productos.modelo.php";
-
-
+ */
 class TablaArticulos{
 
     /*=============================================
@@ -53,25 +43,42 @@ class TablaArticulos{
         STOCK
         =============================================*/ 
 
-        if($articulos[$i]["stock"] <= 10){
+        if($articulos[$i]["stock"] <= $articulos[$i]["ventas"] ){
 
-            $stock = "<button class='btn btn-danger'>".$articulos[$i]["stock"]."</button>";
-
-        }else if($articulos[$i]["stock"] > 11 && $articulos[$i]["stock"] <= 15){
-
-            $stock = "<button class='btn btn-warning'>".$articulos[$i]["stock"]."</button>";
+            $stock = "<button class='btn btn-danger btn-xs'>".$articulos[$i]["stock"]."</button>";
 
         }else{
 
-            $stock = "<button class='btn btn-success'>".$articulos[$i]["stock"]."</button>";
+            $stock = "<button class='btn btn-primary btn-xs'>".$articulos[$i]["stock"]."</button>";
 
-        }        
+        }
+        
+        /*=============================================
+        ESTADO
+        =============================================*/ 
+
+        if($articulos[$i]["estado"] == "DESCONTINUADO"){
+
+            /* $estado = "<button class='btn btn-danger btn-xs btnActivar'>".$articulos[$i]["id"]."</button>"; */
+            $estado = "<button class='btn btn-danger btn-xs btnActivar' idArticulo='".$articulos[$i]["id"]."' estadoArticulo='Activo'>Inactivo</button>";
+
+        }else if($articulos[$i]["estado"] == "CAMPAÑAD"){
+
+            $estado = "<button class='btn btn-warning btn-xs'>CAMPAÑAD</button>";
+
+        }else{
+
+            /* $estado = "<button class='btn btn-success btn-xs btnActivar'>".$articulos[$i]["id"]."</button>"; */
+            $estado = "<button class='btn btn-success btn-xs btnActivar' idArticulo='".$articulos[$i]["id"]."' estadoArticulo='DESCONTINUADO'>Activo</button>";
+
+        }
+
 
         /*=============================================
         TRAEMOS LAS ACCIONES
         =============================================*/         
         
-        $botones =  "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='".$articulos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarProducto' idProducto='".$articulos[$i]["id"]."' codigo='".$articulos[$i]["codigo"]."' imagen='".$articulos[$i]["imagen"]."'><i class='fa fa-times'></i></button></div>"; 
+        $botones =  "<div class='btn-group'><button class='btn btn-warning btnEditarArticulo' idArticulo='".$articulos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarArticulo'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarArticulo' idArticulo='".$articulos[$i]["id"]."' articulo='".$articulos[$i]["articulo"]."' imagen='".$articulos[$i]["imagen"]."'><i class='fa fa-times'></i></button></div>"; 
 
             $datosJson .= '[
             "'.($i+1).'",
@@ -83,8 +90,8 @@ class TablaArticulos{
             "'.$articulos[$i]["color"].'",
             "'.$articulos[$i]["talla"].'",
             "'.$articulos[$i]["tipo"].'",
-            "'.$articulos[$i]["estado"].'",
-            "'.$articulos[$i]["stock"].'",
+            "'.$estado.'",
+            "'.$stock.'",
             "'.$botones.'"
             ],';        
             }
