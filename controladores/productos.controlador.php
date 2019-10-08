@@ -155,7 +155,7 @@ class ControladorProductos{
 
 /*=============================================
 	EDITAR PRODUCTO
-	=============================================*/
+=============================================*/
 
 	static public function ctrEditarProducto(){
 

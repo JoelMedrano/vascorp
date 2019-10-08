@@ -122,7 +122,7 @@ MODAL AGREGAR MARCA
               
                 <span class="input-group-addon"><i class="fa fa-th"></i></span> 
 
-                <select class="form-control input-lg" id="nuevaCategoria" name="nuevaCategoria" required>
+                <select class="form-control input-lg" id="nuevaMarca" name="nuevaMarca" required>
                   
                   <option value="">Seleccionar marca</option>
 
@@ -154,7 +154,7 @@ MODAL AGREGAR MARCA
               
                 <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevaModelo" placeholder="Ingresar modelo" required>
+                <input type="text" class="form-control input-lg" id="nuevoModelo" name="nuevoModelo" placeholder="Ingresar modelo" required>
 
               </div>
 
@@ -168,7 +168,7 @@ MODAL AGREGAR MARCA
               
                 <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevaDescripcion" placeholder="Ingresar nombre" required>
+                <input type="text" class="form-control input-lg" id="nuevaDescripcion" name="nuevaDescripcion" placeholder="Ingresar nombre" required>
 
               </div>
 
@@ -205,6 +205,8 @@ MODAL AGREGAR MARCA
               </div>
 
             </div>
+            
+            <input type="hidden" name="color" id="color">
 
             <!-- ENTRADA PARA TALLAS -->
 
@@ -266,6 +268,8 @@ MODAL AGREGAR MARCA
 
             </div>       
 
+            <input type="hidden" name="talla" id="talla">
+
             <!-- ENTRADA PARA TIPO -->
 
             <div class="form-group">
@@ -308,7 +312,7 @@ MODAL AGREGAR MARCA
               
                 <span class="input-group-addon"><i class="fa fa-code"></i></span> 
 
-                <input type="text" class="form-control input-lg" id="nuevoCodigo" name="nuevoCodigo" placeholder="Ingresar código" required>
+                <input type="text" class="form-control input-lg" id="nuevoCodigo" name="nuevoCodigo" placeholder="Ingresar código" readonly required>
 
               </div>
 
@@ -340,12 +344,17 @@ MODAL AGREGAR MARCA
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Guardar producto</button>
+          <button type="submit" class="btn btn-primary">Guardar artículo</button>
 
         </div>
 
       </form>
+      <?php
 
+        $crearArticulo = new ControladorArticulos();
+        $crearArticulo -> ctrCrearArticulo();
+
+      ?>  
 
 
     </div>
@@ -355,3 +364,200 @@ MODAL AGREGAR MARCA
 </div>
 
 
+<!--=====================================
+MODAL EDITAR ARTICULO
+======================================-->
+
+<div id="modalEditarArticulo" class="modal fade" role="dialog">
+  
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <form role="form" method="post" enctype="multipart/form-data">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title">Editar articulo</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+
+          <div class="box-body">
+
+
+            <!-- ENTRADA PARA SELECCIONAR MARCA -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <select class="form-control input-lg" name="editarMarca" required readonly>
+                  
+                  <option id="editarMarca"></option>
+ 
+                </select>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EL MODELO -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="editarModelo" name="editarModelo" placeholder="Ingresar modelo" required readonly>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA LA DESCRIPCIÓN -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="editarDescripcion" name="editarDescripcion" placeholder="Ingresar nombre" required>
+
+              </div>
+
+            </div>            
+
+            <!-- ENTRADA PARA SELECCIONAR COLOR -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-dashboard"></i></span> 
+
+                <select class="form-control input-lg" name="editarColor" required readonly>
+                  
+                  <option id="editarColor"></option>
+
+  
+                </select>
+
+              </div>
+
+            </div>
+            
+            
+
+            <!-- ENTRADA PARA TALLAS -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-tag"></i></span> 
+
+                <select class="form-control input-lg"  name="editarTalla" required readonly>
+
+                  <option id="editarTalla"></option>
+
+                </select>
+
+              </div>
+
+            </div>       
+
+            <!-- ENTRADA PARA TIPO -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-text-height"></i></span> 
+
+                <select class="form-control input-lg" name="editarTipo" required readonly>
+                  
+                  <option id="editarTipo"></option>
+
+                </select>
+
+              </div>
+
+            </div>                      
+
+            <!-- ENTRADA PARA EL CÓDIGO -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-code"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="editarCodigo" name="editarCodigo" placeholder="Ingresar código" readonly required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA SUBIR FOTO -->
+
+             <div class="form-group">
+              
+              <div class="panel">SUBIR IMAGEN</div>
+
+              <input type="file" class="nuevaImagen" name="editarImagen">
+
+              <p class="help-block">Peso máximo de la imagen 2MB</p>
+
+              <img src="vistas/img/articulos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+
+              <input type="hidden" name="imagenActual" id="imagenActual">
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Guardar artículo</button>
+
+        </div>
+
+      </form>
+      <?php
+
+        $editarArticulo = new ControladorArticulos();
+        $editarArticulo -> ctrEditarArticulo();
+
+      ?>    
+
+      
+
+    </div>
+
+  </div>
+
+</div>

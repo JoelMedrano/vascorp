@@ -68,19 +68,89 @@ class ModeloArticulos{
 		$stmt = null;
 
 	}
+
+	/*=============================================
+	REGISTRO DE ARTICULO
+	=============================================*/
+	static public function mdlIngresarArticulo($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (articulo, id_marca, modelo, nombre, cod_color, color, cod_talla, talla, tipo, imagen) VALUES (:articulo, :id_marca, :modelo, :nombre, :cod_color, :color, :cod_talla, :talla, :tipo, :imagen)");
+
+		$stmt->bindParam(":articulo", $datos["articulo"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_marca", $datos["id_marca"], PDO::PARAM_STR);
+		$stmt->bindParam(":modelo", $datos["modelo"], PDO::PARAM_STR);
+		$stmt->bindParam(":nombre", $datos["descripcion"], PDO::PARAM_STR);
+		$stmt->bindParam(":cod_color", $datos["cod_color"], PDO::PARAM_STR);
+		$stmt->bindParam(":color", $datos["color"], PDO::PARAM_STR);
+		$stmt->bindParam(":cod_talla", $datos["cod_talla"], PDO::PARAM_STR);
+		$stmt->bindParam(":talla", $datos["talla"], PDO::PARAM_STR);
+		$stmt->bindParam(":tipo", $datos["tipo"], PDO::PARAM_STR);
+		$stmt->bindParam(":imagen", $datos["imagen"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			return "error";
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+
+	}	
+
 	
 	// Método para activar y desactivar un usuario
 	static public function mdlActualizarArticulo($tabla,$item1,$valor1,$item2,$valor2){
+
 		$sql="UPDATE $tabla SET $item1=:$item1 WHERE $item2=:$item2";
 		$stmt=Conexion::conectar()->prepare($sql);
+
 		$stmt->bindParam(":".$item1,$valor1,PDO::PARAM_STR);
 		$stmt->bindParam(":".$item2,$valor2,PDO::PARAM_STR);
+
 		if($stmt->execute()){
-			return "ok";}
-		else{
-			return "error";}
+
+			return "ok";
+		
+		}else{
+		
+			return "error";
+		
+		}
+		
 		$stmt=null;
 	}
+
+	/*=============================================
+	EDITAR ARTICULO
+	=============================================*/
+	static public function mdlEditarArticulo($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, imagen = :imagen WHERE articulo = :articulo");
+
+		$stmt->bindParam(":nombre", $datos["descripcion"], PDO::PARAM_STR);
+		$stmt->bindParam(":imagen", $datos["imagen"], PDO::PARAM_STR);
+		$stmt->bindParam(":articulo", $datos["articulo"], PDO::PARAM_STR);
+
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			return "error";
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+
+	}	
 
 
     

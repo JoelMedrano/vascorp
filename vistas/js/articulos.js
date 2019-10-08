@@ -89,3 +89,189 @@ $(document).on("click",".btnActivar",function(){
 		$(this).html("Activo");
 		$(this).attr("estadoArticulo","DESCONTINUADO");}
 });
+
+
+
+/*=============================================
+CAPTURANDO LOS DATOS PARA ASIGNAR CÓDIGO
+=============================================*/
+
+$("#nuevoModelo").change(function(){
+
+	var nuevoModelo = document.getElementById("nuevoModelo").value;
+	var nuevoColor = document.getElementById("nuevoColor").value;
+	var nuevaTalla = document.getElementById("nuevaTalla").value;
+
+	var nuevoCodigo = nuevoModelo+nuevoColor+nuevaTalla
+
+	/* console.log("nuevoCodigo", nuevoCodigo); */
+
+	$("#nuevoCodigo").val(nuevoCodigo);
+
+})
+
+$("#nuevoColor").change(function(){
+
+	var nuevoModelo = document.getElementById("nuevoModelo").value;
+	var nuevoColor = document.getElementById("nuevoColor").value;
+	var nuevaTalla = document.getElementById("nuevaTalla").value;
+
+	var nuevoCodigo = nuevoModelo+nuevoColor+nuevaTalla
+
+	/* console.log("nuevoCodigo", nuevoCodigo); */
+
+	$("#nuevoCodigo").val(nuevoCodigo);
+
+})
+
+$("#nuevaTalla").change(function(){
+
+	var nuevoModelo = document.getElementById("nuevoModelo").value;
+	var nuevoColor = document.getElementById("nuevoColor").value;
+	var nuevaTalla = document.getElementById("nuevaTalla").value;
+
+	var nuevoCodigo = nuevoModelo+nuevoColor+nuevaTalla
+
+	/* console.log("nuevoCodigo", nuevoCodigo); */
+
+	$("#nuevoCodigo").val(nuevoCodigo);
+
+})
+
+/*=============================================
+CAPTURANDO LOS DATOS PARA ASIGNAR NOMBRE DEL COLOR
+=============================================*/
+
+$("#nuevoColor").change(function(){
+
+	var nuevoColor = document.getElementById("nuevoColor");
+	var nuevoColorNombre = nuevoColor.options[nuevoColor.selectedIndex].text;
+	
+	var tamano = nuevoColorNombre.length;
+	var color = nuevoColorNombre.substring(5,tamano);
+
+/* 	console.log("nuevoColor", nuevoColorNombre);
+	console.log("tamano", tamano);
+	console.log("color", color); */
+
+	$("#color").val(color);
+
+
+})
+
+/*=============================================
+CAPTURANDO LOS DATOS PARA ASIGNAR NOMBRE DE LA TALLA
+=============================================*/
+
+$("#nuevaTalla").change(function(){
+
+	var nuevaTalla = document.getElementById("nuevaTalla");
+	var talla = nuevaTalla.options[nuevaTalla.selectedIndex].text;
+	
+/* 	console.log("nuevaTalla", talla); */
+
+	$("#talla").val(talla);
+
+
+})
+
+
+/*=============================================
+EDITAR ARTICULO
+=============================================*/
+
+$(".tablaArticulos tbody").on("click", "button.btnEditarArticulo", function(){
+
+	var idArticulo = $(this).attr("idArticulo");
+
+	console.log("idArticulo", idArticulo);
+
+	var datos = new FormData();
+	datos.append("idArticulo", idArticulo);
+	
+	$.ajax({
+
+		url:"ajax/articulos.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType:"json",
+		success:function(respuesta){
+
+			/* para sacar la marca */
+
+			var datosMarca = new FormData();
+			datosMarca.append("idMarca",respuesta["id_marca"]);
+
+			$.ajax({
+
+				url:"ajax/marcas.ajax.php",
+				method: "POST",
+				data: datosMarca,
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType:"json",
+				success:function(respuesta){
+					
+					$("#editarMarca").val(respuesta["id"]);
+					$("#editarMarca").html(respuesta["marca"]);
+	
+				}
+	
+			})
+
+			/* para sacar el color */
+
+			var datosColor = new FormData();
+			datosColor.append("idColor",respuesta["cod_color"]);
+
+			$.ajax({
+
+				url:"ajax/colores.ajax.php",
+				method: "POST",
+				data: datosColor,
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType:"json",
+				success:function(respuesta){
+					
+					$("#editarColor").val(respuesta["id"]);
+					$("#editarColor").html(respuesta["nom_color"]);
+	
+				}
+	
+			})			
+			
+			$("#editarCodigo").val(respuesta["articulo"]);
+
+			$("#editarModelo").val(respuesta["modelo"]);
+
+			$("#editarDescripcion").val(respuesta["nombre"]);
+
+			$("#editarTalla").val(respuesta["cod_talla"]);
+			$("#editarTalla").html(respuesta["talla"]);
+
+			$("#editarTipo").val(respuesta["tipo"]);
+			$("#editarTipo").html(respuesta["tipo"]);
+
+			if(respuesta["imagen"] != ""){
+
+				$("#imagenActual").val(respuesta["imagen"]);
+
+				$(".previsualizar").attr("src",  respuesta["imagen"]);
+
+			}
+
+  
+   
+		}
+  
+	})	
+
+
+
+})
