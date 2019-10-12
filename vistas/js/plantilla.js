@@ -52,3 +52,11 @@ $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
 $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
 //Money Euro
 $('[data-mask]').inputmask()  
+
+
+/* SELECT2 */
+
+/* 
+$(document).ready(function(){
+	$('#seleccionarCliente').select2();
+}); */

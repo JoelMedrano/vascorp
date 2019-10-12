@@ -553,11 +553,16 @@ MODAL EDITAR ARTICULO
         $editarArticulo -> ctrEditarArticulo();
 
       ?>    
-
-      
-
     </div>
 
   </div>
 
 </div>
+
+
+<?php
+
+  $eliminarArticulo = new ControladorArticulos();
+  $eliminarArticulo -> ctrEliminarArticulo();
+
+?> 

@@ -47,7 +47,10 @@ session_start();
   <link rel="stylesheet" href="vistas/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
 
   <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="vistas/plugins/iCheck/all.css">  
+  <link rel="stylesheet" href="vistas/plugins/iCheck/all.css"> 
+
+  <!-- SELECT2 -->
+  <link rel="stylesheet" href="vistas/bower_components/bootstrap-select/dist/css/bootstrap-select.min.css">
 
   <!--=====================================
   PLUGINS DE JAVASCRIPT
@@ -84,6 +87,12 @@ session_start();
   <script src="vistas/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
   <script src="vistas/plugins/input-mask/jquery.inputmask.extensions.js"></script>
   
+  <!-- bootstrap-select -->
+
+  <script src="vistas/bower_components/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+  <!-- jQuery Number -->
+  <script src="vistas/plugins/jqueryNumber/jquerynumber.min.js"></script>
 
 
 </head>
@@ -125,6 +134,7 @@ CUERPO DOCUMENTO
           $_GET["ruta"] == "clientes" ||
           $_GET["ruta"] == "ventas" ||
           $_GET["ruta"] == "crear-venta" ||
+          $_GET["ruta"] == "editar-venta" ||
           $_GET["ruta"] == "reportes" ||
           $_GET["ruta"] == "salir" ||
           $_GET["ruta"] == "articulos" ||
@@ -167,6 +177,7 @@ CUERPO DOCUMENTO
   <script src="vistas/js/categorias.js"></script>
   <script src="vistas/js/productos.js"></script>
   <script src="vistas/js/clientes.js"></script>
+  <script src="vistas/js/ventas.js"></script>
 
   <script src="vistas/js/articulos.js"></script>
   <script src="vistas/js/marcas.js"></script>

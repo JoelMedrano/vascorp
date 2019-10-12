@@ -184,7 +184,7 @@ $(".tablaArticulos tbody").on("click", "button.btnEditarArticulo", function(){
 
 	var idArticulo = $(this).attr("idArticulo");
 
-	console.log("idArticulo", idArticulo);
+	/* console.log("idArticulo", idArticulo); */
 
 	var datos = new FormData();
 	datos.append("idArticulo", idArticulo);
@@ -271,6 +271,43 @@ $(".tablaArticulos tbody").on("click", "button.btnEditarArticulo", function(){
 		}
   
 	})	
+
+
+
+})
+
+
+/*=============================================
+ELIMINAR PRODUCTO
+=============================================*/
+
+$(".tablaArticulos tbody").on("click", "button.btnEliminarArticulo", function(){
+
+	var idArticulo = $(this).attr("idArticulo");
+	var articulo = $(this).attr("articulo");
+	var imagen = $(this).attr("imagen");
+
+	/* console.log("idArticulo", idArticulo); */
+
+	swal({
+
+		title: '¿Está seguro de borrar el articulo?',
+		text: "¡Si no lo está puede cancelar la accíón!",
+		type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si, borrar producto!'
+        }).then(function(result) {
+        if (result.value) {
+
+        	window.location = "index.php?ruta=articulos&idArticulo="+idArticulo+"&imagen="+imagen+"&articulo="+articulo;
+
+        }
+
+
+	})
 
 
 

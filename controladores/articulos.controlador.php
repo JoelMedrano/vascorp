@@ -156,147 +156,192 @@ class controladorArticulos{
 	}
 
 
-/*=============================================
-	EDITAR ARTICULO
-=============================================*/
+	/*=============================================
+		EDITAR ARTICULO
+	=============================================*/
 
-static public function ctrEditarArticulo(){
+	static public function ctrEditarArticulo(){
 
-	if(isset($_POST["editarDescripcion"])){
+		if(isset($_POST["editarDescripcion"])){
 
-		if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDescripcion"])){
-
-			/*=============================================
-			VALIDAR IMAGEN
-			=============================================*/
-
-			   $ruta = $_POST["imagenActual"];
-
-			   if(isset($_FILES["editarImagen"]["tmp_name"]) && !empty($_FILES["editarImagen"]["tmp_name"])){
-
-				list($ancho, $alto) = getimagesize($_FILES["editarImagen"]["tmp_name"]);
-
-				$nuevoAncho = 500;
-				$nuevoAlto = 500;
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDescripcion"])){
 
 				/*=============================================
-				CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+				VALIDAR IMAGEN
 				=============================================*/
 
-				$directorio = "vistas/img/articulos/".$_POST["editarCodigo"];
+				$ruta = $_POST["imagenActual"];
 
-				/*=============================================
-				PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BD
-				=============================================*/
+				if(isset($_FILES["editarImagen"]["tmp_name"]) && !empty($_FILES["editarImagen"]["tmp_name"])){
 
-				if(!empty($_POST["imagenActual"]) && $_POST["imagenActual"] != "vistas/img/articulos/default/anonymous.png"){
+					list($ancho, $alto) = getimagesize($_FILES["editarImagen"]["tmp_name"]);
 
-					unlink($_POST["imagenActual"]);
-
-				}else{
-
-					mkdir($directorio, 0755);	
-				
-				}
-				
-				/*=============================================
-				DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-				=============================================*/
-
-				if($_FILES["editarImagen"]["type"] == "image/jpeg"){
+					$nuevoAncho = 500;
+					$nuevoAlto = 500;
 
 					/*=============================================
-					GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
 					=============================================*/
 
-					$aleatorio = mt_rand(100,999);
-
-					$ruta = "vistas/img/articulos/".$_POST["editarCodigo"]."/".$aleatorio.".jpg";
-
-					$origen = imagecreatefromjpeg($_FILES["editarImagen"]["tmp_name"]);						
-
-					$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-					imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-					imagejpeg($destino, $ruta);
-
-				}
-
-				if($_FILES["editarImagen"]["type"] == "image/png"){
+					$directorio = "vistas/img/articulos/".$_POST["editarCodigo"];
 
 					/*=============================================
-					GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+					PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BD
 					=============================================*/
 
-					$aleatorio = mt_rand(100,999);
+					if(!empty($_POST["imagenActual"]) && $_POST["imagenActual"] != "vistas/img/articulos/default/anonymous.png"){
 
-					$ruta = "vistas/img/articulos/".$_POST["editarCodigo"]."/".$aleatorio.".png";
+						unlink($_POST["imagenActual"]);
 
-					$origen = imagecreatefrompng($_FILES["editarImagen"]["tmp_name"]);						
+					}else{
 
-					$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+						mkdir($directorio, 0755);	
+					
+					}
+					
+					/*=============================================
+					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+					=============================================*/
 
-					imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+					if($_FILES["editarImagen"]["type"] == "image/jpeg"){
 
-					imagepng($destino, $ruta);
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+						$aleatorio = mt_rand(100,999);
+
+						$ruta = "vistas/img/articulos/".$_POST["editarCodigo"]."/".$aleatorio.".jpg";
+
+						$origen = imagecreatefromjpeg($_FILES["editarImagen"]["tmp_name"]);						
+
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+						imagejpeg($destino, $ruta);
+
+					}
+
+					if($_FILES["editarImagen"]["type"] == "image/png"){
+
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+						$aleatorio = mt_rand(100,999);
+
+						$ruta = "vistas/img/articulos/".$_POST["editarCodigo"]."/".$aleatorio.".png";
+
+						$origen = imagecreatefrompng($_FILES["editarImagen"]["tmp_name"]);						
+
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+						imagepng($destino, $ruta);
+
+					}
 
 				}
+
+				$tabla = "articulojf";
+
+				$datos = array("descripcion" => $_POST["editarDescripcion"],
+							"articulo" => $_POST["editarCodigo"],
+							"imagen" => $ruta);
+
+				$respuesta = ModeloArticulos::mdlEditarArticulo($tabla, $datos);
+
+				if($respuesta == "ok"){
+
+					echo'<script>
+
+						swal({
+							type: "success",
+							title: "El articulo ha sido editado correctamente",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar"
+							}).then(function(result){
+										if (result.value) {
+
+										window.location = "articulos";
+
+										}
+									})
+
+						</script>';
+
+				}
+
+
+			}else{
+
+				echo'<script>
+
+					swal({
+						type: "error",
+						title: "¡El articulo no puede ir con los campos vacíos o llevar caracteres especiales!",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){
+							if (result.value) {
+
+							window.location = "articulos";
+
+							}
+						})
+
+				</script>';
+			}
+		}
+
+	}	
+
+
+	/*=============================================
+	BORRAR ARTICULO
+	=============================================*/
+	static public function ctrEliminarArticulo(){
+
+		if(isset($_GET["idArticulo"])){
+
+			$tabla ="articulojf";
+			$datos = $_GET["idArticulo"];
+
+			if($_GET["imagen"] != "" && $_GET["imagen"] != "vistas/img/articulos/default/anonymous.png"){
+
+				unlink($_GET["imagen"]);
+				rmdir('vistas/img/articulos/'.$_GET["articulo"]);
 
 			}
 
-			$tabla = "articulojf";
-
-			$datos = array("descripcion" => $_POST["editarDescripcion"],
-						   "articulo" => $_POST["editarCodigo"],
-						   "imagen" => $ruta);
-
-			$respuesta = ModeloArticulos::mdlEditarArticulo($tabla, $datos);
+			$respuesta = ModeloArticulos::mdlEliminarArticulo($tabla, $datos);
 
 			if($respuesta == "ok"){
 
 				echo'<script>
 
-					swal({
-						  type: "success",
-						  title: "El articulo ha sido editado correctamente",
-						  showConfirmButton: true,
-						  confirmButtonText: "Cerrar"
-						  }).then(function(result){
-									if (result.value) {
-
-									window.location = "articulos";
-
-									}
-								})
-
-					</script>';
-
-			}
-
-
-		}else{
-
-			echo'<script>
-
 				swal({
-					  type: "error",
-					  title: "¡El articulo no puede ir con los campos vacíos o llevar caracteres especiales!",
+					  type: "success",
+					  title: "El articulo ha sido borrado correctamente",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar"
 					  }).then(function(result){
-						if (result.value) {
+								if (result.value) {
 
-						window.location = "articulos";
+								window.location = "articulos";
 
-						}
-					})
+								}
+							})
 
-			  </script>';
+				</script>';
+
+			}		
 		}
-	}
 
-}	
+
+	}	
 
 
 }
