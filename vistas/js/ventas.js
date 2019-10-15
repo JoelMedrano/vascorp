@@ -78,6 +78,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function () {
     dataType: "json",
     success: function (respuesta) {
 
+      var codigo=respuesta["codigo"];
       var descripcion = respuesta["descripcion"];
       var stock = respuesta["stock"];
       var precio = respuesta["precio_venta"];
@@ -112,7 +113,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function () {
 
         '<span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto="' + idProducto + '"><i class="fa fa-times"></i></button></span>' +
 
-        '<input type="text" class="form-control nuevaDescripcionProducto" idProducto="' + idProducto + '" name="agregarProducto" value="' + descripcion + '" readonly required>' +
+        '<input type="text" class="form-control nuevaDescripcionProducto" idProducto="' + idProducto + '" name="agregarProducto" value="' + descripcion + '" codigoP="'+codigo+'" readonly required>' +
 
         '</div>' +
 
@@ -293,7 +294,7 @@ $(".btnAgregarProducto").click(function () {
 
         '<span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto><i class="fa fa-times"></i></button></span>' +
 
-        '<select class="form-control nuevaDescripcionProducto" id="producto' + numProducto + '" idProducto name="nuevaDescripcionProducto" required>' +
+        '<select class="form-control nuevaDescripcionProducto" id="producto' + numProducto + '" idProducto codigoP name="nuevaDescripcionProducto" required>' +
 
         '<option>Seleccione el producto</option>' +
 
@@ -673,6 +674,7 @@ function listarProductos() {
 
     listaProductos.push({
       "id": $(descripcion[i]).attr("idProducto"),
+      "codigo":$(descripcion[i]).attr("codigoP"),
       "descripcion": $(descripcion[i]).val(),
       "cantidad": $(cantidad[i]).val(),
       "stock": $(cantidad[i]).attr("nuevoStock"),
@@ -694,7 +696,7 @@ LISTAR MÉTODO DE PAGO
 
 function listarMetodos() {
 
-	var listaMetodos = "";
+	var listarMetodos = "";
 
 	if ($("#nuevoMetodoPago").val() == "Efectivo") {
 
@@ -716,10 +718,13 @@ $(".tablas").on("click", ".btnEditarVenta", function () {
 
 	var idVenta = $(this).attr("idVenta");
 
-	window.location = "index.php?ruta=editar-venta&idVenta=" + idVenta;
-
-
+  window.location = "index.php?ruta=editar-venta&idVenta=" + idVenta;
+  
 })
+
+// Formato para los números en las cajas
+$(".precioProducto").number(true,0);
+$("#totalVenta").number(true,0);
 
 
 /*=============================================
@@ -774,20 +779,44 @@ $(".tablas").on("click", ".btnEliminarVenta", function () {
 	var idVenta = $(this).attr("idVenta");
 
 	swal({
-		title: '¿Está seguro de borrar la venta?',
-		text: "¡Si no lo está puede cancelar la accíón!",
-		type: 'warning',
+		type: "warning",
+		title: "Advertencia",
+		text: "¿Está seguro de eliminar la Venta? ¡Si no está seguro, puede cancelar la acción!",
 		showCancelButton: true,
 		confirmButtonColor: '#3085d6',
 		cancelButtonColor: '#d33',
-		cancelButtonText: 'Cancelar',
-		confirmButtonText: 'Si, borrar venta!'
-	}).then(function (result) {
-		if (result.value) {
+		confirmButtonText: "¡Si, eliminar Venta!",
+		cancelButtonText: "Cancelar",
+	}).then(function(result){
+		if(result.value){
+			var datos=new FormData();
+			datos.append("idVenta",idVenta);
+			$.ajax({
+				url:"ajax/ventas.ajax.php",
+				type:"POST",
+				data:datos,
+				cache:false,
+				contentType:false,
+				processData:false,
+				success:function(respuesta){
 
-			window.location = "index.php?ruta=ventas&idVenta=" + idVenta;
+          /* console.log("respuestaaaaaa", respuesta); */
+
+					if(respuesta=="ok"){
+						swal({
+							type: "success",
+							title: "¡Ok!",
+							text: "¡La información fue Eliminada con éxito!",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar"
+						}).then((result)=>{
+							if(result.value){
+                window.location="ventas";
+              }
+						});}
+				}
+			});
 		}
-
-	})
+	});
 
 })

@@ -126,12 +126,6 @@
 
         </table>
 
-        <?php
-
-          $eliminarVenta = new ControladorVentas();
-          $eliminarVenta -> ctrEliminarVenta();
-
-        ?>        
 
       </div>
 

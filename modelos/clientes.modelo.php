@@ -4,6 +4,36 @@ require_once "conexion.php";
 
 class ModeloClientes{
 
+
+	// Método para mostrar un Cliente de la BD
+	static public function mdlMostrarCliente($tabla,$item,$valor){
+
+		if($item!=null){
+
+			$sql="SELECT * FROM $tabla WHERE $item=:$item";
+			$stmt=Conexion::conectar()->prepare($sql);
+			$stmt->bindParam(":".$item,$valor,PDO::PARAM_STR);
+			$stmt->execute();
+
+			# Retornamos un fetch por ser una sola línea la que necesitamos devolver
+
+			return $stmt->fetch();
+		}else{
+
+			$sql="SELECT * FROM $tabla ORDER BY nombre";
+			$stmt=Conexion::conectar()->prepare($sql);
+
+			$stmt->execute();
+			
+			# Retornamos un fetchAll por ser más de una línea la que necesitamos devolver
+			return $stmt->fetchAll();
+		}
+
+		$stmt->close();
+
+		$stmt=null;
+	}	
+
 	/*=============================================
 	CREAR CLIENTE
 	=============================================*/

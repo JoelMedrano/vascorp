@@ -82,7 +82,7 @@
 </div>
 
 <!--=====================================
-MODAL AGREGAR MARCA
+MODAL AGREGAR ARTICULO
 ======================================-->
 
 <div id="modalAgregarArticulo" class="modal fade" role="dialog">
@@ -566,3 +566,5 @@ MODAL EDITAR ARTICULO
   $eliminarArticulo -> ctrEliminarArticulo();
 
 ?> 
+
+

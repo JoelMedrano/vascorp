@@ -88,13 +88,28 @@
 
                         </a>
 
-                    </li>                                            
+                    </li>
 
                 </ul>
 
             </li>
 
             <!-- fin maestros -->
+
+            <!-- inicio tarjetas -->
+
+            <li>
+
+                <a href="crear-tarjeta">
+
+                    <i class="fa fa-id-card-o"></i>
+                    <span>Tarjetas</span>
+
+                </a>
+
+            </li>
+
+            <!-- fin tarjetas -->
 
             <li>
 
