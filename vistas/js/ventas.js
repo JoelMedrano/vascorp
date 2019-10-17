@@ -366,7 +366,7 @@ $(".btnAgregarProducto").click(function () {
 
 
 /*=============================================
-SELECCIONAR PRODUCTO
+SELECCIONAR PRODUCTO DESDE DISPOSITIVOS
 =============================================*/
 
 $(".formularioVenta").on("change", "select.nuevaDescripcionProducto", function () {

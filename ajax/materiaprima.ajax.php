@@ -16,7 +16,7 @@ class AjaxMateriaPrima{
 
   public function ajaxEditarMateriaPrima(){
 
-	$item = "codpro";
+	$item = "Codpro";
 	$valor = $this->idMateriaPrima;
 
 	$respuesta = ControladorMateriaPrima::ctrMostrarMateriaPrima($item, $valor);

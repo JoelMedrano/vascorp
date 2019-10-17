@@ -72,9 +72,9 @@ $(".tablaMateriaPrima tbody").on("click", "button.btnEditarMateriaPrima", functi
 		dataType:"json",
 		success:function(respuesta){
 
-            console.log("respuesta", respuesta);
+            /* console.log("codpro", respuesta["Codpro"]); */
 			
-			$("#editarCodigo").val(respuesta["CodPro"]);
+			$("#editarCodigo").val(respuesta["Codpro"]);
 
 			$("#editarDescripcion").val(respuesta["DesPro"]);
  

@@ -12,7 +12,32 @@ class ModeloMateriaPrima{
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY codpro ASC");
+			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT   	
+														p.Codpro,
+														SUBSTRING(p.CodFab, 1, 6) AS codlinea,
+														tb4.Des_larga AS linea,
+														p.DesPro,
+														CONCAT(p.DesPro,' - ',tb.Des_Larga) AS descripcion,
+														p.CodAlm01,
+														tb.Des_Larga AS color,
+														tb2.Des_Corta AS unidad,
+														p.cospro 
+													FROM $tabla AS p,
+														Tabla_M_Detalle AS tb,
+														Tabla_M_Detalle AS tb1,
+														Tabla_M_Detalle AS tb2,
+														Tabla_M_Detalle AS tb4 			
+													WHERE $item = :$item 
+														AND tb.Cod_Tabla IN ('TCOL') 
+														AND tb2.Cod_Tabla IN ('TUND') 
+														AND tb4.Cod_Tabla IN ('TLIN') 
+														AND tb1.Cod_Tabla IN ('TSUB') 
+														AND tb.Cod_Argumento = p.ColPro 
+														AND tb2.Cod_Argumento = p.UndPro 
+														AND LEFT(p.CodFab, 3) = tb4.Des_Corta 
+														AND SUBSTRING(p.CodFab, 4, 3) = tb1.Valor_3 
+														AND tb4.Des_Corta = tb1.Des_Corta
+														ORDER BY SUBSTRING(CodFab, 1, 6) ASC");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
@@ -46,7 +71,7 @@ class ModeloMateriaPrima{
                                                         AND LEFT(p.CodFab, 3) = tb4.Des_Corta 
                                                         AND SUBSTRING(p.CodFab, 4, 3) = tb1.Valor_3 
                                                         AND tb4.Des_Corta = tb1.Des_Corta 
-                                                    ORDER BY p.CodPro ASC");
+                                                    ORDER BY SUBSTRING(p.CodFab, 1, 6) ASC");
 
 			$stmt -> execute();
 

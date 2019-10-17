@@ -11,73 +11,6 @@ class TablaMateriaPrima{
 
     public function mostrarTablaMateriaPrima(){
 
-
-/*         echo '{"data": [[
-            "1",
-            "00001",
-            "CIN001",
-            "CINTA",
-            "CINTA BEBE ANCHA 7MM",
-            "1040.000000",
-            "VERDE MILITAR",
-            "MTS",
-            "0.063900",
-            "botones"
-            ],[
-            "2",
-            "00002",
-            "ADH002",
-            "ADHESIVO",
-            "AUTOADHESIVO PARA HANG TAG",
-            "0.000000",
-            "BLANCO",
-            "UND",
-            "0.005900",
-            "botones"
-            ],[
-            "3",
-            "00004",
-            "ADH003",
-            "ADHESIVO",
-            "AUTOADHESIVO TALLERO",
-            "0.000000",
-            "6",
-            "UND",
-            "0.002000",
-            "botones"
-            ],[
-            "4",
-            "00005",
-            "ADH003",
-            "ADHESIVO",
-            "AUTOADHESIVO TALLERO",
-            "0.000000",
-            "8",
-            "UND",
-            "0.002000",
-            "botones"
-            ],[
-            "5",
-            "00006",
-            "ADH003",
-            "ADHESIVO",
-            "AUTOADHESIVO TALLERO",
-            "0.000000",
-            "10",
-            "UND",
-            "0.002000",
-            "botones"
-            ]]}';
- */
-
-
-
-
-
-
-
-
-
         $item = null;     
         $valor = null;
 
@@ -91,8 +24,6 @@ class TablaMateriaPrima{
             /*=============================================
             TRAEMOS LAS ACCIONES
             =============================================*/         
-            
-/*             $botones =  "<div class='btn-group'><button class='btn btn-warning btnEditarMateriaPrima' idMateriaPrima='".$materiaprima[$i]["codigo"]."' data-toggle='modal' data-target='#modalEditarMateriaPrima'><i class='fa fa-pencil'></i></button></div>";  */
 
                 $botones = "<div class='btn-group'><button class='btn btn-warning btnEditarMateriaPrima' idMateriaPrima='".$materiaprima[$i]["codigo"]."' data-toggle='modal' data-target='#modalEditarMateriaPrima'><i class='fa fa-pencil'></i></button></div>";
     

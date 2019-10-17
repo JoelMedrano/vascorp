@@ -70,6 +70,53 @@ class ModeloArticulos{
 	}
 
 	/*=============================================
+	MOSTRAR ARTICULOS
+	=============================================*/
+
+	static public function mdlMostrarSinTarjeta($tabla, $item, $valor){
+
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id DESC");
+
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+			$stmt -> execute();
+
+			return $stmt -> fetch();
+
+		}else{
+
+			$stmt = Conexion::conectar()->prepare("SELECT 	a.id,
+															a.articulo,
+															CONCAT(
+																a.modelo,
+																' - ',
+																a.nombre,
+																' - ',
+																a.color,
+																' - ',
+																a.talla
+															) AS packing 
+														FROM
+															$tabla a 
+															WHERE a.tarjeta = 'no' 
+  															AND a.estado = 'activo'");
+
+			$stmt -> execute();
+
+			return $stmt -> fetchAll();
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}	
+	
+
+	/*=============================================
 	REGISTRO DE ARTICULO
 	=============================================*/
 	static public function mdlIngresarArticulo($tabla, $datos){

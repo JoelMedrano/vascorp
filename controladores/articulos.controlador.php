@@ -17,6 +17,20 @@ class controladorArticulos{
 	}
 
 	/*=============================================
+	MOSTRAR SIN TARJETA
+	=============================================*/
+
+	static public function ctrMostrarSinTarjeta($item, $valor){
+
+		$tabla = "articulojf";
+
+		$respuesta = ModeloArticulos::mdlMostrarSinTarjeta($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}	
+
+	/*=============================================
 	CREAR ARTICULO
 	=============================================*/
 

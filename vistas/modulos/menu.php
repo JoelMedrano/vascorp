@@ -98,14 +98,47 @@
 
             <!-- inicio tarjetas -->
 
-            <li>
+            <li class="treeview">
 
-                <a href="crear-tarjeta">
+                <a href="#">
 
                     <i class="fa fa-id-card-o"></i>
+
                     <span>Tarjetas</span>
 
+                    <span class="pull-right-container">
+
+                        <i class="fa fa-angle-left pull-right"></i>
+
+                    </span>
+
                 </a>
+
+                <ul class="treeview-menu">
+
+                    <li>
+
+                        <a href="tarjetas">
+
+                            <i class="fa fa-circle-o"></i>
+                            <span>Administrar Tarjetas</span>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="crear-tarjeta">
+
+                            <i class="fa fa-circle-o"></i>
+                            <span>Crear Tarjeta</span>
+
+                        </a>
+
+                    </li>
+
+                </ul>
 
             </li>
 
