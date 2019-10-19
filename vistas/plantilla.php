@@ -141,6 +141,7 @@ CUERPO DOCUMENTO
           $_GET["ruta"] == "materiaprima" ||
           $_GET["ruta"] == "tarjetas" ||
           $_GET["ruta"] == "crear-tarjeta" ||
+          $_GET["ruta"] == "editar-tarjeta" ||
           $_GET["ruta"] == "marcas" ||
           $_GET["ruta"] == "colores"){
 

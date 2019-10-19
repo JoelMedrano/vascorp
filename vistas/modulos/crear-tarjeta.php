@@ -69,25 +69,30 @@
 
                     <?php
 
-                      $item = null;
-                      $valor = null;
 
-                      $tarjetas = ControladorTarjetas::ctrMostrarTarjetas($item, $valor);
+                      $ult_codigo = ControladorTarjetas::ctrUltimoCodigoTarjeta();
 
-                      if(!$tarjetas){
+                      if(!$ult_codigo){
 
                         echo '<input type="text" class="form-control" id="nuevaTarjeta" name="nuevaTarjeta" value="10001" readonly>';
 
 
                       }else{
 
-                        foreach ($tarjetas as $key => $value) {
+                        foreach ($ult_codigo as $key => $value) {
                           
                           
                         
                         }
 
-                        $codigo = $value["codigo"] + 1;
+                        $codigo = $value["ultimo_codigo"]+1;
+
+                        /* 
+                        ! como esta sumando el codigo
+                        */
+
+                        /* var_dump("ultimo_codigo", $ult_codigo);
+                        var_dump("ultimo_codigo", $codigo); */
 
 
 
@@ -181,35 +186,43 @@
 
                       <tbody>
 
-                        <tr>
+                      <tr>
 
-                          <td style="width: 50%">
+                        <td style="width: 50%">
 
-                            <div class="input-group">
+                          <div class="input-group">
 
-                              <input type="number" class="form-control" min="0" value="18" id="nuevoImpuestoVenta"
-                                name="nuevoImpuestoVenta" placeholder="0" required>
-                              <span class="input-group-addon"><i class="fa fa-percent"></i></span>
+                            <input type="number" class="form-control input-lg" min="0" value="18" id="nuevoImpuestoTarjeta"
+                              name="nuevoImpuestoTarjeta" placeholder="0" required>
 
-                            </div>
+                            <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" required>
 
-                          </td>
-
-                          <td style="width: 50%">
-
-                            <div class="input-group">
-
-                              <span class="input-group-addon"><i class="fa fa-money"></i></span>
-
-                              <input type="number" min="1" class="form-control" id="nuevoTotalVenta"
-                                name="nuevoTotalVenta" placeholder="00000" readonly required>
+                            <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" required>
 
 
-                            </div>
+                            <span class="input-group-addon"><i class="fa fa-percent"></i></span>
 
-                          </td>
+                          </div>
 
-                        </tr>
+                        </td>
+
+                        <td style="width: 50%">
+
+                          <div class="input-group">
+
+                            <span class="input-group-addon"><i class="fa fa-money"></i></span>
+
+                            <input type="text" min="1" class="form-control input-lg" id="nuevoTotalTarjeta"
+                              name="nuevoTotalTarjeta" total="" placeholder="00000" readonly required>
+
+                            <input type="hidden" name="totalTarjeta" id="totalTarjeta">
+
+
+                          </div>
+
+                        </td>
+
+                      </tr>
 
                       </tbody>
 

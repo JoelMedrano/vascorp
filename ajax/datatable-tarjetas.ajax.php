@@ -64,7 +64,6 @@ class TablaTarjetas{
             $botones =  "<div class='btn-group'><button class='btn btn-warning btnEditarTarjeta' idTarjeta='".$tarjetas[$i]["id"]."'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarTarjeta' idTarjeta='".$tarjetas[$i]["id"]."'><i class='fa fa-times'></i></button></div>"; 
     
                 $datosJson .= '[
-                "'.($i+1).'",
                 "'.$tarjetas[$i]["codigo"].'",
                 "'.$estado_tarjeta.'",
                 "'.$tarjetas[$i]["fecha"].'",

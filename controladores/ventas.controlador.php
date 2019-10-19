@@ -16,16 +16,16 @@ class ControladorVentas{
 
 	}
 
-		// Método para Mostrar los detalles de ventas
-		static public function ctrMostrarDetallesVentas($item,$valor){
+	// Método para Mostrar los detalles de ventas
+	static public function ctrMostrarDetallesVentas($item,$valor){
 
-			$tabla="detalles_ventajf";
+		$tabla="detalles_ventajf";
 
-			$respuesta=ModeloVentas::mdlMostraDetallesVentas($tabla,$item,$valor);
+		$respuesta=ModeloVentas::mdlMostraDetallesVentas($tabla,$item,$valor);
 
-			return $respuesta;
+		return $respuesta;
 
-		}
+	}
 	
 	/*=============================================
 	CREAR VENTA
@@ -85,6 +85,7 @@ class ControladorVentas{
 					ModeloVentas::mdlActualizarUnDato($tabla,$item2,$valor2,$valor);
 
 				}
+
 				
 				# Traemos la información del cliente
 				$tabla="clientesjf";

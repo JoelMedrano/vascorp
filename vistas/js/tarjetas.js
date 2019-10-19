@@ -169,13 +169,13 @@ $(".tablaMateriaPrimaTarjetas tbody").on("click", "button.agregarMP", function (
 	
 			'</div>');
   
-			/* AQUI AGREGAR SUMARTOTALPRECIOS - AGREGAR IMPUESTOS - LISTAR PRODUCTOS */
+			/* AQUI AGREGAR SUMARTOTALPRECIOST - AGREGAR IMPUESTOS - LISTAR PRODUCTOS */
 
-			sumarTotalPrecios();
+			sumarTotalPreciosT();
 
 			$(".nuevoPrecioProducto").number(true, 6);
 
-			agregarImpuesto();
+			agregarImpuestoT();
 
 			listarMP();
 
@@ -256,19 +256,19 @@ $(".formularioMateriaPrima").on("click", "button.quitarMP", function () {
 
   if ($(".nuevaMateriaPrima").children().length == 0) {
 
-    $("#nuevoImpuestoVenta").val(0);
-    $("#nuevoTotalVenta").val(0);
-    $("#totalVenta").val(0);
-    $("#nuevoTotalVenta").attr("total", 0);
+    $("#nuevoImpuestoTarjeta").val(0);
+    $("#nuevoTotalTarjeta").val(0);
+    $("#totalTarjeta").val(0);
+    $("#nuevoTotalTarjeta").attr("total", 0);
 
   } else {
 
-/* AQUI AGREGAR SUMARTOTALPRECIOS - AGREGAR IMPUESTOS - LISTAR PRODUCTOS */
+/* AQUI AGREGAR SUMARTOTALPRECIOST - AGREGAR IMPUESTOS - LISTAR PRODUCTOS */
 
 
-	sumarTotalPrecios();
+	sumarTotalPreciosT();
 
-	agregarImpuesto();
+	agregarImpuestoT();
 
 	listarMP();
 
@@ -298,11 +298,11 @@ $(".formularioMateriaPrima").on("change", "input.nuevaCantidadProducto", functio
 	precio.val(precioFinal);
   
   
-/* AQUI AGREGAR SUMARTOTALPRECIOS - AGREGAR IMPUESTOS - LISTAR PRODUCTOS */
+/* AQUI AGREGAR SUMARTOTALPRECIOST - AGREGAR IMPUESTOS - LISTAR PRODUCTOS */
 
-	sumarTotalPrecios();
+	sumarTotalPreciosT();
 
-	agregarImpuesto();
+	agregarImpuestoT();
 	
 	listarMP();
   
@@ -313,20 +313,20 @@ $(".formularioMateriaPrima").on("change", "input.nuevaCantidadProducto", functio
 SUMAR TODOS LOS PRECIOS
 =============================================*/
 
-function sumarTotalPrecios() {
+function sumarTotalPreciosT() {
 
 	var precioItem = $(".nuevoPrecioProducto");
   
-	var arraySumaPrecio = [];
+	var arraySumaPrecioT = [];
   
 	for (var i = 0; i < precioItem.length; i++) {
   
-	  arraySumaPrecio.push(Number($(precioItem[i]).val()));
+	  arraySumaPrecioT.push(Number($(precioItem[i]).val()));
   
   
 	}
   
-	  /* console.log("arraySumaPrecio", arraySumaPrecio); */
+	  /* console.log("arraySumaPrecioT", arraySumaPrecioT); */
   
 	function sumaArrayPrecios(total, numero) {
   
@@ -334,13 +334,13 @@ function sumarTotalPrecios() {
   
 	}
   
-	var sumaTotalPrecio = arraySumaPrecio.reduce(sumaArrayPrecios);
+	var sumaTotalPrecio = arraySumaPrecioT.reduce(sumaArrayPrecios);
   
 	  /* console.log("sumaTotalPrecio", sumaTotalPrecio); */
   
-	$("#nuevoTotalVenta").val(sumaTotalPrecio);
-		$("#totalVenta").val(sumaTotalPrecio);
-	$("#nuevoTotalVenta").attr("total", sumaTotalPrecio);
+	$("#nuevoTotalTarjeta").val(sumaTotalPrecio);
+		$("#totalTarjeta").val(sumaTotalPrecio);
+	$("#nuevoTotalTarjeta").attr("total", sumaTotalPrecio);
   
   
   }
@@ -349,18 +349,18 @@ function sumarTotalPrecios() {
 FUNCIÓN AGREGAR IMPUESTO
 =============================================*/
 
-function agregarImpuesto() {
+function agregarImpuestoT() {
 
-	var impuesto = $("#nuevoImpuestoVenta").val();
-	var precioTotal = $("#nuevoTotalVenta").attr("total");
+	var impuesto = $("#nuevoImpuestoTarjeta").val();
+	var precioTotal = $("#nuevoTotalTarjeta").attr("total");
   
 	var precioImpuesto = Number(precioTotal * impuesto / 100);
   
 	var totalConImpuesto = Number(precioImpuesto) + Number(precioTotal);
   
-	$("#nuevoTotalVenta").val(totalConImpuesto);
+	$("#nuevoTotalTarjeta").val(totalConImpuesto);
   
-	$("#totalVenta").val(totalConImpuesto);
+	$("#totalTarjeta").val(totalConImpuesto);
   
 	$("#nuevoPrecioImpuesto").val(precioImpuesto);
   
@@ -372,9 +372,9 @@ function agregarImpuesto() {
   CUANDO CAMBIA EL IMPUESTO
   =============================================*/
   
-  $("#nuevoImpuestoVenta").change(function () {
+  $("#nuevoImpuestoTarjeta").change(function () {
   
-	agregarImpuesto();
+	agregarImpuestoT();
   
   });
 
@@ -382,7 +382,7 @@ function agregarImpuesto() {
 FORMATO AL PRECIO FINAL
 =============================================*/
 
-$("#nuevoTotalVenta").number(true, 6);
+$("#nuevoTotalTarjeta").number(true, 6);
 
 
 /*=============================================
@@ -393,7 +393,7 @@ LISTAR TODOS LOS PRODUCTOS
 function listarMP() {
 
 	var listaMP = [];
-  
+
 	var descripcion = $(".nuevaDescripcionProducto");
   
 	var cantidad = $(".nuevaCantidadProducto");
@@ -413,8 +413,122 @@ function listarMP() {
   
 	}
   
+	/* 
+	! comentar luego de prubas
+	*/
 	/* console.log("listaMP", JSON.stringify(listaMP)); */
   
 	$("#listaMP").val(JSON.stringify(listaMP));
   
   }
+
+/*=============================================
+BOTON EDITAR TARJETA
+=============================================*/
+$(".tablaTarjetas").on("click", ".btnEditarTarjeta", function () {
+
+	var idTarjeta = $(this).attr("idTarjeta");
+
+  window.location = "index.php?ruta=editar-tarjeta&idTarjeta=" + idTarjeta;
+  
+})
+
+// Formato para los números en las cajas
+$(".nuevoPrecioProducto").number(true,6);
+$("#totalTarjeta").number(true,6);
+
+
+/*=============================================
+FUNCIÓN PARA DESACTIVAR LOS BOTONES AGREGAR CUANDO EL PRODUCTO YA HABÍA SIDO SELECCIONADO EN LA CARPETA
+=============================================*/
+
+function quitarAgregarProductoT() {
+
+	//Capturamos todos los id de productos que fueron elegidos en la venta
+	var idMateriaPrima = $(".quitarMP");
+
+	//Capturamos todos los botones de agregar que aparecen en la tabla
+	var botonesTablaT = $(".tablaMateriaPrimaTarjetas tbody button.agregarMP");
+
+	//Recorremos en un ciclo para obtener los diferentes idMateriaPrima que fueron agregados a la venta
+	for (var i = 0; i < idMateriaPrima.length; i++) {
+
+		//Capturamos los Id de los productos agregados a la venta
+		var boton = $(idMateriaPrima[i]).attr("idMateriaPrima");
+
+		//Hacemos un recorrido por la tabla que aparece para desactivar los botones de agregar
+		for (var j = 0; j < botonesTablaT.length; j++) {
+
+			if ($(botonesTablaT[j]).attr("idMateriaPrima") == boton) {
+
+				$(botonesTablaT[j]).removeClass("btn-primary agregarMP");
+				$(botonesTablaT[j]).addClass("btn-default");
+
+			}
+		}
+
+	}
+
+}
+
+
+/*=============================================
+CADA VEZ QUE CARGUE LA TABLA CUANDO NAVEGAMOS EN ELLA EJECUTAR LA FUNCIÓN:
+=============================================*/
+
+$('.tablaMateriaPrimaTarjetas').on('draw.dt', function () {
+
+	quitarAgregarProductoT();
+
+})
+
+/*=============================================
+BORRAR TARJETA
+=============================================*/
+$(".tablaTarjetas").on("click", ".btnEliminarTarjeta", function () {
+
+	var idTarjeta = $(this).attr("idTarjeta");
+
+	swal({
+		type: "warning",
+		title: "Advertencia",
+		text: "¿Está seguro de eliminar la Tarjeta? ¡Si no está seguro, puede cancelar la acción!",
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: "¡Si, eliminar Tarjeta!",
+		cancelButtonText: "Cancelar",
+	}).then(function (result) {
+		if (result.value) {
+			var datos = new FormData();
+			datos.append("idTarjeta", idTarjeta);
+			$.ajax({
+				url: "ajax/tarjetas.ajax.php",
+				type: "POST",
+				data: datos,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function (respuesta) {
+
+					/* console.log("respuestaaaaaa", respuesta); */
+
+					if (respuesta == "ok") {
+						swal({
+							type: "success",
+							title: "¡Ok!",
+							text: "¡La información fue Eliminada con éxito!",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar"
+						}).then((result) => {
+							if (result.value) {
+								window.location = "tarjetas";
+							}
+						});
+					}
+				}
+			});
+		}
+	});
+
+})

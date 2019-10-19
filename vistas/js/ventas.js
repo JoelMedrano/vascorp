@@ -483,6 +483,8 @@ function sumarTotalPrecios() {
 
   var precioItem = $(".nuevoPrecioProducto");
 
+  console.log("precioitem", precioItem);
+
   var arraySumaPrecio = [];
 
   for (var i = 0; i < precioItem.length; i++) {
@@ -492,7 +494,7 @@ function sumarTotalPrecios() {
 
   }
 
-  /*   console.log("arraySumaPrecio", arraySumaPrecio); */
+/*     console.log("arraySumaPrecio", arraySumaPrecio); */
 
   function sumaArrayPrecios(total, numero) {
 
@@ -502,7 +504,7 @@ function sumarTotalPrecios() {
 
   var sumaTotalPrecio = arraySumaPrecio.reduce(sumaArrayPrecios);
 
-  /*   console.log("sumaTotalPrecio", sumaTotalPrecio); */
+/*     console.log("sumaTotalPrecio", sumaTotalPrecio); */
 
   $("#nuevoTotalVenta").val(sumaTotalPrecio);
   	$("#totalVenta").val(sumaTotalPrecio);
@@ -734,10 +736,14 @@ FUNCIÓN PARA DESACTIVAR LOS BOTONES AGREGAR CUANDO EL PRODUCTO YA HABÍA SIDO S
 function quitarAgregarProducto() {
 
 	//Capturamos todos los id de productos que fueron elegidos en la venta
-	var idProductos = $(".quitarProducto");
+  var idProductos = $(".quitarProducto");
+  
+  console.log("idProductos", idProductos);
 
 	//Capturamos todos los botones de agregar que aparecen en la tabla
-	var botonesTabla = $(".tablaVentas tbody button.agregarProducto");
+  var botonesTabla = $(".tablaVentas tbody button.agregarProducto");
+  
+  console.log("botonesTabla", botonesTabla);
 
 	//Recorremos en un ciclo para obtener los diferentes idProductos que fueron agregados a la venta
 	for (var i = 0; i < idProductos.length; i++) {

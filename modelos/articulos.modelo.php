@@ -12,7 +12,7 @@ class ModeloArticulos{
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id DESC");
+			$stmt = Conexion::conectar()->prepare("SELECT *, CONCAT(modelo,' - ',nombre,' - ',color,' - ',talla) AS packing FROM $tabla WHERE $item = :$item ORDER BY id DESC");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
@@ -223,7 +223,23 @@ class ModeloArticulos{
 
 		$stmt = null;
 
-	}	
+	}
+
+	// Método para actualizar un dato CON EL ID
+	static public function mdlActualizarUnDato($tabla,$item1,$valor1,$valor2){
+
+		$sql="UPDATE $tabla SET $item1=:$item1 WHERE articulo=:id";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->bindParam(":".$item1,$valor1,PDO::PARAM_STR);
+		$stmt->bindParam(":id",$valor2,PDO::PARAM_INT);
+
+		$stmt->execute();
+
+		$stmt=null;
+
+	}
 
     
 }    

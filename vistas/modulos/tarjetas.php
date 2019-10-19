@@ -44,7 +44,7 @@
          
          <tr>
            
-           <th style="width:10px">#</th>
+
            <th>Código Interno</th>
            <th>Estado Tarjeta</th>
            <th>Fecha</th>
