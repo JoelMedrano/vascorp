@@ -61,7 +61,10 @@
                     $articulo = ControladorArticulos::ctrMostrarArticulos($itemArticulo, $valorArticulo);
                     $packing=$articulo["packing"];     
                     
-                    $porcentajeImpuesto = $tarjeta["impuesto"] * 100 / $tarjeta["neto"];                    
+                    $porcentajeImpuesto = number_format($tarjeta["impuesto"] * 100 / $tarjeta["neto"],0);
+                    
+                    date_default_timezone_set('America/Lima');
+                    $ahora=date('Y/m/d h:i:s');
                     
                     
                 ?>              
@@ -76,9 +79,11 @@
                     
                     <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                    <input type="text" class="form-control" id="nuevoUsuario" value="<?php echo $usuario["nombre"]; ?>" readonly>
+                    <input type="text" class="form-control" id="nuevoUsuario" value="<?php echo $_SESSION["nombre"]; ?>" readonly>
 
-                    <input type="hidden" name="idUsuario" value="<?php echo $usuario["id"]; ?>">
+                    <input type="hidden" name="idUsuario" value="<?php echo $_SESSION["id"]; ?>">
+
+                    <input type="hidden" name="fechaActual" value="<?php echo $ahora; ?>">
 
                   </div>
 
@@ -162,7 +167,7 @@
 
                   <div class="col-xs-2">
 
-                    <input type="number" class="form-control input-sm nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="'.$value["consumo"].'" required>
+                    <input type="number" class="form-control input-sm nuevaCantidadProducto" name="nuevaCantidadProducto" min="0" value="'.$value["consumo"].'" step="any" required>
 
                   </div>
 

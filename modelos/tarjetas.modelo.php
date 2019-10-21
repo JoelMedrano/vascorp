@@ -26,6 +26,8 @@ class ModeloTarjetas{
                                                                 t.articulo,
                                                                 t.usuario,
                                                                 u.nombre as nom_usu,
+																t.impuesto,
+																t.neto,
                                                                 t.total,
                                                                 t.estado AS estado_tarjeta,
                                                                 t.fecha,
@@ -174,14 +176,16 @@ class ModeloTarjetas{
 	*/
 	static public function mdlEditarTarjetas($tabla,$datos){
 
-		$sql="UPDATE $tabla SET impuesto=:impuesto,neto=:neto,total=:total WHERE articulo=:articulo";
+		$sql="UPDATE $tabla SET usuario=:usuario, impuesto=:impuesto, neto=:neto, total=:total, lastUpdate=:lastUpdate WHERE articulo=:articulo";
 
 		$stmt=Conexion::conectar()->prepare($sql);
 
+		$stmt->bindParam(":usuario",$datos["usuario"],PDO::PARAM_STR);
 		$stmt->bindParam(":articulo",$datos["articulo"],PDO::PARAM_STR);
 		$stmt->bindParam(":impuesto",$datos["impuesto"],PDO::PARAM_STR);
 		$stmt->bindParam(":neto",$datos["neto"],PDO::PARAM_STR);
 		$stmt->bindParam(":total",$datos["total"],PDO::PARAM_STR);
+		$stmt->bindParam(":lastUpdate",$datos["lastUpdate"],PDO::PARAM_STR);
 
 		if($stmt->execute()){
 
@@ -241,6 +245,34 @@ class ModeloTarjetas{
 		$stmt -> close();
 
 		$stmt = null;
+
+	}
+	
+	/* 
+	* Método par aactivar o revisar tarjetas
+	*/
+	static public function mdlActualizarTarjeta($tabla,$item1,$valor1,$item2,$valor2,$item3,$valor3){
+	
+		$sql="UPDATE $tabla SET $item1=:$item1, $item3=:$item3 WHERE $item2=:$item2";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->bindParam(":".$item1,$valor1,PDO::PARAM_STR);
+		$stmt->bindParam(":".$item2,$valor2,PDO::PARAM_INT);
+		$stmt->bindParam(":".$item3,$valor3,PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "ok";
+		
+		}else{
+		
+			return "error";
+		
+		}
+		
+		$stmt=null;
+
 
 	}	
 

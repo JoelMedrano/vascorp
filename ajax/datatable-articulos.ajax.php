@@ -31,15 +31,6 @@ class TablaArticulos{
         $imagen = "<img src='".$articulos[$i]["imagen"]."' width='40px'>";
 
         /*=============================================
-        TRAEMOS LA CATEGORÍA
-        =============================================*/ 
-
-/*         $item = "id";
-        $valor = $articulos[$i]["id_marca"];
-
-        $marcas = ControladorMarcas::ctrMostrarMarcas($item, $valor); */
-        
-        /*=============================================
         STOCK
         =============================================*/ 
 

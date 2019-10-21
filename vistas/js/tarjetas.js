@@ -1,20 +1,6 @@
-/*=============================================
-CARGAR LA TABLA DINÁMICA DE PRODUCTOS
-=============================================*/
-
-/* $.ajax({
-
-	url: "ajax/datatable-productos.ajax.php",
-	success:function(respuesta){
-		
-		console.log("respuesta", respuesta);
-
-	}
-
-}) */
-
-/* no tocar */
-
+/* 
+* CARGAR TABLA TARJETAS
+*/
 $('.tablaTarjetas').DataTable( {
     "ajax": "ajax/datatable-tarjetas.ajax.php",
     "deferRender": true,
@@ -48,9 +34,9 @@ $('.tablaTarjetas').DataTable( {
 	}
 } );
 
-/* no tocar */
-
-
+/* 
+*CARGAR LA TABLA DE MATERIA PRIMA EN CREAR TARJETA
+*/
 $('.tablaMateriaPrimaTarjetas').DataTable( {
     "ajax": "ajax/datatable-materiaprimaTarjetas.ajax.php",
     "deferRender": true,
@@ -84,10 +70,9 @@ $('.tablaMateriaPrimaTarjetas').DataTable( {
 	}
 } );
 
-/*=============================================
-AGREGANDO MATERIA PRIMA A LA VENTA DESDE LA TABLA
-=============================================*/
-
+/* 
+* AGREGANDO MATERIA PRIMA A LA TARJETA DESDE LA TABLA
+*/
 $(".tablaMateriaPrimaTarjetas tbody").on("click", "button.agregarMP", function () {
 
 	var idMateriaPrima = $(this).attr("idMateriaPrima");
@@ -188,10 +173,9 @@ $(".tablaMateriaPrimaTarjetas tbody").on("click", "button.agregarMP", function (
   
   });
 
-/*=============================================
-CUANDO CARGUE LA TABLA CADA VEZ QUE NAVEGUE EN ELLA
-=============================================*/
-
+/* 
+* CUANDO CARGUE LA TABLA CADA VEZ QUE NAVEGUE EN ELLA
+*/
 $(".tablaMateriaPrimaTarjetas").on("draw.dt", function () {
 
 	/* console.log("tabla"); */
@@ -213,10 +197,9 @@ $(".tablaMateriaPrimaTarjetas").on("draw.dt", function () {
   
   })
 
-/*=============================================
-QUITAR MATERIA PRIMA DE LA VENTA Y RECUPERAR BOTÓN
-=============================================*/
-
+/* 
+* QUITAR MATERIA PRIMA DE LA TAREJTA Y RECUPERAR BOTÓN
+*/
 var idQuitarMateriaPrima = [];
 
 localStorage.removeItem("quitarMP");
@@ -276,11 +259,9 @@ $(".formularioMateriaPrima").on("click", "button.quitarMP", function () {
 
 })
 
-
-/*=============================================
-MODIFICAR LA CANTIDAD
-=============================================*/
-
+/* 
+* MODIFICAR LA CANTIDAD
+*/
 $(".formularioMateriaPrima").on("change", "input.nuevaCantidadProducto", function () {
 
 	var precio = $(this).parent().parent().children(".ingresoPrecio").children().children(".nuevoPrecioProducto");
@@ -308,11 +289,9 @@ $(".formularioMateriaPrima").on("change", "input.nuevaCantidadProducto", functio
   
   })
 
-  
-/*=============================================
-SUMAR TODOS LOS PRECIOS
-=============================================*/
-
+/* 
+* SUMAR TODOS LOS PRECIOS
+*/
 function sumarTotalPreciosT() {
 
 	var precioItem = $(".nuevoPrecioProducto");
@@ -345,10 +324,9 @@ function sumarTotalPreciosT() {
   
   }
 
-/*=============================================
-FUNCIÓN AGREGAR IMPUESTO
-=============================================*/
-
+/* 
+* FUNCIÓN AGREGAR IMPUESTO
+*/
 function agregarImpuestoT() {
 
 	var impuesto = $("#nuevoImpuestoTarjeta").val();
@@ -368,28 +346,23 @@ function agregarImpuestoT() {
   
   }
   
-  /*=============================================
-  CUANDO CAMBIA EL IMPUESTO
-  =============================================*/
-  
-  $("#nuevoImpuestoTarjeta").change(function () {
-  
-	agregarImpuestoT();
-  
-  });
+/* 
+* CUANDO CAMBIA EL IMPUESTO
+*/
+$("#nuevoImpuestoTarjeta").change(function () {
 
-/*=============================================
-FORMATO AL PRECIO FINAL
-=============================================*/
+agregarImpuestoT();
 
+});
+
+/* 
+* FORMATO AL PRECIO FINAL
+*/
 $("#nuevoTotalTarjeta").number(true, 6);
 
-
-/*=============================================
-LISTAR TODOS LOS PRODUCTOS
-=============================================*/
-
-
+/* 
+* LISTAR TODAS LAS MATERIAS PRIMAS
+*/
 function listarMP() {
 
 	var listaMP = [];
@@ -422,9 +395,9 @@ function listarMP() {
   
   }
 
-/*=============================================
-BOTON EDITAR TARJETA
-=============================================*/
+/* 
+* BOTON EDITAR TARJETA
+*/
 $(".tablaTarjetas").on("click", ".btnEditarTarjeta", function () {
 
 	var idTarjeta = $(this).attr("idTarjeta");
@@ -433,15 +406,15 @@ $(".tablaTarjetas").on("click", ".btnEditarTarjeta", function () {
   
 })
 
-// Formato para los números en las cajas
+/* 
+* FORMATO PARA LOS NUMEROS EN LAS CAJAS
+*/
 $(".nuevoPrecioProducto").number(true,6);
 $("#totalTarjeta").number(true,6);
 
-
-/*=============================================
-FUNCIÓN PARA DESACTIVAR LOS BOTONES AGREGAR CUANDO EL PRODUCTO YA HABÍA SIDO SELECCIONADO EN LA CARPETA
-=============================================*/
-
+/* 
+*FUNCIÓN PARA DESACTIVAR LOS BOTONES AGREGAR CUANDO LA MATERIA PRIMA YA HABÍA SIDO SELECCIONADO EN LA CARPETA
+*/
 function quitarAgregarProductoT() {
 
 	//Capturamos todos los id de productos que fueron elegidos en la venta
@@ -471,20 +444,18 @@ function quitarAgregarProductoT() {
 
 }
 
-
-/*=============================================
-CADA VEZ QUE CARGUE LA TABLA CUANDO NAVEGAMOS EN ELLA EJECUTAR LA FUNCIÓN:
-=============================================*/
-
+/* 
+* CADA VEZ QUE CARGUE LA TABLA CUANDO NAVEGAMOS EN ELLA EJECUTAR LA FUNCIÓN:
+*/
 $('.tablaMateriaPrimaTarjetas').on('draw.dt', function () {
 
 	quitarAgregarProductoT();
 
 })
 
-/*=============================================
-BORRAR TARJETA
-=============================================*/
+/* 
+* BORRAR LA TARJETA
+*/
 $(".tablaTarjetas").on("click", ".btnEliminarTarjeta", function () {
 
 	var idTarjeta = $(this).attr("idTarjeta");
@@ -530,5 +501,55 @@ $(".tablaTarjetas").on("click", ".btnEliminarTarjeta", function () {
 			});
 		}
 	});
+
+})
+
+/* 
+* ACTIVAR O MANDAR A REVISAR TARJETAS
+*/
+$(".tablaTarjetas").on("click", ".btnActivarT", function () {
+
+	var idTarjeta = $(this).attr("idTarjeta");
+	var estadoTarjeta = $(this).attr("estadoTarjeta");
+
+	var datos = new FormData();
+	datos.append("activarId", idTarjeta);
+	datos.append("activarTarjeta", estadoTarjeta);
+
+	$.ajax({
+
+		url: "ajax/tarjetas.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function (respuesta) {
+
+			swal({
+				title: "La Información ha sido actualizada",
+				type: "success",
+				confirmButtonText: "¡Cerrar!"
+			}).then(function (result) {
+				if (result.value) {
+
+					window.location = "tarjetas";
+
+				}
+			});			
+		}
+	})
+
+	if (estadoTarjeta == "RE") {
+		$(this).removeClass('btn-primary');
+		$(this).addClass('btn-warning');
+		$(this).html('Revisar');
+		$(this).attr('estadoTarjeta', "AC");
+	} else {
+		$(this).addClass('btn-primary');
+		$(this).removeClass('btn-warning');
+		$(this).html('Aprobado');
+		$(this).attr('estadoTarjeta', "RE");
+	}
 
 })

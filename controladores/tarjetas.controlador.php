@@ -1,5 +1,6 @@
 <?php
 
+
 class ControladorTarjetas{
 
 	/* 
@@ -238,10 +239,12 @@ class ControladorTarjetas{
 			todo: editamos los cambios en la tabla TARJETAS
 			*/
 
-			$datos=array("articulo"=>$_POST["idArticuloTarjeta"],
+			$datos=array("usuario"=>$_POST["idUsuario"],
+						 "articulo"=>$_POST["idArticuloTarjeta"],
 						 "impuesto"=>$_POST["nuevoPrecioImpuesto"],
 						 "neto"=>$_POST["nuevoPrecioNeto"],
-						 "total"=>$_POST["totalTarjeta"]);
+						 "total"=>$_POST["totalTarjeta"],
+						 "lastUpdate"=>$_POST["fechaActual"]);
 						 						
 
 			$respuesta=ModeloTarjetas::mdlEditarTarjetas("tarjetasjf",$datos);

@@ -29,11 +29,11 @@ class TablaTarjetas{
     
             if($tarjetas[$i]["estado_tarjeta"] == "RE"){
     
-                $estado_tarjeta = "<button class='btn btn-warning btn-xs btnActivar' idTarjeta='".$tarjetas[$i]["id"]."' estadoTarjeta='Activo'>Revisar</button>";
+                $estado_tarjeta = "<button class='btn btn-warning btn-xs btnActivarT' idTarjeta='".$tarjetas[$i]["id"]."' estadoTarjeta='AC'>Revisar</button>";
     
             }else{
     
-                $estado_tarjeta = "<button class='btn btn-primary btn-xs btnActivar' idTarjeta='".$tarjetas[$i]["id"]."' estadoTarjeta='Revisar'>Aprobado</button>";
+                $estado_tarjeta = "<button class='btn btn-primary btn-xs btnActivarT' idTarjeta='".$tarjetas[$i]["id"]."' estadoTarjeta='RE'>Aprobado</button>";
     
             }
 
@@ -56,18 +56,24 @@ class TablaTarjetas{
 
             }
 
+            /*=============================================
+            formato numero 6 digitos
+            =============================================*/ 
+
+            $neto=number_format($tarjetas[$i]["neto"],6);
+
     
             /*=============================================
             TRAEMOS LAS ACCIONES
             =============================================*/         
             
-            $botones =  "<div class='btn-group'><button class='btn btn-warning btnEditarTarjeta' idTarjeta='".$tarjetas[$i]["id"]."'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarTarjeta' idTarjeta='".$tarjetas[$i]["id"]."'><i class='fa fa-times'></i></button></div>"; 
+            $botones =  "<div class='btn-group'><button class='btn btn-info btn-xs btnTejidoPrincipal' data-toggle='modal' data-target='#modalTejidoPrincipal' articulo='".$tarjetas[$i]["articulo"]."'><i class='fa fa-eye'></i></button><button class='btn btn-warning btn-xs btnEditarTarjeta' idTarjeta='".$tarjetas[$i]["id"]."'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btn-xs btnEliminarTarjeta' idTarjeta='".$tarjetas[$i]["id"]."'><i class='fa fa-times'></i></button></div>"; 
     
                 $datosJson .= '[
                 "'.$tarjetas[$i]["codigo"].'",
                 "'.$estado_tarjeta.'",
                 "'.$tarjetas[$i]["fecha"].'",
-                "S/ '.$tarjetas[$i]["total"].'",
+                "'.$neto.'",
                 "'.$tarjetas[$i]["nom_usu"].'",
                 "'.$tarjetas[$i]["articulo"].'",
                 "'.$tarjetas[$i]["modelo"].'",
