@@ -31,6 +31,20 @@ class controladorArticulos{
 	}	
 
 	/*=============================================
+	ARTICULOS ACTIVOS
+	=============================================*/
+
+	static public function ctrArticulosActivos(){
+
+		$tabla = "articulojf";
+
+		$respuesta = ModeloArticulos::mdlArticulosActivos($tabla);
+
+		return $respuesta;
+
+	}	
+
+	/*=============================================
 	CREAR ARTICULO
 	=============================================*/
 

@@ -31,7 +31,6 @@ class ControladorTarjetas{
 
 	}
 
-
 	/* 
 	* SACAR EL ULTIMO CODIGO
 	*/
@@ -45,7 +44,6 @@ class ControladorTarjetas{
 	/* 
 	* CREAR TARJETAS
 	*/
-
 	static public function ctrCrearTarjeta(){
 		/* veriaficamos que venta traiga datos */
 
@@ -279,7 +277,8 @@ class ControladorTarjetas{
 
 						ModeloTarjetas::mdlGuardarDetallesTarjeta("detalles_tarjetajf",$datosD);
 
-											# Mostramos una alerta suave
+					# Mostramos una alerta suave
+
 					echo '<script>
 							swal({
 								type: "success",
@@ -384,7 +383,142 @@ class ControladorTarjetas{
 
 		return $respuesta;		
 
-	}	
+	}
+	
+	/* 
+	* TOTAL DE TARJETAS DE ARTICULOS ACTIVOS
+	*/
+	static public function ctrTarjetasActivas(){
+
+        $tabla = "tarjetasjf";
+
+        $respuesta = ModeloTarjetas::mdlTarjetasActivas($tabla);
+
+        return $respuesta;
+
+	}
+	
+	/* 
+	* COPIAR TARJETAS
+	*/	
+	static public function ctrCopiarTarjetas(){
+
+		if(isset($_POST["copiarTarjeta"])){
+
+			/* 
+			TODO: alerta si no cambiaron anda de la tarjeta
+			*/
+			
+			if($_POST["listaMP"] == ""){
+				# Mostramos una alerta suave
+				echo '<script>
+						swal({
+							type: "error",
+							title: "Error",
+							text: "¡No se cambio ninguna materia prima. Por favor, intenteló de nuevo!",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar"
+						}).then((result)=>{
+							if(result.value){
+								window.location="index.php?ruta=copiar-tarjeta&idTarjeta='.$_POST["tarjetaOrigen"].'";}
+						});
+					</script>';
+			}else{
+
+				/* 
+				? trae lista luego de cambiar algun detalle
+				*/
+
+				$listaMP=json_decode($_POST["listaMP"],true);
+
+				/* var_dump("listaMP", $listaMP); */
+
+				/* 
+				todo Actualizar que el articulo ya tiene tarjeta
+				*/
+
+				$tablaA = "articulojf";
+				$item1 = "tarjeta";
+				$valor1 = "si";
+				$valor = $_POST["seleccionarArticulo"];
+				
+				ModeloArticulos::mdlActualizarUnDato($tablaA,$item1,$valor1,$valor);
+
+				/* 
+				todo GUARDAR CABECERA DE LA TARJETA
+				*/
+
+				$datos=array("codigo"=>$_POST["copiarTarjeta"],
+				"articulo"=>$_POST["seleccionarArticulo"],
+				"usuario"=>$_POST["idUsuario"],
+				"impuesto"=>$_POST["nuevoPrecioImpuesto"],
+				"neto"=>$_POST["nuevoPrecioNeto"],
+				"total"=>$_POST["totalTarjeta"],
+				"estado"=>"AC");
+
+				/* var_dump("datos", $datos); */
+
+				$respuesta=ModeloTarjetas::mdlGuardarTarjetas("tarjetasjf",$datos);
+
+				/* var_dump("respuesta", $respuesta); */
+
+				/* 
+				todo GUARDAR DETALLE DE LA TARJETA
+				*/
+				if($respuesta == "ok"){
+
+					foreach($listaMP as $key=>$value){
+
+						$datosD=array("articulo"=>$_POST["seleccionarArticulo"],
+						"mat_pri"=>$value["codigo"],
+						"consumo"=>$value["cantidad"],
+						"precio_mp"=>$value["precio"],
+						"total_detalle"=>$value["total"]);
+
+						/* var_dump("datosD", $datosD); */
+
+						ModeloTarjetas::mdlGuardarDetallesTarjeta("detalles_tarjetajf",$datosD);
+
+						echo '<script>
+						swal({
+							type: "success",
+							title: "Felicitaciones",
+							text: "¡La información fue creada con éxito!",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar"
+						}).then((result)=>{
+							if(result.value){
+								window.location="tarjetas";}
+						});
+					</script>';
+
+					}
+
+				}else{
+
+					# Mostramos una alerta suave
+					echo '<script>
+							swal({
+								type: "error",
+								title: "Error",
+								text: "¡La información presento problemas y no se registro adecuadamente. Por favor, intenteló de nuevo!",
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar"
+							}).then((result)=>{
+								if(result.value){
+								window.location="index.php?ruta=copiar-tarjeta&idTarjeta='.$_POST["tarjetaOrigen"].'";}
+							});
+						</script>';
+
+				}
+
+
+			}
+
+
+		}
+
+	}
 
 }
 

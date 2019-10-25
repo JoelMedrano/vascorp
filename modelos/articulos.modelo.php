@@ -70,7 +70,29 @@ class ModeloArticulos{
 	}
 
 	/*=============================================
-	MOSTRAR ARTICULOS
+	MOSTRAR CANTIDAD DE ARTICULOS
+	=============================================*/
+	static public function mdlArticulosActivos($tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT   COUNT(articulo) AS cant_articulo 
+                                                     FROM $tabla m
+                                                     WHERE estado = 'activo'");
+
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+		$stmt -> close();
+
+		$stmt = null;
+
+    }
+
+	
+
+
+	/*=============================================
+	MOSTRAR ARTICULOS PENDIENTES DE TARJETAS
 	=============================================*/
 
 	static public function mdlMostrarSinTarjeta($tabla, $item, $valor){

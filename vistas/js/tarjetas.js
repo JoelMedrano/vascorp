@@ -31,7 +31,7 @@ $('.tablaTarjetas').DataTable( {
 				"sSortDescending": ": Activar para ordenar la columna de manera descendente"
 			}
 
-	}
+	}	
 } );
 
 /* 
@@ -552,4 +552,27 @@ $(".tablaTarjetas").on("click", ".btnActivarT", function () {
 		$(this).attr('estadoTarjeta', "RE");
 	}
 
+})
+
+
+/* 
+* BOTON COPIAR TARJETA
+*/
+$(".tablaTarjetas").on("click", ".btnCopiarTarjeta", function () {
+
+	var idTarjeta = $(this).attr("idTarjeta");
+
+  window.location = "index.php?ruta=copiar-tarjeta&idTarjeta=" + idTarjeta;
+  
+})
+
+/* 
+* PASAR DATOS AL MODAL modalTejidoPrincipal
+*/
+$('#modalTejidoPrincipal').on('show.bs.modal', function (event) {
+	var button = $(event.relatedTarget)
+	var recipient = button.data('whatever') 
+	var modal = $(this)
+	modal.find('.modal-title').text('New message to ' + recipient)
+	modal.find('.modal-body input').val(recipient)
 })

@@ -13,6 +13,7 @@ require_once "controladores/articulos.controlador.php";
 require_once "controladores/materiaprima.controlador.php";
 
 require_once "controladores/tarjetas.controlador.php";
+require_once "controladores/movimientos.controlador.php";
 
 
 
@@ -28,6 +29,7 @@ require_once "modelos/articulos.modelo.php";
 require_once "modelos/materiaprima.modelo.php";
 
 require_once "modelos/tarjetas.modelo.php";
+require_once "modelos/movimientos.modelo.php";
 
 $plantilla = new ControladorPlantilla();
 $plantilla -> ctrPlantilla();

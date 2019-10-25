@@ -34,6 +34,31 @@
 
         </a>
 
+        <button type="button" class="btn btn-default pull-right" id="daterange-btn">
+
+          <span>
+            <i class="fa fa-calendar"></i>
+
+            <?php
+
+              if(isset($_GET["fechaInicial"])){
+
+                echo $_GET["fechaInicial"]." - ".$_GET["fechaFinal"];
+
+              }else{
+              
+                echo 'Rango de fecha';
+
+              }
+
+            ?>
+
+          </span>
+
+          <i class="fa fa-caret-down"></i>
+
+        </button>
+
       </div>
 
       <div class="box-body">
@@ -60,68 +85,76 @@
 
           <tbody>
 
-            <?php
+          <?php
 
-              $item = null;
-              $valor = null;
-              
-              $respuesta = ControladorVentas::ctrMostrarVentas($item, $valor);
+            if(isset($_GET["fechaInicial"])){
 
-              foreach ($respuesta as $key => $value){
+              $fechaInicial = $_GET["fechaInicial"];
+              $fechaFinal = $_GET["fechaFinal"];
 
-                echo '<tr>
+            }else{
 
-                        <td>'.($key+1).'</td>
-          
-                        <td>'.$value["codigo"].'</td>';
+              $fechaInicial = null;
+              $fechaFinal = null;
 
-                        $itemCliente = "id";
-                        $valorCliente = $value["id_cliente"];
-      
-                        $respuestaCliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
-      
-                        echo '<td>'.$respuestaCliente["nombre"].'</td>';
-      
-                        $itemUsuario = "id";
-                        $valorUsuario = $value["id_vendedor"];
-      
-                        $respuestaUsuario = ControladorUsuarios::ctrMostrarUsuarios($itemUsuario, $valorUsuario);
+            }
 
-          
-                        echo '<td>'.$respuestaUsuario["nombre"].'</td>
-          
-                        <td>'.$value["metodo_pago"].'</td>
+            $respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
 
-                        <td>$ '.number_format($value["neto"],2).'</td>
-      
-                        <td>$ '.number_format($value["total"],2).'</td>
-      
-                        <td>'.$value["fecha"].'</td>
-          
-                        <td>
+            foreach ($respuesta as $key => $value) {
+            
+            echo '<tr>
 
-                          <div class="btn-group">
-          
-                            <button class="btn btn-info"><i class="fa fa-print"></i></button>
+                    <td>'.($key+1).'</td>
 
-                            <button class="btn btn-warning btnEditarVenta" idVenta="'.$value["id"].'"><i class="fa fa-pencil"></i></button>                          
-          
-                            <button class="btn btn-danger btnEliminarVenta" idVenta="'.$value["id"].'"><i class="fa fa-times"></i></button>
-          
-                          </div>
-          
-                        </td>
-          
-                      </tr>';
+                    <td>'.$value["codigo"].'</td>';
+
+                    $itemCliente = "id";
+                    $valorCliente = $value["id_cliente"];
+
+                    $respuestaCliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
+
+                    echo '<td>'.$respuestaCliente["nombre"].'</td>';
+
+                    $itemUsuario = "id";
+                    $valorUsuario = $value["id_vendedor"];
+
+                    $respuestaUsuario = ControladorUsuarios::ctrMostrarUsuarios($itemUsuario, $valorUsuario);
+
+                    echo '<td>'.$respuestaUsuario["nombre"].'</td>
+
+                    <td>'.$value["metodo_pago"].'</td>
+
+                    <td>$ '.number_format($value["neto"],2).'</td>
+
+                    <td>$ '.number_format($value["total"],2).'</td>
+
+                    <td>'.$value["fecha"].'</td>
+
+                    <td>
+
+                      <div class="btn-group">
+                         
+                        <button class="btn btn-info btnImprimirFactura" codigoVenta="'.$value["codigo"].'">
+
+                          <i class="fa fa-print"></i>
+
+                        </button>';
 
 
+                        echo '<button class="btn btn-warning btnEditarVenta" idVenta="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
+
+                        <button class="btn btn-danger btnEliminarVenta" idVenta="'.$value["id"].'"><i class="fa fa-times"></i></button>';
+
+                      
+                      echo '</div>  
+
+                    </td>
+
+                  </tr>';
               }
 
-            ?>
-
-
-
-
+          ?>
           </tbody>
 
         </table>
