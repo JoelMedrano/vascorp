@@ -76,5 +76,19 @@ class ControladorMateriaPrima{
 			}
 		}
 
-	}	    
+	}
+	
+	/* 
+	* Método para llenar datos al combo de materia prima
+	*/
+	static public function ctrTejidoPrincipal(){
+
+		$tabla = "producto";
+
+		$respuesta = ModeloMateriaPrima::mdlTejidoPrincipal($tabla);
+
+		return $respuesta;
+
+	}
+
 }

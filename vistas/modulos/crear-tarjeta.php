@@ -26,7 +26,7 @@
       EL FORMULARIO
       ======================================-->
 
-      <div class="col-lg-6 col-xs-12">
+      <div class="col-lg-7 col-xs-12">
 
         <div class="box box-success">
 
@@ -147,6 +147,18 @@
                 </div>
 
                 <!--=====================================
+                TITULOS
+                ======================================-->
+                
+                <div class="col-lg-12">
+                  <label class="col-lg-6">Materia Prima</label>
+                  <label class="col-lg-2"><center>Tej. Principal</center></label>
+                  <label class="col-lg-2"><center>Consumo</center></label>
+                  <label class="col-lg-2"><center>Costo</center></label>
+
+                </div>
+         
+                <!--=====================================
                 ENTRADA PARA AGREGAR MATERIAPRIMA
                 ======================================-->
 
@@ -246,8 +258,9 @@
 
             <div class="box-footer">
 
-              <button type="submit" class="btn btn-primary pull-right">Guardar tarjeta</button>
-
+              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-floppy-o"></i>  Guardar tarjeta</button>
+              
+              <a href="tarjetas" id="cancel" name="cancel" class="btn btn-danger"><i class="fa fa-times-circle"></i> Cancelar</a>
             </div>
 
           </form>
@@ -267,7 +280,7 @@
       LA TABLA DE PRODUCTOS
       ======================================-->
 
-      <div class="col-lg-6 hidden-md hidden-sm hidden-xs">
+      <div class="col-lg-5 hidden-md hidden-sm hidden-xs">
 
         <div class="box box-warning">
 
@@ -275,17 +288,17 @@
 
           <div class="box-body">
 
-            <table class="table table-bordered table-striped dt-responsive tablaMateriaPrimaTarjetas">
+            <table class="table table-bordered table-striped table-condensed tablaMateriaPrimaTarjetas">
 
               <thead>
 
                 <tr>
-                  <th>Cod. Línea</th>
-                  <th>Código</th>
+                  <th>Línea</th>
+                  <th>Cód</th>
                   <th>Descripción</th>
                   <th>Color</th>
                   <th>Unidad</th>
-                  <th>Acciones</th>
+                  <th style="width:10px">Acciones</th>
                 </tr>
 
               </thead>

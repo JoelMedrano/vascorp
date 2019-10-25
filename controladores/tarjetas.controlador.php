@@ -133,6 +133,7 @@ class ControladorTarjetas{
 
 						$datosD=array("articulo"=>$ultimoId[0]["articulo"],
 									 "mat_pri"=>$value["codigo"],
+									 "tej_princ"=>$value["tejido"],
 									 "consumo"=>$value["cantidad"],
 									 "precio_mp"=>$value["precio"],
 									 "total_detalle"=>$value["total"]);
@@ -192,106 +193,142 @@ class ControladorTarjetas{
 		   isset($_POST["idArticuloTarjeta"]) && 
 		   isset($_POST["listaMP"])){
 
-			/* 
-			todo: traemos los datos del detalle tarjeta
-			*/
-
-			$detaMP=ModeloTarjetas::mdlMostraDetallesTarjetas("detalles_tarjetajf","articulo",$_POST["idArticuloTarjeta"]);
-
-			/* 
-			! ver que trae detaMP
-			*/
-
-			/* var_dump("detaMP", $detaMP); */
-
-			/* 
-			todo: cambiamos los id de la lista por los id de productos
-			*/
-			foreach($detaMP as $key=>$value){
-
-				$infoMP=ControladorMateriaPrima::ctrMostrarMateriaPrima("Codpro",$value["mat_pri"]);
-
-				$detaMP[$key]["mat_pri"]=$infoMP["Codpro"];
-
-				/* 
-				! ver que tiene detaMP
-				*/
-
-				/* var_dump("detaMP", $detaMP[$key]["mat_pri"]); */
-
-			}
-
-			if($_POST["listaMP"]==""){
-
-				$listaMP=$detaMP;
-				$validarCambio=false;
+			if($_POST["listaMP"] == ""){
+				# Mostramos una alerta suave
+				echo '<script>
+						swal({
+							type: "error",
+							title: "Error",
+							text: "¡No se cambio ninguna materia prima. Por favor, intenteló de nuevo!",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar"
+						}).then((result)=>{
+							if(result.value){
+								window.location="index.php?ruta=editar-tarjeta&idTarjeta='.$_POST["idTarjetaE"].'";}
+						});
+					</script>';
 
 			}else{
 
-				$listaMP=json_decode($_POST["listaMP"],true);
-				$validarCambio=true;
+				/* 
+				todo: traemos los datos del detalle tarjeta
+				*/
 
-			}
-
-			/* 
-			todo: editamos los cambios en la tabla TARJETAS
-			*/
-
-			$datos=array("usuario"=>$_POST["idUsuario"],
-						 "articulo"=>$_POST["idArticuloTarjeta"],
-						 "impuesto"=>$_POST["nuevoPrecioImpuesto"],
-						 "neto"=>$_POST["nuevoPrecioNeto"],
-						 "total"=>$_POST["totalTarjeta"],
-						 "lastUpdate"=>$_POST["fechaActual"]);
-						 						
-
-			$respuesta=ModeloTarjetas::mdlEditarTarjetas("tarjetasjf",$datos);
-			
-			if($respuesta=="ok"){
+				$detaMP=ModeloTarjetas::mdlMostraDetallesTarjetas("detalles_tarjetajf","articulo",$_POST["idArticuloTarjeta"]);
 
 				/* 
-				todo: eliminamos el detalle de las tarjetas
+				! ver que trae detaMP
 				*/
-				
-				$eliminarDeta=ModeloTarjetas::mdlEliminarDato("detalles_tarjetajf","articulo",$_POST["idArticuloTarjeta"]);
 
-				if($eliminarDeta=="ok"){
+				/* var_dump("detaMP", $detaMP); */
+
+				/* 
+				todo: cambiamos los id de la lista por los id de productos
+				*/
+				foreach($detaMP as $key=>$value){
+
+					$infoMP=ControladorMateriaPrima::ctrMostrarMateriaPrima("Codpro",$value["mat_pri"]);
+
+					$detaMP[$key]["mat_pri"]=$infoMP["Codpro"];
 
 					/* 
-					todo: guardamos el nuevo detalle de la tarjeta
+					! ver que tiene detaMP
 					*/
 
-					foreach($listaMP as $key=>$value){
+					/* var_dump("detaMP", $detaMP[$key]["mat_pri"]); */
 
-						$datosD=array("articulo"=>$_POST["idArticuloTarjeta"],
-									 "mat_pri"=>$value["codigo"],
-									 "consumo"=>$value["cantidad"],
-									 "precio_mp"=>$value["precio"],
-									 "total_detalle"=>$value["total"]);
+				}
+
+				if($_POST["listaMP"]==""){
+
+					$listaMP=$detaMP;
+					$validarCambio=false;
+
+				}else{
+
+					$listaMP=json_decode($_POST["listaMP"],true);
+					$validarCambio=true;
+
+				}
+
+				/* 
+				todo: editamos los cambios en la tabla TARJETAS
+				*/
+
+				$datos=array("usuario"=>$_POST["idUsuario"],
+							"articulo"=>$_POST["idArticuloTarjeta"],
+							"impuesto"=>$_POST["nuevoPrecioImpuesto"],
+							"neto"=>$_POST["nuevoPrecioNeto"],
+							"total"=>$_POST["totalTarjeta"],
+							"lastUpdate"=>$_POST["fechaActual"]);
+													
+
+				$respuesta=ModeloTarjetas::mdlEditarTarjetas("tarjetasjf",$datos);
+				
+				if($respuesta=="ok"){
+
+					/* 
+					todo: eliminamos el detalle de las tarjetas
+					*/
+					
+					$eliminarDeta=ModeloTarjetas::mdlEliminarDato("detalles_tarjetajf","articulo",$_POST["idArticuloTarjeta"]);
+
+					if($eliminarDeta=="ok"){
 
 						/* 
-						! revisar que esta llegando a datos
+						todo: guardamos el nuevo detalle de la tarjeta
 						*/
-						
-						/* var_dump("datos detalle", $datosD); */
 
-						ModeloTarjetas::mdlGuardarDetallesTarjeta("detalles_tarjetajf",$datosD);
+						foreach($listaMP as $key=>$value){
 
-					# Mostramos una alerta suave
+							$datosD=array("articulo"=>$_POST["idArticuloTarjeta"],
+										"mat_pri"=>$value["codigo"],
+										"tej_princ"=>$value["tejido"],
+										"consumo"=>$value["cantidad"],
+										"precio_mp"=>$value["precio"],
+										"total_detalle"=>$value["total"]);
 
-					echo '<script>
-							swal({
-								type: "success",
-								title: "Felicitaciones",
-								text: "¡La información fue Actualizada con éxito!",
-								showConfirmButton: true,
-								confirmButtonText: "Cerrar"
-							}).then((result)=>{
-								if(result.value){
-									window.location="tarjetas";}
-							});
-						</script>';
+							/* 
+							! revisar que esta llegando a datos
+							*/
+							
+							/* var_dump("datos detalle", $datosD); */
+
+							ModeloTarjetas::mdlGuardarDetallesTarjeta("detalles_tarjetajf",$datosD);
+
+						# Mostramos una alerta suave
+
+						echo '<script>
+								swal({
+									type: "success",
+									title: "Felicitaciones",
+									text: "¡La información fue Actualizada con éxito!",
+									showConfirmButton: true,
+									confirmButtonText: "Cerrar"
+								}).then((result)=>{
+									if(result.value){
+										window.location="tarjetas";}
+								});
+							</script>';
+						}
+
+					}else{
+						# Mostramos una alerta suave
+						echo '<script>
+								swal({
+									type: "error",
+									title: "Error",
+									text: "¡La información presento problemas al actualizar los Detalles. Por favor, comunicarse con el Administrador de la Base de Datos!",
+									showConfirmButton: true,
+									confirmButtonText: "Cerrar"
+								}).then((result)=>{
+									if(result.value){
+										window.location="tarjetas";}
+								});
+							</script>';
 					}
+
+
 
 				}else{
 					# Mostramos una alerta suave
@@ -299,7 +336,7 @@ class ControladorTarjetas{
 							swal({
 								type: "error",
 								title: "Error",
-								text: "¡La información presento problemas al actualizar los Detalles. Por favor, comunicarse con el Administrador de la Base de Datos!",
+								text: "¡La información presento problemas y no se actualizó adecuadamente. Por favor, intenteló de nuevo!",
 								showConfirmButton: true,
 								confirmButtonText: "Cerrar"
 							}).then((result)=>{
@@ -307,26 +344,12 @@ class ControladorTarjetas{
 									window.location="tarjetas";}
 							});
 						</script>';
+					
 				}
 
+			}
 
-
-			}else{
-				# Mostramos una alerta suave
-				echo '<script>
-						swal({
-							type: "error",
-							title: "Error",
-							text: "¡La información presento problemas y no se actualizó adecuadamente. Por favor, intenteló de nuevo!",
-							showConfirmButton: true,
-							confirmButtonText: "Cerrar"
-						}).then((result)=>{
-							if(result.value){
-								window.location="tarjetas";}
-						});
-					</script>';
-				
-			}	
+	
 
 		}
 		
@@ -473,6 +496,7 @@ class ControladorTarjetas{
 						"mat_pri"=>$value["codigo"],
 						"consumo"=>$value["cantidad"],
 						"precio_mp"=>$value["precio"],
+						"tej_princ"=>$value["tejido"],
 						"total_detalle"=>$value["total"]);
 
 						/* var_dump("datosD", $datosD); */

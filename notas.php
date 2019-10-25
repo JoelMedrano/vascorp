@@ -5,7 +5,7 @@ todo: TARJETAS
 * ver la opcion de saber cuando editaron la tarjeta y quien fue. - ok
 * poner descripcion en botones - ok
 * copiar tarjetas - ok
-* asignar tejido principal
+* asignar tejido principal - ok
 ! revisar materia prima por articulo
 ! calcular cantidad que necesita cierta cantidad de prendas
 ! sacar en reporte

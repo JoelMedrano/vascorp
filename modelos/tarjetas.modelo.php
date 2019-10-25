@@ -118,21 +118,50 @@ class ModeloTarjetas{
 	*/
 	static public function mdlGuardarDetallesTarjeta($tabla,$datos){
 
-		$sql="INSERT INTO $tabla(articulo,mat_pri,consumo,precio_mp,total_detalle) VALUES (:articulo,:mat_pri,:consumo,:precio_mp,:total_detalle)";
+		$sql="INSERT INTO $tabla(articulo,mat_pri,tej_princ,consumo,precio_mp,total_detalle) VALUES (:articulo,:mat_pri,:tej_princ,:consumo,:precio_mp,:total_detalle)";
 
 		$stmt=Conexion::conectar()->prepare($sql);
 
 		$stmt->bindParam(":articulo",$datos["articulo"],PDO::PARAM_INT);
 		$stmt->bindParam(":mat_pri",$datos["mat_pri"],PDO::PARAM_STR);
+		$stmt->bindParam(":tej_princ",$datos["tej_princ"],PDO::PARAM_STR);
 		$stmt->bindParam(":consumo",$datos["consumo"],PDO::PARAM_INT);
 		$stmt->bindParam(":precio_mp",$datos["precio_mp"],PDO::PARAM_STR);
 		$stmt->bindParam(":total_detalle",$datos["total_detalle"],PDO::PARAM_STR);
 
-		$stmt->execute();
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			return "error";
+
+		}
 
 		$stmt=null;
 	}
 
+	/* 
+	* Método para guardar el tejido principal
+	*/
+	static public function mdlActualizarTP($tablaT, $valorT1, $valorT2){
+
+		$sql="UPDATE $tablaT SET tej_princ='si' WHERE articulo=:articulo AND mat_pri=:mat_pri";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->bindParam(":articulo",$valorT1,PDO::PARAM_STR);
+		$stmt->bindParam(":mat_pri",$valorT2,PDO::PARAM_STR);
+
+		$stmt->execute();
+
+		$stmt=null;
+
+
+
+	}
+	
     /* 
 	* Método para pedir último Id de tarjeta
 	*/	

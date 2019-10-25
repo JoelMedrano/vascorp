@@ -26,7 +26,7 @@
       EL FORMULARIO
       ======================================-->
 
-      <div class="col-lg-6 col-xs-12">
+      <div class="col-lg-7 col-xs-12">
 
         <div class="box box-success">
 
@@ -166,6 +166,18 @@
                 </div>
 
                 <!--=====================================
+                TITULOS
+                ======================================-->
+                
+                <div class="col-lg-12">
+                  <label class="col-lg-6">Materia Prima</label>
+                  <label class="col-lg-2"><center>Tej. Principal</center></label>
+                  <label class="col-lg-2"><center>Consumo</center></label>
+                  <label class="col-lg-2"><center>Costo</center></label>
+
+                </div>                 
+
+                <!--=====================================
                 ENTRADA PARA AGREGAR PRODUCTO
                 ======================================-->
 
@@ -196,7 +208,7 @@
                  
                   echo '<div class="row" style="padding:5px 15px">
 
-                  <div class="col-xs-7" style="padding-right:0px">
+                  <div class="col-xs-6" style="padding-right:0px">
 
                     <div class="input-group">
 
@@ -210,11 +222,17 @@
 
                   <div class="col-xs-2">
 
+                    <input type="text" class="form-control input-sm tejidoPrincipal" name="tejidoPrincipal" min="0" value="'.$value["tej_princ"].'" required>
+
+                  </div>                  
+
+                  <div class="col-xs-2">
+
                     <input type="number" class="form-control input-sm nuevaCantidadProducto" name="nuevaCantidadProducto" min="0" value="'.$value["consumo"].'" step="any" required>
 
                   </div>
 
-                  <div class="col-xs-3 ingresoPrecio" style="padding-left:0px">
+                  <div class="col-xs-2 ingresoPrecio" style="padding-left:0px">
 
                     <div class="input-group">
 
@@ -321,7 +339,9 @@
 
             <div class="box-footer">
 
-              <button type="submit" class="btn btn-primary pull-right">Guardar Cambios</button>
+              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-floppy-o"></i>  Guardar Cambios</button>
+
+              <a href="tarjetas" id="cancel" name="cancel" class="btn btn-danger"><i class="fa fa-times-circle"></i> Cancelar</a>
 
             </div>
 
@@ -344,7 +364,7 @@
       LA TABLA DE PRODUCTOS
       ======================================-->
 
-      <div class="col-lg-6 hidden-md hidden-sm hidden-xs">
+      <div class="col-lg-5 hidden-md hidden-sm hidden-xs">
 
         <div class="box box-warning">
 
@@ -352,7 +372,7 @@
 
           <div class="box-body">
 
-            <table class="table table-bordered table-striped dt-responsive tablaMateriaPrimaTarjetas">
+            <table class="table table-bordered table-striped table-condensed tablaMateriaPrimaTarjetas">
 
               <thead>
 

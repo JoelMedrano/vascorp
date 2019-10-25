@@ -116,41 +116,49 @@ $(".tablaMateriaPrimaTarjetas tbody").on("click", "button.agregarMP", function (
 
 			'<div class="row" style="padding:5px 15px">' +
 	
-			'<!-- Descripción del producto -->' +
-	
-			'<div class="col-xs-7" style="padding-right:0px">' +
-	
-			'<div class="input-group">' +
-	
-			'<span class="input-group-addon input-sm"><button type="button" class="btn btn-danger btn-xs quitarMP" idMateriaPrima="' + idMateriaPrima + '"><i class="fa fa-times"></i></button></span>' +
-	
-			'<input type="text" class="form-control input-sm nuevaDescripcionProducto" idMateriaPrima="' + idMateriaPrima + '" name="agregarMP" value="' + descripcion + '" codigoP="'+codigo+'" readonly required>' +
-	
-			'</div>' +
-	
-			'</div>' +
-	
-			'<!-- Cantidad del producto -->' +
-	
-			'<div class="col-xs-2">' +
-	
-			'<input type="number" class="form-control input-sm nuevaCantidadProducto" name="nuevaCantidadProducto" value="1" stock="' + stock + '" nuevoStock="' + Number(stock - 1) + '" required>' +
-	
-			'</div>' +
-	
-			'<!-- Precio del producto -->' +
-	
-			'<div class="col-xs-3 ingresoPrecio" style="padding-left:0px">' +
-	
-			'<div class="input-group">' +
-	
-			'<span class="input-group-addon"><i class="fa fa-money"></i></span>' +
-	
-			'<input type="text" class="form-control input-sm nuevoPrecioProducto" precioReal="' + precio + '" name="nuevoPrecioProducto" value="' + precio + '" readonly required>' +
-	
-			'</div>' +
-	
-			'</div>' +
+				'<!-- Descripción del producto -->' +
+		
+				'<div class="col-xs-6" style="padding-right:0px">' +
+		
+					'<div class="input-group">' +
+			
+						'<span class="input-group-addon input-sm"><button type="button" class="btn btn-danger btn-xs quitarMP" idMateriaPrima="' + idMateriaPrima + '"><i class="fa fa-times"></i></button></span>' +
+				
+						'<input type="text" class="form-control input-sm nuevaDescripcionProducto" idMateriaPrima="' + idMateriaPrima + '" name="agregarMP" value="' + descripcion + '" codigoP="'+codigo+'" readonly required>' +
+			
+					'</div>' +
+		
+				'</div>' +
+
+				'<!-- Tejido Principal-->' +
+		
+				'<div class="col-xs-2">' +
+		
+					'<input type="text" class="form-control input-sm tejidoPrincipal" name="tejidoPrincipal" value="no" required>' +
+		
+				'</div>' +
+		
+				'<!-- Cantidad del producto -->' +
+		
+				'<div class="col-xs-2">' +
+		
+					'<input type="number" class="form-control input-sm nuevaCantidadProducto" name="nuevaCantidadProducto" value="1" stock="' + stock + '" nuevoStock="' + Number(stock - 1) + '" required>' +
+		
+				'</div>' +
+		
+				'<!-- Precio del producto -->' +
+		
+				'<div class="col-xs-2 ingresoPrecio" style="padding-left:0px">' +
+		
+					'<div class="input-group">' +
+			
+						'<span class="input-group-addon"><i class="fa fa-money"></i></span>' +
+				
+						'<input type="text" class="form-control input-sm nuevoPrecioProducto" precioReal="' + precio + '" name="nuevoPrecioProducto" value="' + precio + '" readonly required>' +
+			
+					'</div>' +
+		
+				'</div>' +
 	
 			'</div>');
   
@@ -198,7 +206,7 @@ $(".tablaMateriaPrimaTarjetas").on("draw.dt", function () {
   })
 
 /* 
-* QUITAR MATERIA PRIMA DE LA TAREJTA Y RECUPERAR BOTÓN
+* QUITAR MATERIA PRIMA DE LA TARJETA Y RECUPERAR BOTÓN
 */
 var idQuitarMateriaPrima = [];
 
@@ -290,6 +298,20 @@ $(".formularioMateriaPrima").on("change", "input.nuevaCantidadProducto", functio
   })
 
 /* 
+* MODIFICAR SI EN TEJIDO PRINCIPAL
+*/  
+
+$(".formularioMateriaPrima").on("change", "input.tejidoPrincipal", function () {
+
+	/* var tejido = $(this); */
+  
+	/* console.log("tejido", tejido.val()); */
+
+	listarMP();
+  
+  })
+
+/* 
 * SUMAR TODOS LOS PRECIOS
 */
 function sumarTotalPreciosT() {
@@ -351,9 +373,11 @@ function agregarImpuestoT() {
 */
 $("#nuevoImpuestoTarjeta").change(function () {
 
-agregarImpuestoT();
+	agregarImpuestoT();
 
 });
+
+
 
 /* 
 * FORMATO AL PRECIO FINAL
@@ -368,6 +392,8 @@ function listarMP() {
 	var listaMP = [];
 
 	var descripcion = $(".nuevaDescripcionProducto");
+
+	var tejido = $(".tejidoPrincipal");
   
 	var cantidad = $(".nuevaCantidadProducto");
   
@@ -379,6 +405,7 @@ function listarMP() {
 		"id": $(descripcion[i]).attr("idMateriaPrima"),
 		"codigo":$(descripcion[i]).attr("codigoP"),
 		"descripcion": $(descripcion[i]).val(),
+		"tejido": $(tejido[i]).val(),
 		"cantidad": $(cantidad[i]).val(),
 		"precio": $(precio[i]).attr("precioReal"),
 		"total": $(precio[i]).val()
