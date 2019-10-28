@@ -27,7 +27,7 @@ todo: ARTICULOS
 
 todo: OTROS
 * etiquetar codigo - ok
-* asginar roles -STAND BY, SE TIENE QUE HACER PRIMERO REPORTES
+* asginar roles - MANTENER SIEMPRE ACTIVO
 
 todo: ROLES
 * SISTEMAS

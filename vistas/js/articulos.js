@@ -15,7 +15,7 @@ CARGAR LA TABLA DINÁMICA DE ARTICULOS
 
 
 $('.tablaArticulos').DataTable( {
-    "ajax": "ajax/datatable-articulos.ajax.php",
+    "ajax": "ajax/datatable-articulos.ajax.php?perfil="+$("#perfilOculto").val(),
     "deferRender": true,
 	"retrieve": true,
 	"processing": true,

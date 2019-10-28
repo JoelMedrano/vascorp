@@ -63,22 +63,39 @@
 
                       <td>'.($key+1).'</td>
 
-                      <td class="text-uppercase">'.$value["marca"].'</td>
+                      <td class="text-uppercase">'.$value["marca"].'</td>';
 
-                      <td>
+                      if( $_SESSION["perfil"] == "Supervisores" ||
+                          $_SESSION["perfil"] == "Sistemas"){
 
-                        <div class="btn-group">
+                            echo '<td>
+
+                                    <div class="btn-group">
+                                        
+                                    <button class="btn btn-warning btnEditarMarca" idMarca="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarMarca"><i class="fa fa-pencil"></i></button>
+                                    
+                                    <button class="btn btn-danger btnEliminarMarca" idMarca="'.$value["id"].'"><i class="fa fa-times"></i></button>
+            
+                                    </div>  
+            
+                                  </td>';
+
+                      }else{
+
+                            echo '<td>
+
+                            <div class="btn-group">
+                                
+                            <button class="btn btn-warning btnEditarMarca" idMarca="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarMarca"><i class="fa fa-pencil"></i></button>
                             
-                        <button class="btn btn-warning btnEditarMarca" idMarca="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarMarca"><i class="fa fa-pencil"></i></button>
-                         
-                        <button class="btn btn-danger btnEliminarMarca" idMarca="'.$value["id"].'"><i class="fa fa-times"></i></button>
+                            </div>  
 
-                        </div>  
+                          </td>';
 
-                      </td>
+                      }
+                      
+             echo '</tr>';        
 
-
-                  </tr>';
           }
 
         ?>

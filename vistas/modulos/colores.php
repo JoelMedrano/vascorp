@@ -67,21 +67,42 @@
 
                     <td>'.$value["cod_color"].'</td>
 
-                    <td>'.$value["nom_color"].'</td>
+                    <td>'.$value["nom_color"].'</td>';
 
-                    <td>
+                    if( $_SESSION["perfil"] == "Supervisores" ||
+                        $_SESSION["perfil"] == "Sistemas"){
 
-                      <div class="btn-group">
-                          
-                        <button class="btn btn-warning btnEditarColor" data-toggle="modal" data-target="#modalEditarColor" idColor="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
+                          echo '<td>
 
-                        <button class="btn btn-danger btnEliminarColor" idColor="'.$value["id"].'"><i class="fa fa-times"></i></button>
+                                <div class="btn-group">
+                                    
+                                  <button class="btn btn-warning btnEditarColor" data-toggle="modal" data-target="#modalEditarColor" idColor="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
+          
+                                  <button class="btn btn-danger btnEliminarColor" idColor="'.$value["id"].'"><i class="fa fa-times"></i></button>
+          
+                                </div>  
+          
+                              </td>';
 
-                      </div>  
+                    }else{
 
-                    </td>
+                      echo '<td>
 
-                  </tr>';
+                              <div class="btn-group">
+                                  
+                                <button class="btn btn-warning btnEditarColor" data-toggle="modal" data-target="#modalEditarColor" idColor="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
+
+                              </div>  
+
+                            </td>';
+
+                      
+                    }
+
+
+
+
+                  echo '</tr>';
           
             }
 

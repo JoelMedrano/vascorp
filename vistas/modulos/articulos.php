@@ -33,7 +33,9 @@
       </div>
 
       <div class="box-body">
-        
+
+        <input type="hidden" value="<?=$_SESSION["perfil"];?>" id="perfilOculto"> 
+
        <table class="table table-bordered table-striped dt-responsive tablaArticulos" width="100%">
          
         <thead>
@@ -538,13 +540,31 @@ MODAL EDITAR ARTICULO
         PIE DEL MODAL
         ======================================-->
 
-        <div class="modal-footer">
 
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+        <?php
 
-          <button type="submit" class="btn btn-primary">Guardar artículo</button>
+          if($_SESSION["perfil"] == "Logistica"){
 
-        </div>
+            echo '<div class="modal-footer">
+
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+          
+                  </div>';
+
+          }else{
+
+            echo '<div class="modal-footer">
+
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+          
+                    <button type="submit" class="btn btn-primary">Guardar artículo</button>
+  
+                  </div>';
+
+
+
+          }
+        ?>
 
       </form>
       <?php

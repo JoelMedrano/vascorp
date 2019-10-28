@@ -37,6 +37,8 @@
       </div>
 
       <div class="box-body">
+
+        <input type="hidden" value="<?=$_SESSION["perfil"];?>" id="perfilOculto">
         
        <table class="table table-bordered table-striped dt-responsive tablaTarjetas">
          
@@ -243,9 +245,7 @@ MODAL VISUALIZAR INFORMACION
 
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
-
-          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Salir</button>
 
         </div>
 
