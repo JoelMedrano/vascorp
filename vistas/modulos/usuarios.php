@@ -214,6 +214,18 @@ MODAL AGREGAR USUARIO
 
                   <option value="Vendedor">Vendedor</option>
 
+                  <option value="Sistemas">Sistemas</option>
+
+                  <option value="Supervisores">Supervisores</option>
+
+                  <option value="Produccion">Producción</option>
+
+                  <option value="Logistica">Logística</option>
+
+                  <option value="Udp">UDP</option>
+
+                  <option value="Costos">Costos</option>
+
                 </select>
 
               </div>
@@ -358,6 +370,18 @@ MODAL EDITAR USUARIO
                   <option value="Especial">Especial</option>
 
                   <option value="Vendedor">Vendedor</option>
+
+                  <option value="Sistemas">Sistemas</option>
+
+                  <option value="Supervisores">Supervisores</option>
+
+                  <option value="Produccion">Producción</option>
+
+                  <option value="Logistica">Logística</option>
+
+                  <option value="Udp">UDP</option>
+
+                  <option value="Costos">Costos</option>
 
                 </select>
 

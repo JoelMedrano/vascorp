@@ -28,13 +28,13 @@
 
                     echo '<div class="box box-success">
 
-                    <div class="box-header">
+                            <div class="box-header">
 
-                    <h1>Bienvenid@ ' .$_SESSION["nombre"].'</h1>
+                                <h1>Bienvenid@ ' .$_SESSION["nombre"].'</h1>
 
-                    </div>
+                            </div>
 
-                    </div>';
+                         </div>';
 
 
                 ?>

@@ -15,222 +15,272 @@
 
             </li>
 
-            <li>
+            <?php
+
+                if($_SESSION["perfil"] == "Sistemas"){
+
+                    echo '<li>
+
+                            <a href="usuarios">
+            
+                                <i class="fa fa-user"></i>
+                                <span>Usuarios</span>
+            
+                            </a>
+    
+                        </li>';
+
+                }
+
+            ?>
+
+            <?php
+            
+                if( $_SESSION["perfil"] == "Sistemas" || 
+                    $_SESSION["perfil"] == "Supervisores" || 
+                    $_SESSION["perfil"] == "Produccion" || 
+                    $_SESSION["perfil"] == "Logistica" || 
+                    $_SESSION["perfil"] == "Udp" || 
+                    $_SESSION["perfil"] == "Costos"){
+
+                        echo '<!-- maestros Joel -->
+
+                        <li class="treeview">
+            
+                            <a href="#">
+            
+                                <i class="fa fa-database"></i>
+            
+                                <span>Maestros</span>
+            
+                                <span class="pull-right-container">
+            
+                                    <i class="fa fa-angle-left pull-right"></i>
+            
+                                </span>
+            
+                            </a>
+            
+                            <ul class="treeview-menu">
+            
+                                <li>
+            
+                                    <a href="articulos">
+            
+                                        <i class="fa fa-circle-o"></i>
+                                        <span>Administrar Artículos</span>
+            
+                                    </a>
+            
+                                </li>
+            
+                                <li>
+            
+                                    <a href="materiaprima">
+            
+                                        <i class="fa fa-circle-o"></i>
+                                        <span>Administrar MP</span>
+            
+                                    </a>
+            
+                                </li>
+            
+                                <li>
+            
+                                    <a href="marcas">
+            
+                                        <i class="fa fa-circle-o"></i>
+                                        <span>Administrar Marcas</span>
+            
+                                    </a>
+            
+                                </li>
+            
+                                <li>
+            
+                                    <a href="colores">
+            
+                                        <i class="fa fa-circle-o"></i>
+                                        <span>Administrar Colores</span>
+            
+                                    </a>
+            
+                                </li>
+            
+                            </ul>
+            
+                        </li>
+            
+                        <!-- fin maestros -->';
+
+                }
+            
+            ?>
+
+            <?php
+            
+                if( $_SESSION["perfil"] == "Sistemas" || 
+                    $_SESSION["perfil"] == "Supervisores" || 
+                    $_SESSION["perfil"] == "Produccion" || 
+                    $_SESSION["perfil"] == "Logistica" || 
+                    $_SESSION["perfil"] == "Udp" || 
+                    $_SESSION["perfil"] == "Costos"){
+
+                        echo '<!-- inicio tarjetas -->
+
+                        <li class="treeview">
+            
+                            <a href="#">
+            
+                                <i class="fa fa-id-card-o"></i>
+            
+                                <span>Tarjetas</span>
+            
+                                <span class="pull-right-container">
+            
+                                    <i class="fa fa-angle-left pull-right"></i>
+            
+                                </span>
+            
+                            </a>
+            
+                            <ul class="treeview-menu">
+            
+                                <li>
+            
+                                    <a href="tarjetas">
+            
+                                        <i class="fa fa-circle-o"></i>
+                                        <span>Administrar Tarjetas</span>
+            
+                                    </a>
+            
+                                </li>';
 
-                <a href="usuarios">
+                                if( $_SESSION["perfil"] == "Sistemas" || 
+                                    $_SESSION["perfil"] == "Supervisores" || 
+                                    $_SESSION["perfil"] == "Produccion" || 
+                                    $_SESSION["perfil"] == "Udp" || 
+                                    $_SESSION["perfil"] == "Costos"){
 
-                    <i class="fa fa-user"></i>
-                    <span>Usuarios</span>
+                                        echo '<li>
+            
+                                                <a href="crear-tarjeta">
+                        
+                                                    <i class="fa fa-circle-o"></i>
+                                                    <span>Crear Tarjeta</span>
+                        
+                                                </a>
+                        
+                                            </li>';
+                                }
+                                
+                            echo '</ul>
+            
+                        </li>
+            
+                        <!-- fin tarjetas -->';
 
-                </a>
 
-            </li>
+                }
+            
+            ?>
 
-            <!-- maestros Joel -->
+            <?php
+            
+            if( $_SESSION["perfil"] == "Sistemas" ||
+                $_SESSION["perfil"] == "Administrador")
+            
+                echo '  <li>
 
-            <li class="treeview">
+                            <a href="categorias">
 
-                <a href="#">
+                                <i class="fa fa-th"></i>
+                                <span>Categorías</span>
 
-                    <i class="fa fa-database"></i>
+                            </a>
 
-                    <span>Maestros</span>
+                        </li>
 
-                    <span class="pull-right-container">
+                        <li>
 
-                        <i class="fa fa-angle-left pull-right"></i>
+                            <a href="productos">
 
-                    </span>
+                                <i class="fa fa-product-hunt"></i>
+                                <span>Productos</span>
 
-                </a>
+                            </a>
 
-                <ul class="treeview-menu">
+                        </li>
 
-                    <li>
+                        <li>
 
-                        <a href="articulos">
+                            <a href="clientes">
 
-                            <i class="fa fa-circle-o"></i>
-                            <span>Administrar Artículos</span>
+                                <i class="fa fa-users"></i>
+                                <span>Clientes</span>
 
-                        </a>
+                            </a>
 
-                    </li>
+                        </li>
 
-                    <li>
+                        <li class="treeview">
 
-                        <a href="materiaprima">
+                            <a href="#">
 
-                            <i class="fa fa-circle-o"></i>
-                            <span>Administrar MP</span>
+                                <i class="fa fa-list-ul"></i>
 
-                        </a>
+                                <span>Ventas</span>
 
-                    </li>
+                                <span class="pull-right-container">
 
-                    <li>
+                                    <i class="fa fa-angle-left pull-right"></i>
 
-                        <a href="marcas">
+                                </span>
 
-                            <i class="fa fa-circle-o"></i>
-                            <span>Administrar Marcas</span>
+                            </a>
 
-                        </a>
+                            <ul class="treeview-menu">
 
-                    </li>
+                                <li>
 
-                    <li>
+                                    <a href="ventas">
 
-                        <a href="colores">
+                                        <i class="fa fa-circle-o"></i>
+                                        <span>Administrar ventas</span>
 
-                            <i class="fa fa-circle-o"></i>
-                            <span>Administrar Colores</span>
+                                    </a>
 
-                        </a>
+                                </li>
 
-                    </li>
+                                <li>
 
-                </ul>
+                                    <a href="crear-venta">
 
-            </li>
+                                        <i class="fa fa-circle-o"></i>
+                                        <span>Crear venta</span>
 
-            <!-- fin maestros -->
+                                    </a>
 
-            <!-- inicio tarjetas -->
+                                </li>
 
-            <li class="treeview">
+                                <li>
 
-                <a href="#">
+                                    <a href="reportes">
 
-                    <i class="fa fa-id-card-o"></i>
+                                        <i class="fa fa-circle-o"></i>
+                                        <span>Reporte de ventas</span>
 
-                    <span>Tarjetas</span>
+                                    </a>
 
-                    <span class="pull-right-container">
+                                </li>
 
-                        <i class="fa fa-angle-left pull-right"></i>
+                            </ul>
 
-                    </span>
+                        </li>';
+            
+            ?>
 
-                </a>
-
-                <ul class="treeview-menu">
-
-                    <li>
-
-                        <a href="tarjetas">
-
-                            <i class="fa fa-circle-o"></i>
-                            <span>Administrar Tarjetas</span>
-
-                        </a>
-
-                    </li>
-
-                    <li>
-
-                        <a href="crear-tarjeta">
-
-                            <i class="fa fa-circle-o"></i>
-                            <span>Crear Tarjeta</span>
-
-                        </a>
-
-                    </li>
-
-                </ul>
-
-            </li>
-
-            <!-- fin tarjetas -->
-
-            <li>
-
-                <a href="categorias">
-
-                    <i class="fa fa-th"></i>
-                    <span>Categorías</span>
-
-                </a>
-
-            </li>
-
-            <li>
-
-                <a href="productos">
-
-                    <i class="fa fa-product-hunt"></i>
-                    <span>Productos</span>
-
-                </a>
-
-            </li>
-
-            <li>
-
-                <a href="clientes">
-
-                    <i class="fa fa-users"></i>
-                    <span>Clientes</span>
-
-                </a>
-
-            </li>
-
-            <li class="treeview">
-
-                <a href="#">
-
-                    <i class="fa fa-list-ul"></i>
-
-                    <span>Ventas</span>
-
-                    <span class="pull-right-container">
-
-                        <i class="fa fa-angle-left pull-right"></i>
-
-                    </span>
-
-                </a>
-
-                <ul class="treeview-menu">
-
-                    <li>
-
-                        <a href="ventas">
-
-                            <i class="fa fa-circle-o"></i>
-                            <span>Administrar ventas</span>
-
-                        </a>
-
-                    </li>
-
-                    <li>
-
-                        <a href="crear-venta">
-
-                            <i class="fa fa-circle-o"></i>
-                            <span>Crear venta</span>
-
-                        </a>
-
-                    </li>
-
-                    <li>
-
-                        <a href="reportes">
-
-                            <i class="fa fa-circle-o"></i>
-                            <span>Reporte de ventas</span>
-
-                        </a>
-
-                    </li>
-
-                </ul>
-
-            </li>
 
         </ul>
 

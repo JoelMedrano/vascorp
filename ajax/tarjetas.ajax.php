@@ -41,12 +41,34 @@ class AjaxTarjetas{
 
 		$respuesta=ModeloTarjetas::mdlActualizarTarjeta($tabla,$item1,$valor1,$item2,$valor2,$item3,$valor3);
 		echo $respuesta;
+	}
+	
+	public $articuloTarjeta;
+
+	public function ajaxVisualizarTarjeta(){
+
+		$item = "articulo";
+		$valor = $this->articuloTarjeta;
+
+		$respuesta = ControladorTarjetas::ctrVisualizarTarjeta($item, $valor);
+
+		echo json_encode($respuesta);
+	}
+
+	public function ajaxVisualizarTarjetaDetalle(){
+
+		$item = "articulo";
+		$valor = $this->articuloTarjetaDetalle;
+
+		$respuestaDetalle = ControladorTarjetas::ctrVisualizarTarjetaDetalle($item, $valor);
+
+		echo json_encode($respuestaDetalle);
 	}	
 
 
 }
 
-// OBJETOS
+// ELIMINAR
 if(isset($_POST["idTarjeta"])){
 
 	$eliminarTarjeta=new AjaxTarjetas();
@@ -55,7 +77,7 @@ if(isset($_POST["idTarjeta"])){
     
 }
 
-//OBJETOS
+//ACTIVAR
 
 if(isset($_POST["activarId"])){
 	$activar=new AjaxTarjetas();
@@ -63,3 +85,28 @@ if(isset($_POST["activarId"])){
 	$activar->activarTarjeta=$_POST["activarTarjeta"];
 	$activar->ajaxActivarDesactivarTarjeta();
 }
+
+
+/*=============================================
+VISUALIZAR TARJETA CABECERA
+=============================================*/ 
+
+if(isset($_POST["articuloTarjeta"])){
+
+	$visualizarTarjeta = new AjaxTarjetas();
+	$visualizarTarjeta -> articuloTarjeta = $_POST["articuloTarjeta"];
+	$visualizarTarjeta -> ajaxVisualizarTarjeta();
+  
+  }
+
+/*=============================================
+VISUALIZAR TARJETA DETALLE
+=============================================*/ 
+
+if(isset($_POST["articuloTarjetaDetalle"])){
+
+	$visualizarTarjetaDetalle = new AjaxTarjetas();
+	$visualizarTarjetaDetalle -> articuloTarjetaDetalle = $_POST["articuloTarjetaDetalle"];
+	$visualizarTarjetaDetalle -> ajaxVisualizarTarjetaDetalle();
+  
+  }

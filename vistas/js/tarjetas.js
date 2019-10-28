@@ -603,3 +603,93 @@ $('#modalTejidoPrincipal').on('show.bs.modal', function (event) {
 	modal.find('.modal-title').text('New message to ' + recipient)
 	modal.find('.modal-body input').val(recipient)
 })
+
+
+/* 
+* BOTON VISUALIZAR TARJETA
+*/
+$(".tablaTarjetas").on("click", ".btnVisualizarTarjeta", function () {
+
+	var articuloTarjeta = $(this).attr("articuloTarjeta");
+
+	/* console.log("articuloTarjeta", articuloTarjeta); */
+
+	var datos = new FormData();
+	datos.append("articuloTarjeta", articuloTarjeta);
+
+	$.ajax({
+
+		url:"ajax/tarjetas.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType:"json",
+		success:function(respuesta){
+
+			/* console.log("respuesta", respuesta); */
+
+			$("#articulo").val(respuesta["articulo"]);
+
+			$("#descripcion").val(respuesta["descripcion"]);
+
+			$("#fecha").val(respuesta["fecha"]);
+
+			$("#costo").val(respuesta["neto"]);
+
+			$("#estado").val(respuesta["estadoTarjeta"]);
+
+			$("#tejidoPrincipal").val(respuesta["descripcionMP"]);
+
+		}
+
+	})
+
+	var articuloTarjetaDetalle = $(this).attr("articuloTarjeta");	
+
+	console.log("articuloTarjetaDetalle", articuloTarjetaDetalle);
+
+	var datosDetalle = new FormData();
+	datosDetalle.append("articuloTarjetaDetalle", articuloTarjetaDetalle);
+
+	$.ajax({
+
+		url:"ajax/tarjetas.ajax.php",
+		method: "POST",
+		data: datosDetalle,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType:"json",
+		success:function(respuestaDetalle){
+
+			console.log("respuestaDetalle", respuestaDetalle);
+
+			for(var id of respuestaDetalle){
+
+				$('.tablaDetalle').append(
+
+					'<tr>' +
+						'<td>' + id.mat_pri + ' </td>' +
+						'<td>' + id.descripcionMP + ' </td>' +
+						'<td>' + id.unidad + ' </td>' +
+						'<td>' + id.consumo + ' </td>' +
+						'<td>' + id.tej_princ + ' </td>' +
+						'<td>' + id.precio_mp + ' </td>' +
+						'<td>' + id.total_detalle + ' </td>' +
+					'</tr>'
+
+
+				)
+
+			}
+
+		}
+
+	})
+
+
+
+  
+})

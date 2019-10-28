@@ -544,5 +544,35 @@ class ControladorTarjetas{
 
 	}
 
+	/* 
+	* VISUALIZAR DATOS DE LAS TARJETAS DETALLE
+	*/
+	static public function ctrVisualizarTarjeta($item, $valor){
+
+		$tabla = "tarjetasjf";
+
+        $respuesta = ModeloTarjetas::mdlVisualizarTarjeta($tabla, $item, $valor);
+        
+        /* var_dump("respuesta", $respuesta); */
+
+		return $respuesta;
+
+	}	
+
+	/* 
+	* VISUALIZAR DATOS DE LAS TARJETAS
+	*/
+	static public function ctrVisualizarTarjetaDetalle($item, $valor){
+
+		$tabla = "detalles_tarjetajf";
+
+        $respuesta = ModeloTarjetas::mdlVisualizarTarjetaDetalle($tabla, $item, $valor);
+        
+        /* var_dump("respuesta", $respuesta); */
+
+		return $respuesta;
+
+	}	
+
 }
 

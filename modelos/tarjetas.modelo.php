@@ -325,7 +325,116 @@ class ModeloTarjetas{
 
 		$stmt = null;
 
-    } 	
+	}
+	
+	/* 
+	* Método para vizualizar cabecera tarjeta
+	*/
+	static public function mdlVisualizarTarjeta($tabla, $item, $valor){
+
+		$sql="SELECT DISTINCT 
+								t.articulo,
+								CONCAT(
+									a.modelo,
+									' - ',
+									a.nombre,
+									' - ',
+									a.color,
+									' - ',
+									a.talla
+									) AS descripcion,
+								DATE(t.fecha) AS fecha,
+								t.neto,
+								CASE
+									WHEN t.estado = 're' 
+									THEN 'REVISAR' 
+									ELSE 'APROBADO' 
+								END AS estadoTarjeta,
+								tp.descripcionMP 
+							FROM
+								$tabla t 
+								LEFT JOIN articulojf a 
+									ON t.articulo = a.articulo 
+								LEFT JOIN 
+								(SELECT 
+									dt.articulo,
+									dt.mat_pri,
+									dt.tej_princ,
+									mp.descripcionMP 
+								FROM
+									detalles_tarjetajf dt 
+									LEFT JOIN 
+									(SELECT DISTINCT 
+										p.Codpro,
+										CONCAT(p.DesPro, ' - ', tb.Des_Larga) AS descripcionMP 
+									FROM
+										producto AS p,
+										Tabla_M_Detalle AS tb 
+									WHERE tb.Cod_Tabla IN ('TCOL') 
+										AND tb.Cod_Argumento = p.ColPro) AS mp 
+									ON dt.mat_pri = mp.codpro 
+								WHERE $item = :$item
+									AND tej_princ = 'si') AS tp 
+								ON t.articulo = tp.articulo 
+							WHERE t.$item = :$item";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->bindParam(":".$item,$valor,PDO::PARAM_STR);
+
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt=null;
+
+	}
+
+	/* 
+	* Método para vizualizar detalle tarjeta
+	*/
+	static public function mdlVisualizarTarjetaDetalle($tabla, $item, $valor){
+
+		$sql="SELECT 
+						dt.mat_pri,
+						mp.descripcionMP,
+						mp.unidad,
+						ROUND(dt.consumo, 6) AS consumo,
+						CASE
+							WHEN dt.tej_princ='no' THEN ''
+							ELSE 'SI'
+						END AS tej_princ,
+						ROUND(dt.precio_mp, 6) AS precio_mp,
+						ROUND(dt.total_detalle, 6) AS total_detalle 
+					FROM
+						$tabla dt 
+						LEFT JOIN 
+						(SELECT DISTINCT 
+							p.Codpro,
+							CONCAT(p.DesPro, ' - ', tb.Des_Larga) AS descripcionMP,
+							tb2.Des_Corta AS unidad 
+						FROM
+							producto AS p,
+							Tabla_M_Detalle AS tb,
+							Tabla_M_Detalle AS tb2 
+						WHERE tb.Cod_Tabla IN ('TCOL') 
+							AND tb2.Cod_Tabla IN ('TUND') 
+							AND tb.Cod_Argumento = p.ColPro 
+							AND tb2.Cod_Argumento = p.UndPro) AS mp 
+						ON dt.mat_pri = mp.codpro 
+					WHERE dt.$item = :$item";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->bindParam(":".$item,$valor,PDO::PARAM_STR);
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt=null;
+
+	}	
 
 
 }

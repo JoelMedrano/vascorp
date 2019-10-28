@@ -6,10 +6,11 @@ todo: TARJETAS
 * poner descripcion en botones - ok
 * copiar tarjetas - ok
 * asignar tejido principal - ok
+* visualizar detale de tarjeta - ok
 ! revisar materia prima por articulo
 ! calcular cantidad que necesita cierta cantidad de prendas
 ! sacar en reporte
-? se puede poner la cantidad de prendas que rinden por kilo? en tarjeta.
+// se puede poner la cantidad de prendas que rinden por kilo? en tarjeta.
 
 
 todo: ESCRITORIO
@@ -19,12 +20,37 @@ todo: ESCRITORIO
 
 
 todo: ARTICULOS
-!copiar articulos
+! copiar articulos
+! sacar informacion en un modal
+! hacer reportes en excel
 
 
 todo: OTROS
 * etiquetar codigo - ok
-* asginar roles
+* asginar roles -STAND BY, SE TIENE QUE HACER PRIMERO REPORTES
+
+todo: ROLES
+* SISTEMAS
+    - TODOS LOS MODULOS / TODOS LOS BOTONES - CONTROL TOTAL
+* SUPERVISORES
+    - QUITAR LOS MODULOS DE PRUEBA
+* PRODUCCION
+    - ESCRITORIO - UNIDADES
+    - MODULOS: MAESTROS - TARJETAS
+    - QUITAR BOTONES ELIMINAR  DE TODO MENOS DE ARTICULOS
+* LOGISTICA
+    - ESCRITORIO - UNIDADES
+    - MODULOS: MAESTROS - TARJETAS - QUITAR CREAR TARJETAS
+    - QUITAR BOTONES ELIMINAR  DE TODO
+* DISEÑO
+- ESCRITORIO - UNIDADES
+    - MODULOS: MAESTROS - TARJETAS
+    - QUITAR BOTONES ELIMINAR  DE TODO MENOS DE TARJETAS
+* COSTOS
+    - ESCRITORIO - UNIDADES
+    - MODULOS: MAESTROS - TARJETAS
+    - QUITAR BOTONES ELIMINAR  DE TODO MENOS DE TARJETAS
+* VENTAS
 
 */
 

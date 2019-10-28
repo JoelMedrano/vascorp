@@ -72,12 +72,12 @@
 </div>
 
 <!--=====================================
-MODAL ASIGNAR TEJIDO PRINCIPAL
+MODAL VISUALIZAR INFORMACION
 ======================================-->
 
-<div id="modalTejidoPrincipal" class="modal fade" role="dialog">
+<div id="modalVisualizarTarjeta" class="modal fade" role="dialog">
   
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="width: 80% !important;">
 
     <div class="modal-content">
 
@@ -91,7 +91,7 @@ MODAL ASIGNAR TEJIDO PRINCIPAL
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Asignar Tejido Principal</h4>
+          <h4 class="modal-title">Detalle de Tarjeta</h4>
 
         </div>
 
@@ -105,38 +105,134 @@ MODAL ASIGNAR TEJIDO PRINCIPAL
 
             <!-- ENTRADA PARA CODIGO DEL ARTICULO-->
             
-            <div class="form-group">
+            <div class="form-group col-lg-4">
               
+              <label>Articulo</label>
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-code"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="editarArticulo" id="editarArticulo" required>
+              <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
 
-                 <input type="hidden"  name="idTarjeta" id="idCategoria" required>
+                <input type="text" class="form-control input-sm" name="articulo" id="articulo" required readonly>
 
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA SELECCIONAR LA MATERIA PRIMA -->
+            <!-- ENTRADA PARA LA DESCRIPCION-->
+            
+            <div class="form-group col-lg-8">
 
-            <div class="form-group">
+              <label>Descripción</label>
               
               <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span> 
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
 
-                <select class="form-control input-lg" id="mpPrincipal" name="mpPrincipal" required>
-                  
-                  <option value="">Seleccionar Materia Prima</option>
- 
-                </select>
+                <input type="text" class="form-control input-sm" name="descripcion" id="descripcion" required readonly>
 
               </div>
 
             </div>            
-  
+
+            <!-- ENTRADA PARA LA FECHA-->
+            
+            <div class="form-group col-lg-4">
+
+              <label>Creación</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <input type="text" class="form-control input-sm" name="fecha" id="fecha" required readonly>
+
+              </div>
+
+            </div>      
+            
+            <!-- ENTRADA PARA EL COSTO-->
+            
+            <div class="form-group col-lg-4">
+
+              <label>Costo S/</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <input type="text" class="form-control input-sm" name="costo" id="costo" required readonly>
+
+              </div>
+
+            </div>
+            
+            <!-- ENTRADA PARA EL ESTADO-->
+            
+            <div class="form-group col-lg-4">
+
+              <label>Estado</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <input type="text" class="form-control input-sm" name="estado" id="estado" required readonly>
+
+              </div>
+
+            </div>     
+
+            <!-- ENTRADA PARA EL TEJIDO PRINCIPAL-->
+            
+            <div class="form-group col-lg-12">
+
+              <label>Tejido Principal</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <input type="text" class="form-control input-sm" name="tejidoPrincipal" id="tejidoPrincipal" required readonly>
+
+              </div>
+
+            </div>     
+
+            <!-- TABLA DE DETALLES -->
+            
+            <label>TABLA DETALLES</label>
+
+            <div class="box-body">
+
+              <table class="table table-bordered table-striped dt-responsive tablaDetalle">
+
+                <thead>
+
+                  <tr>
+
+                    <th style="width:100px">CodPro</th>
+                    <th>Materia Prima</th>
+                    <th style="width:80px">Unidad</th>
+                    <th>Consumo</th>
+                    <th style="width:60px">TP</th>
+                    <th>Costo S/</th>
+                    <th>Tota S/</th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody>
+
+
+
+                </tbody>
+
+              </table>
+
+            </div>
+
           </div>
 
         </div>
