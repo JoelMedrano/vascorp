@@ -25,6 +25,35 @@ class AjaxMateriaPrima{
 
   }
 
+  /* 
+  * VISUALIZAR LA CABECERA DE LA MATERIA PRIMA
+  */
+  public $articuloMP;
+
+	public function ajaxVisualizarMateriaPrima(){
+
+		$item = "codpro";
+		$valor = $this->articuloMP;
+
+		$respuesta = ControladorMateriaPrima::ctrVisualizarMateriaPrima($item, $valor);
+
+		echo json_encode($respuesta);
+  
+  }
+
+  /* 
+  * VISUALIZAR DETALLE DE LA MATERIA PRIMA
+  */
+  public function ajaxVisualizarMateriaPrimaDetalle(){
+
+		$item = "mat_pri";
+		$valor = $this->articuloMPDetalle;
+
+		$respuestaDetalle = ControladorMateriaPrima::ctrVisualizarMateriaPrimaDetalle($item, $valor);
+
+		echo json_encode($respuestaDetalle);
+	}	
+
 }
 
 
@@ -39,3 +68,25 @@ if(isset($_POST["idMateriaPrima"])){
 	$editarMateriaPrima -> ajaxEditarMateriaPrima();
   
   }
+
+/* 
+ * VISUALIZAR LA CABECERA DE LA MATERIA PRIMA
+*/
+if(isset($_POST["articuloMP"])){
+
+	$visualizarMateriaPrima = new AjaxMateriaPrima();
+	$visualizarMateriaPrima -> articuloMP = $_POST["articuloMP"];
+	$visualizarMateriaPrima -> ajaxVisualizarMateriaPrima();
+  
+}
+
+/* 
+ * VISUALIZAR DETALLE DE LA MATERIA PRIMA
+*/
+if(isset($_POST["articuloMPDetalle"])){
+
+  $visualizarMateriaPrimaDetalle = new AjaxMateriaPrima();
+	$visualizarMateriaPrimaDetalle -> articuloMPDetalle = $_POST["articuloMPDetalle"];
+	$visualizarMateriaPrimaDetalle -> ajaxVisualizarMateriaPrimaDetalle();
+  
+}

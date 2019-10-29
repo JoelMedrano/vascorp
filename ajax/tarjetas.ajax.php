@@ -97,7 +97,7 @@ if(isset($_POST["articuloTarjeta"])){
 	$visualizarTarjeta -> articuloTarjeta = $_POST["articuloTarjeta"];
 	$visualizarTarjeta -> ajaxVisualizarTarjeta();
   
-  }
+}
 
 /*=============================================
 VISUALIZAR TARJETA DETALLE

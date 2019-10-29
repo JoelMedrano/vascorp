@@ -70,7 +70,8 @@ class ModeloMateriaPrima{
                                                         AND tb2.Cod_Argumento = p.UndPro 
                                                         AND LEFT(p.CodFab, 3) = tb4.Des_Corta 
                                                         AND SUBSTRING(p.CodFab, 4, 3) = tb1.Valor_3 
-                                                        AND tb4.Des_Corta = tb1.Des_Corta 
+                                                        AND tb4.Des_Corta = tb1.Des_Corta
+														AND p.estpro = '1' 
                                                     ORDER BY SUBSTRING(p.CodFab, 1, 6) ASC");
 
 			$stmt -> execute();
@@ -152,6 +153,90 @@ class ModeloMateriaPrima{
 		$stmt=null;
 	}
 
+	/* 
+	* Método para vizualizar cabecera mateeria prima
+	*/
+	static public function mdlVisualizarMateriaPrima($tabla, $item, $valor){
+
+		$sql="SELECT DISTINCT 
+									p.codpro,
+									tblin.des_larga AS linea,
+									SUBSTRING(p.codfab, 1, 6) AS codlinea,
+									p.codfab,
+									p.despro AS descripcion,
+									p.codpro,
+									p.codalm01 as stock,
+									tbund.des_corta AS unidad,
+									tbcol.des_larga AS color,
+									IFNULL(pmp.proveedores,'Pendiente') AS proveedor 
+								FROM
+									$tabla p 
+									LEFT JOIN 
+									(SELECT 
+										codpro,
+										CONCAT_WS('   -   ', prov1.razpro) AS proveedores 
+									FROM
+										preciomp pmp 
+										LEFT JOIN proveedor prov1 
+										ON pmp.codprov1 = prov1.codruc 
+									GROUP BY pmp.codpro) AS pmp 
+									ON pmp.codpro = p.codpro 
+									INNER JOIN tabla_m_detalle AS tbund 
+									ON p.undpro = tbund.cod_argumento 
+									AND (tbund.Cod_Tabla = 'TUND') 
+									INNER JOIN tabla_m_detalle AS tbcol 
+									ON p.ColPro = tbcol.cod_argumento 
+									AND (tbcol.Cod_Tabla = 'TCOL') 
+									INNER JOIN tabla_m_detalle AS tblin 
+									ON LEFT(p.codfab, 3) = tblin.des_corta 
+									AND (tblin.cod_tabla = 'Tlin')
+								WHERE p.$item = :$item
+									AND p.estpro = '1'";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->bindParam(":".$item,$valor,PDO::PARAM_STR);
+
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt=null;
+
+	}
+	
+	/* 
+	* Método para vizualizar detalle de la materia prima
+	*/
+	static public function mdlVisualizarMateriaPrimaDetalle($tabla, $item, $valor){
+
+		$sql="SELECT 	dt.mat_pri,
+						dt.articulo,
+						a.modelo,
+						a.nombre,
+						a.color,
+						a.talla,
+						a.estado,
+						dt.consumo,
+						dt.tej_princ 
+					FROM
+						$tabla dt 
+						LEFT JOIN articulojf a 
+						ON dt.articulo = a.articulo
+					WHERE dt.$item = :$item
+					ORDER BY dt.articulo";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->bindParam(":".$item,$valor,PDO::PARAM_STR);
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt=null;
+
+	}		
 
 
 }

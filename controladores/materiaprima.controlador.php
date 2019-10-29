@@ -91,4 +91,34 @@ class ControladorMateriaPrima{
 
 	}
 
+	/* 
+	* VISUALIZAR DATOS DE LA MATERIA PRIMA CABECERA
+	*/
+	static public function ctrVisualizarMateriaPrima($item, $valor){
+
+		$tabla = "producto";
+
+        $respuesta = ModeloMateriaPrima::mdlVisualizarMateriaPrima($tabla, $item, $valor);
+        
+        /* var_dump("respuesta", $respuesta); */
+
+		return $respuesta;
+
+	}
+
+	/* 
+	* VISUALIZAR DATOS DE LA MATERIA PRIMA DETALLE
+	*/
+	static public function ctrVisualizarMateriaPrimaDetalle($item, $valor){
+
+		$tabla = "detalles_tarjetajf";
+
+        $respuesta = ModeloMateriaPrima::mdlVisualizarMateriaPrimaDetalle($tabla, $item, $valor);
+        
+        /* var_dump("respuesta", $respuesta); */
+
+		return $respuesta;
+
+	}		
+
 }

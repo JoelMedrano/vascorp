@@ -85,7 +85,7 @@ class TablaTarjetas{
                 $_GET["perfil"]=="Costos" ||
                 $_GET["perfil"]=="Udp"){
 
-                    $botones =  "<div class='btn-group'><button class='btn btn-info btnVisualizarTarjeta' title='Visualizar Tarjeta' data-toggle='modal' data-target='#modalVisualizarTarjeta' articuloTarjeta='".$tarjetas[$i]["articulo"]."'><i class='fa fa-eye'></i></button><button class='btn btn-primary  btnCopiarTarjeta' title='Copiar Tarjeta' idTarjeta='".$tarjetas[$i]["id"]."'><i class='fa fa-files-o'></i></button><button class='btn btn-warning  btnEditarTarjeta' title='Editar Tarjeta' idTarjeta='".$tarjetas[$i]["id"]."'><i class='fa fa-pencil'></i></button><button class='btn btn-danger  btnEliminarTarjeta' title='Eliminar Tarjeta' idTarjeta='".$tarjetas[$i]["id"]."'><i class='fa fa-times'></i></button></div>";
+                $botones =  "<div class='btn-group'><button class='btn btn-info btnVisualizarTarjeta' title='Visualizar Tarjeta' data-toggle='modal' data-target='#modalVisualizarTarjeta' articuloTarjeta='".$tarjetas[$i]["articulo"]."'><i class='fa fa-eye'></i></button><button class='btn btn-primary  btnCopiarTarjeta' title='Copiar Tarjeta' idTarjeta='".$tarjetas[$i]["id"]."'><i class='fa fa-files-o'></i></button><button class='btn btn-warning  btnEditarTarjeta' title='Editar Tarjeta' idTarjeta='".$tarjetas[$i]["id"]."'><i class='fa fa-pencil'></i></button><button class='btn btn-danger  btnEliminarTarjeta' title='Eliminar Tarjeta' idTarjeta='".$tarjetas[$i]["id"]."'><i class='fa fa-times'></i></button></div>";
 
             }else{
 

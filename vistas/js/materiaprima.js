@@ -47,11 +47,9 @@ $('.tablaMateriaPrima').DataTable( {
 	}    
 } );
 
-
-/*=============================================
-EDITAR ARTICULO
-=============================================*/
-
+/* 
+* EDITAR MATERIA PRIMA
+*/
 $(".tablaMateriaPrima tbody").on("click", "button.btnEditarMateriaPrima", function(){
 
 	var idMateriaPrima = $(this).attr("idMateriaPrima");
@@ -85,4 +83,99 @@ $(".tablaMateriaPrima tbody").on("click", "button.btnEditarMateriaPrima", functi
 
 
 
+})
+
+/* 
+* VISUALIZAR DETALLE DE ARTICULOS QUE LLEVAN ESA MATERIA PRIMA
+*/
+$(".tablaMateriaPrima").on("click", ".btnVisualizarArticulos", function () {
+
+	var articuloMP = $(this).attr("articuloMP");
+
+	/* console.log("articuloMP", articuloMP); */
+
+	var datos = new FormData();
+	datos.append("articuloMP", articuloMP);
+
+	$.ajax({
+
+		url:"ajax/materiaprima.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType:"json",
+		success:function(respuesta){
+
+			/* console.log("respuesta", respuesta); */
+
+			$("#codpro").val(respuesta["codpro"]);
+			
+			$("#codLinea").val(respuesta["codlinea"]);
+
+			$("#linea").val(respuesta["linea"]);
+
+			$("#codfab").val(respuesta["codfab"]);
+
+			$("#descripcion").val(respuesta["descripcion"]);
+
+			$("#color").val(respuesta["color"]);
+
+			$("#stock").val(respuesta["stock"]);
+
+			$("#proveedor").val(respuesta["proveedor"]);
+
+		}
+
+	})
+
+	var articuloMPDetalle = $(this).attr("articuloMP");	
+
+	console.log("articuloMPDetalle", articuloMPDetalle);
+
+	var datosDetalle = new FormData();
+	datosDetalle.append("articuloMPDetalle", articuloMPDetalle);
+
+	$.ajax({
+
+		url:"ajax/materiaprima.ajax.php",
+		method: "POST",
+		data: datosDetalle,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType:"json",
+		success:function(respuestaDetalle){
+
+			/* console.log("respuestaDetalle", respuestaDetalle); */
+
+			$(".detalleMP").remove();
+
+			for(var id of respuestaDetalle){
+
+				$('.tablaDetalleArticulo').append(
+
+					'<tr class="detalleMP">' +
+						'<td>' + id.articulo + ' </td>' +
+						'<td>' + id.modelo + ' </td>' +
+						'<td>' + id.nombre + ' </td>' +
+						'<td>' + id.color + ' </td>' +
+						'<td>' + id.talla + ' </td>' +
+						'<td>' + id.estado + ' </td>' +
+						'<td>' + id.consumo + ' </td>' +
+						'<td>' + id.tej_princ + ' </td>' +
+					'</tr>'
+
+
+				)
+
+			}
+
+		}
+
+	})
+
+
+  
 })

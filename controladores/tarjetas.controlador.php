@@ -533,7 +533,7 @@ class ControladorTarjetas{
 	}
 
 	/* 
-	* VISUALIZAR DATOS DE LAS TARJETAS DETALLE
+	* VISUALIZAR DATOS DE LAS TARJETAS CABECERA
 	*/
 	static public function ctrVisualizarTarjeta($item, $valor){
 
@@ -548,7 +548,7 @@ class ControladorTarjetas{
 	}	
 
 	/* 
-	* VISUALIZAR DATOS DE LAS TARJETAS
+	* VISUALIZAR DATOS DE LAS TARJETAS DETALLE
 	*/
 	static public function ctrVisualizarTarjetaDetalle($item, $valor){
 
