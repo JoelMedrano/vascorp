@@ -619,14 +619,14 @@ $(".tablaTarjetas").on("click", ".btnVisualizarTarjeta", function () {
 
 	$.ajax({
 
-		url:"ajax/tarjetas.ajax.php",
+		url: "ajax/tarjetas.ajax.php",
 		method: "POST",
 		data: datos,
 		cache: false,
 		contentType: false,
 		processData: false,
-		dataType:"json",
-		success:function(respuesta){
+		dataType: "json",
+		success: function (respuesta) {
 
 			/* console.log("respuesta", respuesta); */
 
@@ -646,7 +646,7 @@ $(".tablaTarjetas").on("click", ".btnVisualizarTarjeta", function () {
 
 	})
 
-	var articuloTarjetaDetalle = $(this).attr("articuloTarjeta");	
+	var articuloTarjetaDetalle = $(this).attr("articuloTarjeta");
 
 	/* console.log("articuloTarjetaDetalle", articuloTarjetaDetalle); */
 
@@ -655,37 +655,77 @@ $(".tablaTarjetas").on("click", ".btnVisualizarTarjeta", function () {
 
 	$.ajax({
 
-		url:"ajax/tarjetas.ajax.php",
+		url: "ajax/tarjetas.ajax.php",
 		method: "POST",
 		data: datosDetalle,
 		cache: false,
 		contentType: false,
 		processData: false,
-		dataType:"json",
-		success:function(respuestaDetalle){
+		dataType: "json",
+		success: function (respuestaDetalle) {
+
+
+			$(".simulacion").change(function () {
+
+				var simulacion = $(this).val();
+
+				console.log("simulacion", simulacion);
+
+				$(".btnCalcular").click(function () {
+
+
+					$(".detalle").remove();
+
+
+					for (var id of respuestaDetalle) {
+
+						/* 
+						todo: Calculamos el total del consumo
+						*/
+						var cons = id.consumo;
+
+						var sumaCons = Number(simulacion) * Number(cons);
+
+						sumaCons = Number(sumaCons.toFixed(6));
+
+						/* 
+						todo: Calculamos el total del costo
+						*/
+
+						var total = id.total_detalle;
+
+						var sumaTotal = Number(simulacion) * Number(total);
+
+						sumaTotal = Number(sumaTotal.toFixed(6));
+
+
+
+						$('.tablaDetalle').append(
+
+							'<tr class="detalle">' +
+							'<td>' + id.mat_pri + ' </td>' +
+							'<td>' + id.descripcionMP + ' </td>' +
+							'<td>' + id.unidad + ' </td>' +
+							'<td>' + sumaCons + ' </td>' +
+							'<td>' + id.tej_princ + ' </td>' +
+							'<td>' + id.precio_mp + ' </td>' +
+							'<td>' + sumaTotal + ' </td>' +
+							'</tr>'
+
+
+						)
+
+					}
+
+
+				})
+
+
+			})
 
 			/* console.log("respuestaDetalle", respuestaDetalle); */
 
-			$(".detalle").remove();
 
-			for(var id of respuestaDetalle){
-
-				$('.tablaDetalle').append(
-
-					'<tr class="detalle">' +
-						'<td>' + id.mat_pri + ' </td>' +
-						'<td>' + id.descripcionMP + ' </td>' +
-						'<td>' + id.unidad + ' </td>' +
-						'<td>' + id.consumo + ' </td>' +
-						'<td>' + id.tej_princ + ' </td>' +
-						'<td>' + id.precio_mp + ' </td>' +
-						'<td>' + id.total_detalle + ' </td>' +
-					'</tr>'
-
-
-				)
-
-			}
 
 		}
 
@@ -693,5 +733,7 @@ $(".tablaTarjetas").on("click", ".btnVisualizarTarjeta", function () {
 
 
 
-  
-})
+});
+
+
+

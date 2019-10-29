@@ -7,8 +7,8 @@ todo: TARJETAS
 * copiar tarjetas - ok
 * asignar tejido principal - ok
 * visualizar detale de tarjeta - ok
-* revisar materia prima por articulo
-! calcular cantidad que necesita cierta cantidad de prendas
+* revisar materia prima por articulo - ok
+* calcular cantidad que necesita cierta cantidad de prendas - ok
 ! sacar en reporte
 // se puede poner la cantidad de prendas que rinden por kilo? en tarjeta.
 

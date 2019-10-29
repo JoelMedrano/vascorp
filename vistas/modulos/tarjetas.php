@@ -79,11 +79,11 @@ MODAL VISUALIZAR INFORMACION
 
 <div id="modalVisualizarTarjeta" class="modal fade" role="dialog">
   
-  <div class="modal-dialog" style="width: 80% !important;">
+  <div class="modal-dialog" style="width: 70% !important;">
 
     <div class="modal-content">
 
-      <form role="form" method="post">
+      <form role="form" method="post" class="modalSimulacion">
 
         <!--=====================================
         CABEZA DEL MODAL
@@ -157,7 +157,7 @@ MODAL VISUALIZAR INFORMACION
             
             <div class="form-group col-lg-4">
 
-              <label>Costo S/</label>
+              <label>Costo x Unidad S/</label>
               
               <div class="input-group">
               
@@ -187,7 +187,7 @@ MODAL VISUALIZAR INFORMACION
 
             <!-- ENTRADA PARA EL TEJIDO PRINCIPAL-->
             
-            <div class="form-group col-lg-12">
+            <div class="form-group col-lg-8">
 
               <label>Tejido Principal</label>
               
@@ -195,15 +195,43 @@ MODAL VISUALIZAR INFORMACION
               
                 <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
 
-                <input type="text" class="form-control input-sm" name="tejidoPrincipal" id="tejidoPrincipal" required readonly>
+                <input type="text" class="form-control input-sm" name="simulacion" id="tejidoPrincipal" required readonly>
 
               </div>
 
-            </div>     
+            </div>
+            
+            <!-- ENTRADA PARA LA SIMULACION-->
+            
+            <div class="form-group col-lg-2">
+
+              <label>Simulación</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <input type="number" class="form-control input-sm simulacion" min="0" value="0" required>
+
+              </div>
+
+            </div>
+            
+            <!-- ENTRADA PARA EL BOTON -->
+            
+            <div class="form-group col-lg-2">
+
+              <br>
+              
+              <span type="button" class="btn btn-success btnCalcular"><i class="fa fa-refresh"></i> Calcular</span>
+              
+            </div>
 
             <!-- TABLA DE DETALLES -->
-            
+
+            <div class="form-group col-lg-12">
             <label>TABLA DETALLES</label>
+            </div>
 
             <div class="box-body">
 
