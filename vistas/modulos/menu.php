@@ -28,7 +28,44 @@
             
                             </a>
     
-                        </li>';
+                        </li>
+                        
+                        <!-- BACKEND SISTEMAS -->
+
+                        <li class="treeview">
+            
+                            <a href="#">
+            
+                                <i class="fa fa-code"></i>
+            
+                                <span>BACKEND</span>
+            
+                                <span class="pull-right-container">
+            
+                                    <i class="fa fa-angle-left pull-right"></i>
+            
+                                </span>
+            
+                            </a>
+            
+                            <ul class="treeview-menu">
+            
+                                <li>
+            
+                                    <a href="movimientos">
+            
+                                        <i class="fa fa-circle-o"></i>
+                                        <span>Movimientos</span>
+            
+                                    </a>
+            
+                                </li>
+
+                            </ul>
+            
+                        </li>
+            
+                        <!-- fin maestros -->   ';
 
                 }
 
@@ -281,6 +318,7 @@
             
             ?>
 
+     
 
         </ul>
 

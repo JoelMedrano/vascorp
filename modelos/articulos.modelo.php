@@ -70,13 +70,37 @@ class ModeloArticulos{
 	}
 
 	/*=============================================
-	MOSTRAR CANTIDAD DE ARTICULOS
+	MOSTRAR CANTIDAD DE PEDIDOS
 	=============================================*/
-	static public function mdlArticulosActivos($tabla){
+	static public function mdlArticulosPedidos($tabla){
 
-		$stmt = Conexion::conectar()->prepare("SELECT   COUNT(articulo) AS cant_articulo 
-                                                     FROM $tabla m
-                                                     WHERE estado = 'activo'");
+		$stmt = Conexion::conectar()->prepare("SELECT 
+														SUM(a.pedidos) AS pedidos 
+													FROM
+														$tabla a
+														WHERE a.estado NOT IN ('descontinuado','campañad')");
+
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+		$stmt -> close();
+
+		$stmt = null;
+
+    }
+
+	/*=============================================
+	MOSTRAR CANTIDAD DE FALTANTES
+	=============================================*/
+	static public function mdlArticulosFaltantes($tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT
+														SUM(a.stock - a.pedidos) * - 1 AS faltantes 
+													FROM
+														articulojf a 
+													WHERE a.stock < a.pedidos 
+														AND a.estado NOT IN ('descontinuado', 'campañad')");
 
 		$stmt -> execute();
 

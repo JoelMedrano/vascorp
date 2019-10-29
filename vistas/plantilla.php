@@ -160,7 +160,8 @@ CUERPO DOCUMENTO
           $_GET["ruta"] == "editar-tarjeta" ||
           $_GET["ruta"] == "copiar-tarjeta" ||
           $_GET["ruta"] == "marcas" ||
-          $_GET["ruta"] == "colores"){
+          $_GET["ruta"] == "colores" ||
+          $_GET["ruta"] == "movimientos"){
 
           include "modulos/".$_GET["ruta"].".php";
 
@@ -206,6 +207,7 @@ CUERPO DOCUMENTO
   <script src="vistas/js/colores.js"></script>
   <script src="vistas/js/materiaprima.js"></script>
   <script src="vistas/js/tarjetas.js"></script>
+  <script src="vistas/js/movimientos.js"></script>
 
 
 </body>

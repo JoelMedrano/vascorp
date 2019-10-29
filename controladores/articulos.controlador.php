@@ -31,14 +31,28 @@ class controladorArticulos{
 	}	
 
 	/*=============================================
-	ARTICULOS ACTIVOS
+	MOSTRAR CANTIDAD DE PEDIDOS
 	=============================================*/
 
-	static public function ctrArticulosActivos(){
+	static public function ctrArticulosPedidos(){
 
 		$tabla = "articulojf";
 
-		$respuesta = ModeloArticulos::mdlArticulosActivos($tabla);
+		$respuesta = ModeloArticulos::mdlArticulosPedidos($tabla);
+
+		return $respuesta;
+
+	}	
+
+	/*=============================================
+	MOSTRAR CANTIDAD DE FALTANTES
+	=============================================*/
+
+	static public function ctrArticulosFaltantes(){
+
+		$tabla = "articulojf";
+
+		$respuesta = ModeloArticulos::mdlArticulosFaltantes($tabla);
 
 		return $respuesta;
 

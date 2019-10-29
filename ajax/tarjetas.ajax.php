@@ -37,7 +37,7 @@ class AjaxTarjetas{
 		$item3="usu_aprob";
 		$valor3=$_SESSION["id"];;
 
-		var_dump($tabla,$item1,$valor1,$item2,$valor2,$item3,$valor3);
+		/* var_dump($tabla,$item1,$valor1,$item2,$valor2,$item3,$valor3); */
 
 		$respuesta=ModeloTarjetas::mdlActualizarTarjeta($tabla,$item1,$valor1,$item2,$valor2,$item3,$valor3);
 		echo $respuesta;

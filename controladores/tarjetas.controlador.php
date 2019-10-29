@@ -408,19 +408,7 @@ class ControladorTarjetas{
 
 	}
 	
-	/* 
-	* TOTAL DE TARJETAS DE ARTICULOS ACTIVOS
-	*/
-	static public function ctrTarjetasActivas(){
 
-        $tabla = "tarjetasjf";
-
-        $respuesta = ModeloTarjetas::mdlTarjetasActivas($tabla);
-
-        return $respuesta;
-
-	}
-	
 	/* 
 	* COPIAR TARJETAS
 	*/	
@@ -429,7 +417,7 @@ class ControladorTarjetas{
 		if(isset($_POST["copiarTarjeta"])){
 
 			/* 
-			TODO: alerta si no cambiaron anda de la tarjeta
+			todo: alerta si no cambiaron anda de la tarjeta
 			*/
 			
 			if($_POST["listaMP"] == ""){

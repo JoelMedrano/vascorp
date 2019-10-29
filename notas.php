@@ -29,6 +29,10 @@ todo: OTROS
 * etiquetar codigo - ok
 * asginar roles - MANTENER SIEMPRE ACTIVO
 
+todo: BACKEND SISTEMAS
+
+* crear la tabla detalles
+
 todo: ROLES
 * SISTEMAS
     - TODOS LOS MODULOS / TODOS LOS BOTONES - CONTROL TOTAL

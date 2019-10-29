@@ -379,8 +379,6 @@ $("#nuevoImpuestoTarjeta").change(function () {
 
 });
 
-
-
 /* 
 * FORMATO AL PRECIO FINAL
 */

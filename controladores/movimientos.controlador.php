@@ -7,7 +7,7 @@ class ControladorMovimientos{
     */
     static public function ctrTotUndVen(){
 
-        $tabla = "movimientosjf";
+        $tabla = "totalesjf";
 
         $respuesta = ModeloMovimientos::mdlTotUndVen($tabla);
 
@@ -33,7 +33,7 @@ class ControladorMovimientos{
     */
     static public function ctrMesesMov(){
 
-        $tabla = "movimientosjf";
+        $tabla = "totalesjf";
 
         $respuesta = ModeloMovimientos::mldMesesMov($tabla);
 
@@ -46,7 +46,7 @@ class ControladorMovimientos{
     */
     static public function ctrTotalMesVent(){
 
-        $tabla = "movimientosjf";
+        $tabla = "totalesjf";
 
         $respuesta = ModeloMovimientos::mdlTotalMesVent($tabla);
 
@@ -58,11 +58,25 @@ class ControladorMovimientos{
     */
     static public function ctrTotalMesProd(){
 
-        $tabla = "movimientosjf";
+        $tabla = "totalesjf";
 
         $respuesta = ModeloMovimientos::mdlTotalMesProd($tabla);
 
         return $respuesta;
-    }    
+    } 
+    
+    /* 
+    * sacamos los totales por mes de la  nueva tabla TOTALES
+    */
+    static public function ctrMostrarTotales($item, $valor){
+
+        $tabla = "totalesjf";
+
+        $respuesta = ModeloMovimientos::mldMostrarTotales($tabla, $item, $valor);
+
+        return $respuesta;
+
+    }
+
 
 }

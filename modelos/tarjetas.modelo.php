@@ -306,28 +306,6 @@ class ModeloTarjetas{
 	}
 	
 	/* 
-	* Método para contar las tarjetas con articulos activos
-	*/
-    static public function mdlTarjetasActivas($tabla){
-
-		$stmt = Conexion::conectar()->prepare("SELECT   COUNT(t.id) AS cant_tarjetas
-                                                     FROM $tabla t
-													 LEFT JOIN articulojf a
-														ON t.articulo=a.articulo
-													 WHERE a.estado='activo'
-													 	AND a.id_marca NOT IN ('4')");
-
-		$stmt -> execute();
-
-		return $stmt -> fetch();
-
-		$stmt -> close();
-
-		$stmt = null;
-
-	}
-	
-	/* 
 	* Método para vizualizar cabecera tarjeta
 	*/
 	static public function mdlVisualizarTarjeta($tabla, $item, $valor){

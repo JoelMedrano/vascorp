@@ -8,9 +8,17 @@ $ventas = ControladorMovimientos::ctrTotUndVen();
 
 $produccion = ControladorMovimientos::ctrTotUndProd();
 
-$articulos = controladorArticulos::ctrArticulosActivos();
+$articulosP = controladorArticulos::ctrArticulosPedidos();
 
-$tarjetas = controladorTarjetas::ctrTarjetasActivas();
+/* var_dump("articulosP", $articulosP); */
+
+$articulosF = controladorArticulos::ctrArticulosFaltantes();
+
+/* var_dump("articulosF", $articulosF); */
+
+$porcentaje =number_format($articulosF["faltantes"]*100/$articulosP["pedidos"],2) ;
+
+/* var_dump("porcentaje", $porcentaje); */
 
 
 ?>
@@ -79,9 +87,9 @@ $tarjetas = controladorTarjetas::ctrTarjetasActivas();
     
     <div class="inner">
     
-      <h3><?php echo number_format($tarjetas["cant_tarjetas"],0); ?></h3>
+      <h3><?php echo number_format($articulosP["pedidos"],0); ?></h3>
 
-      <p>Tarjetas de Artículos Activos</p>
+      <p>Unidades en Pedidos</p>
   
     </div>
     
@@ -107,9 +115,9 @@ $tarjetas = controladorTarjetas::ctrTarjetasActivas();
   
     <div class="inner">
     
-      <h3><?php echo number_format($articulos["cant_articulo"],0); ?></h3>
+      <h3><?php echo number_format($articulosF["faltantes"],0); ?></h3>
 
-      <p>Articulos Activos</p>
+      <p>Unidades faltantes: <?php echo $porcentaje; ?> %</p>
     
     </div>
     
