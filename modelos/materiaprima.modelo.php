@@ -4,10 +4,9 @@ require_once "conexion.php";
 
 class ModeloMateriaPrima{
 
-	/*=============================================
-	MOSTRAR MATERIA PRIMA
-	=============================================*/
-
+	/* 
+	* MOSTRAR DATOS DE LA MATERIA PRIMA
+	*/
 	static public function mdlMostrarMateriaPrima($tabla, $item, $valor){
 
 		if($item != null){
@@ -86,9 +85,9 @@ class ModeloMateriaPrima{
 
     }    
     
-	/*=============================================
-	EDITAR MATERIA PRIMA
-	=============================================*/
+	/* 
+	* EDITAR NOMBRE DE LA MATERIA PRIMA
+	*/
 	static public function mdlEditarMateriaPrima($tabla, $datos){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET despro = :despro WHERE codpro = :codpro");
@@ -236,7 +235,34 @@ class ModeloMateriaPrima{
 
 		$stmt=null;
 
-	}		
+	}
+	
+	/* 
+	* EDITAR COSTO DE LA MATERIA PRIMA
+	*/
+	static public function mdlEditarMateriaPrimaCosto($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET cospro = :cospro WHERE codpro = :codpro");
+
+		$stmt->bindParam(":cospro", $datos["cospro"], PDO::PARAM_STR);
+		$stmt->bindParam(":codpro", $datos["codpro"], PDO::PARAM_STR);
+
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			return "error";
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+
+	}	
+	
 
 
 }

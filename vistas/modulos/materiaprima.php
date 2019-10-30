@@ -383,3 +383,127 @@ MODAL VISUALIZAR INFORMACION
   </div>
 
 </div>
+
+
+
+<!--=====================================
+MODAL EDITAR COSTOS
+======================================-->
+
+<div id="modalEditarCostos" class="modal fade" role="dialog">
+  
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <form role="form" method="post" enctype="multipart/form-data">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title">Editar Costos Materia Prima</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+
+          <div class="box-body">
+
+            <!-- ENTRADA PARA EL CÓDIGO -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-code"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="codigo" name="codigo" readonly required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA LA DESCRIPCIÓN -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="descripcionMP" name="descripcionMP" readonly required>
+
+              </div>
+
+            </div> 
+            
+            <!-- ENTRADA PARA LA COLOR -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-paint-brush"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="colorMP" name="colorMP" readonly required>
+
+              </div>
+
+            </div>              
+            
+            <!-- ENTRADA PARA LOS COSTOS -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-money"></i></span> 
+
+                <input type="number" class="form-control input-lg" id="costo" name="costo" step="any" placeholder="Ingrese Costo en S/" required>
+
+              </div>
+
+            </div>            
+                       
+
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+
+        </div>
+
+      </form>
+
+      <?php
+
+      $editarMateriaPrimaCosto = new ControladorMateriaPrima();
+      $editarMateriaPrimaCosto -> ctrEditarMateriaPrimaCosto();
+
+      ?>          
+
+
+    </div>
+
+  </div>
+
+</div>

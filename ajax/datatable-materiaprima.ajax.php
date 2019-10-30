@@ -25,7 +25,7 @@ class TablaMateriaPrima{
             TRAEMOS LAS ACCIONES
             =============================================*/         
 
-                $botones = "<div class='btn-group'><button class='btn btn-info btnVisualizarArticulos' title='Visualizar Articulos' data-toggle='modal' data-target='#modalVisualizarArticulos' articuloMP='".$materiaprima[$i]["codigo"]."'><i class='fa fa-eye'></i></button><button class='btn btn-warning btnEditarMateriaPrima' idMateriaPrima='".$materiaprima[$i]["codigo"]."' data-toggle='modal' data-target='#modalEditarMateriaPrima'><i class='fa fa-pencil'></i></button></div>";
+                $botones = "<div class='btn-group'><button class='btn btn-info btnVisualizarArticulos' title='Visualizar Articulos' data-toggle='modal' data-target='#modalVisualizarArticulos' articuloMP='".$materiaprima[$i]["codigo"]."'><i class='fa fa-eye'></i></button><button class='btn btn-warning btnEditarMateriaPrima' idMateriaPrima='".$materiaprima[$i]["codigo"]."' data-toggle='modal' data-target='#modalEditarMateriaPrima'><i class='fa fa-pencil'></i></button><button class='btn btn-primary btnEditarCosto' title='Visualizar Costo' data-toggle='modal' data-target='#modalEditarCostos' materiaPrima='".$materiaprima[$i]["codigo"]."'><i class='fa fa-money'></i></button></div>";
     
                 $datosJson .= '[
                 "'.($i+1).'",

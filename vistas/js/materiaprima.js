@@ -48,7 +48,7 @@ $('.tablaMateriaPrima').DataTable( {
 } );
 
 /* 
-* EDITAR MATERIA PRIMA
+* EDITAR NOMBRE MATERIA PRIMA
 */
 $(".tablaMateriaPrima tbody").on("click", "button.btnEditarMateriaPrima", function(){
 
@@ -76,12 +76,9 @@ $(".tablaMateriaPrima tbody").on("click", "button.btnEditarMateriaPrima", functi
 
 			$("#editarDescripcion").val(respuesta["DesPro"]);
  
-   
 		}
   
 	})	
-
-
 
 })
 
@@ -132,7 +129,7 @@ $(".tablaMateriaPrima").on("click", ".btnVisualizarArticulos", function () {
 
 	var articuloMPDetalle = $(this).attr("articuloMP");	
 
-	console.log("articuloMPDetalle", articuloMPDetalle);
+	/* console.log("articuloMPDetalle", articuloMPDetalle); */
 
 	var datosDetalle = new FormData();
 	datosDetalle.append("articuloMPDetalle", articuloMPDetalle);
@@ -175,7 +172,50 @@ $(".tablaMateriaPrima").on("click", ".btnVisualizarArticulos", function () {
 		}
 
 	})
-
-
   
+})
+
+/* 
+* EDITAR COSTO MATERIA PRIMA
+*/
+$(".tablaMateriaPrima tbody").on("click", "button.btnEditarCosto", function(){
+
+	var materiaPrima = $(this).attr("materiaPrima");
+
+	/* console.log("materiaPrima", materiaPrima); */
+
+	var datosCosto = new FormData();
+	datosCosto.append("materiaPrima", materiaPrima);
+	
+	$.ajax({
+
+		url:"ajax/materiaprima.ajax.php",
+		method: "POST",
+		data: datosCosto,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType:"json",
+		success:function(respuestaCostos){
+
+			/* console.log("codpro", respuestaCostos["Codpro"]); */
+
+			/* console.log("respuestaCostos", respuestaCostos); */
+			
+			$("#codigo").val(respuestaCostos["Codpro"]);
+
+			$("#descripcionMP").val(respuestaCostos["descripcion"]);
+
+			$("#colorMP").val(respuestaCostos["color"]);
+
+			$("#costo").val(respuestaCostos["cospro"]);
+
+
+ 
+		}
+  
+	})	
+
+
+
 })

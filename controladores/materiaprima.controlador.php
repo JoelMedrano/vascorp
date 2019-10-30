@@ -2,10 +2,9 @@
 
 class ControladorMateriaPrima{
 
-	/*=============================================
-	MOSTRAR MATERIA PRIMA
-	=============================================*/
-
+	/* 
+	* MOSTRAR DATOS DE LA MATERIA PRIMA
+	*/
 	static public function ctrMostrarMateriaPrima($item, $valor){
 
 		$tabla = "producto";
@@ -16,10 +15,9 @@ class ControladorMateriaPrima{
 
     }
 
-	/*=============================================
-		EDITAR MATERIA PRIMA
-	=============================================*/
-
+	/* 
+	*EDITAR NOMBRE DE MATERIA PRIMA
+	*/
 	static public function ctrEditarMateriaPrima(){
 
 		if(isset($_POST["editarDescripcion"])){
@@ -119,6 +117,66 @@ class ControladorMateriaPrima{
 
 		return $respuesta;
 
-	}		
+	}
+	
+	/* 
+	*EDITAR COSTO DE MATERIA PRIMA
+	*/
+	static public function ctrEditarMateriaPrimaCosto(){
+
+		if(isset($_POST["codigo"])){
+
+
+			$tabla = "producto";
+
+			$datos = array("codpro" => $_POST["codigo"],
+						"cospro" => $_POST["costo"]);
+
+			$respuesta = ModeloMateriaPrima::mdlEditarMateriaPrimaCosto($tabla, $datos);
+
+			if($respuesta == "ok"){
+
+				echo'<script>
+
+					swal({
+						type: "success",
+						title: "La materia prima ha sido editada correctamente",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){
+									if (result.value) {
+
+									window.location = "materiaprima";
+
+									}
+								})
+
+					</script>';
+
+			}else{
+
+				echo'<script>
+
+				swal({
+					type: "danger",
+					title: "La materia prima no ha sido editada correctamente",
+					showConfirmButton: true,
+					confirmButtonText: "Cerrar"
+					}).then(function(result){
+								if (result.value) {
+
+								window.location = "materiaprima";
+
+								}
+							})
+
+				</script>';
+
+
+			}
+
+		}
+
+	}	
 
 }

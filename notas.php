@@ -7,9 +7,8 @@ todo: TARJETAS
 * copiar tarjetas - ok
 * asignar tejido principal - ok
 * visualizar detale de tarjeta - ok
-* revisar materia prima por articulo - ok
 * calcular cantidad que necesita cierta cantidad de prendas - ok
-! sacar en reporte
+! sacar  reporte en excel
 // se puede poner la cantidad de prendas que rinden por kilo? en tarjeta.
 
 
@@ -18,6 +17,10 @@ todo: ESCRITORIO
 * hacer escritorio - graficos. ok
 // cargar escritorio - barra de progreso - toma el mismo tiempo
 
+
+todo: MATERIA PRIMA
+* revisar materia prima por articulo - ok
+* modulo para actualizar el costo - ok
 
 todo: ARTICULOS
 ! copiar articulos
