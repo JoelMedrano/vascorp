@@ -36,8 +36,10 @@
                             <th>Año</th>
                             <th>Mes</th>
                             <th>Nombre del Mes</th>
-                            <th>Total Ventas</th>
-                            <th>Total Producción</th>
+                            <th>Total Ventas Unidades</th>
+                            <th>Total Producción unidades</th>
+                            <th>Total Ventas Soles</th>
+                            <th>Total Pagos Soles</th>
                             <th>Acciones</th>
 
                         </tr>

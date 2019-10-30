@@ -143,25 +143,26 @@ CUERPO DOCUMENTO
 
       if(isset($_GET["ruta"])){
 
-        if($_GET["ruta"] == "inicio" ||
-          $_GET["ruta"] == "usuarios" ||
-          $_GET["ruta"] == "categorias" ||
-          $_GET["ruta"] == "productos" ||
-          $_GET["ruta"] == "clientes" ||
-          $_GET["ruta"] == "ventas" ||
-          $_GET["ruta"] == "crear-venta" ||
-          $_GET["ruta"] == "editar-venta" ||
-          $_GET["ruta"] == "reportes" ||
-          $_GET["ruta"] == "salir" ||
-          $_GET["ruta"] == "articulos" ||
-          $_GET["ruta"] == "materiaprima" ||
-          $_GET["ruta"] == "tarjetas" ||
-          $_GET["ruta"] == "crear-tarjeta" ||
-          $_GET["ruta"] == "editar-tarjeta" ||
-          $_GET["ruta"] == "copiar-tarjeta" ||
-          $_GET["ruta"] == "marcas" ||
-          $_GET["ruta"] == "colores" ||
-          $_GET["ruta"] == "movimientos"){
+        if( $_GET["ruta"] == "inicio" ||
+            $_GET["ruta"] == "inicio-gerencia" ||
+            $_GET["ruta"] == "usuarios" ||
+            $_GET["ruta"] == "categorias" ||
+            $_GET["ruta"] == "productos" ||
+            $_GET["ruta"] == "clientes" ||
+            $_GET["ruta"] == "ventas" ||
+            $_GET["ruta"] == "crear-venta" ||
+            $_GET["ruta"] == "editar-venta" ||
+            $_GET["ruta"] == "reportes" ||
+            $_GET["ruta"] == "salir" ||
+            $_GET["ruta"] == "articulos" ||
+            $_GET["ruta"] == "materiaprima" ||
+            $_GET["ruta"] == "tarjetas" ||
+            $_GET["ruta"] == "crear-tarjeta" ||
+            $_GET["ruta"] == "editar-tarjeta" ||
+            $_GET["ruta"] == "copiar-tarjeta" ||
+            $_GET["ruta"] == "marcas" ||
+            $_GET["ruta"] == "colores" ||
+            $_GET["ruta"] == "movimientos"){
 
           include "modulos/".$_GET["ruta"].".php";
 

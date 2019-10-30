@@ -39,8 +39,10 @@ class TablaMovimientos{
                 "'.$movimientos[$i]["año"].'",
                 "'.$movimientos[$i]["mes"].'",
                 "'.$nombre_mes.'",
-                "'.number_format($movimientos[$i]["ventas"],0).'",
-                "'.number_format($movimientos[$i]["produccion"],0).'",
+                "'.number_format($movimientos[$i]["ventas"],0).' UND",
+                "'.number_format($movimientos[$i]["produccion"],0).' UND",
+                "S/ '.number_format($movimientos[$i]["ventasSoles"],2).'",
+                "S/ '.number_format($movimientos[$i]["pagosSoles"],2).'",
                 "'.$botones.'"
                 ],';        
                 }

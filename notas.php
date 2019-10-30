@@ -15,6 +15,7 @@ todo: TARJETAS
 todo: ESCRITORIO
 * hacer escritorio - cajas superiores - ok
 * hacer escritorio - graficos. ok
+* hacer escritorio con datos para gerencia
 // cargar escritorio - barra de progreso - toma el mismo tiempo
 
 
@@ -34,7 +35,8 @@ todo: OTROS
 
 todo: BACKEND SISTEMAS
 
-* actualizar totales - ok 
+* actualizar totales unidades - ok
+* actualizar totales soles - ok
 
 todo: ROLES
 * SISTEMAS

@@ -182,7 +182,9 @@ class ModeloMovimientos{
                                                          ELSE 'Diciembre' 
                                                       END AS nom_mes,
                                                       SUM(t.total_ventas) AS ventas,
-                                                      SUM(t.total_produccion) AS produccion 
+                                                      SUM(t.total_produccion) AS produccion,
+                                                      SUM(t.total_ventas_soles) AS ventasSoles,
+                                                      SUM(t.total_pagos_soles) AS pagosSoles  
                                                    FROM
                                                       $tabla t 
                                                    WHERE YEAR(NOW()) >= t.año
@@ -207,44 +209,79 @@ class ModeloMovimientos{
 	static public function mdlActualizarMovimientos($tabla,$valor1,$valor2){
 	
 		$sql="UPDATE 
-                  $tabla t 
-                  LEFT JOIN 
-                  (SELECT 
-                     YEAR(m.fecha) AS año,
-                     MONTH(m.fecha) AS mes,
-                     DAY(m.fecha) AS dia,
-                     SUM(m.cantidad) AS produccion 
-                  FROM
-                     movimientosjf m 
-                  WHERE m.tipo = 'E20' 
-                     AND YEAR(m.fecha) = $valor1 
-                     AND MONTH(m.fecha) = $valor2
-                  GROUP BY YEAR(m.fecha),
-                     MONTH(m.fecha),
-                     DAY(m.fecha)) AS p 
-                  ON t.año = p.año 
-                  AND t.mes = p.mes 
-                  AND t.dia = p.dia 
-                  LEFT JOIN 
-                  (SELECT 
-                     YEAR(m.fecha) AS año,
-                     MONTH(m.fecha) AS mes,
-                     DAY(m.fecha) AS dia,
-                     SUM(m.cantidad) AS venta 
-                  FROM
-                     movimientosjf m 
-                  WHERE m.tipo IN ('S02', 'S03', 'S70', 'E05', 'E21') 
-                  AND YEAR(m.fecha) = $valor1 
-                     AND MONTH(m.fecha) = $valor2
-                  GROUP BY YEAR(m.fecha),
-                     MONTH(m.fecha),
-                     DAY(m.fecha)) AS v 
-                  ON t.año = v.año 
-                  AND t.mes = v.mes 
-                  AND t.dia = v.dia SET t.total_produccion = IFNULL(p.produccion,0),
-                  t.total_ventas = IFNULL(v.venta,0) 
-               WHERE t.año= $valor1 
-                  AND t.mes = $valor2";
+                     $tabla t 
+                     LEFT JOIN 
+                     (SELECT 
+                        YEAR(m.fecha) AS año,
+                        MONTH(m.fecha) AS mes,
+                        DAY(m.fecha) AS dia,
+                        SUM(m.cantidad) AS produccion 
+                     FROM
+                        movimientosjf m 
+                     WHERE m.tipo = 'E20' 
+                        AND YEAR(m.fecha) = $valor1 
+                        AND MONTH(m.fecha) = $valor2 
+                     GROUP BY YEAR(m.fecha),
+                        MONTH(m.fecha),
+                        DAY(m.fecha)) AS p 
+                     ON t.año = p.año 
+                     AND t.mes = p.mes 
+                     AND t.dia = p.dia 
+                     LEFT JOIN 
+                     (SELECT 
+                        YEAR(m.fecha) AS año,
+                        MONTH(m.fecha) AS mes,
+                        DAY(m.fecha) AS dia,
+                        SUM(m.cantidad) AS venta 
+                     FROM
+                        movimientosjf m 
+                     WHERE m.tipo IN ('S02', 'S03', 'S70', 'E05', 'E21') 
+                        AND YEAR(m.fecha) = $valor1 
+                        AND MONTH(m.fecha) = $valor2 
+                     GROUP BY YEAR(m.fecha),
+                        MONTH(m.fecha),
+                        DAY(m.fecha)) AS v 
+                     ON t.año = v.año 
+                     AND t.mes = v.mes 
+                     AND t.dia = v.dia 
+                     LEFT JOIN 
+                     (SELECT 
+                        YEAR(v.fecha) AS año,
+                        MONTH(v.fecha) AS mes,
+                        DAY(v.fecha) AS dia,
+                        SUM(v.total) / 1.18 AS ventas_soles 
+                     FROM
+                        ventajf v 
+                     WHERE YEAR(v.fecha) = $valor1 
+                        AND MONTH(v.fecha) = $valor2 
+                     GROUP BY YEAR(v.fecha),
+                        MONTH(v.fecha),
+                        DAY(v.fecha)) AS v1 
+                     ON t.año = v1.año 
+                     AND t.mes = v1.mes 
+                     AND t.dia = v1.dia 
+                     LEFT JOIN 
+                     (SELECT 
+                        YEAR(p1.fecha) AS año,
+                        MONTH(p1.fecha) AS mes,
+                        DAY(p1.fecha) AS dia,
+                        SUM(p1.total) AS pagos_soles 
+                     FROM
+                        pagosjf p1 
+                     WHERE YEAR(p1.fecha) = $valor1 
+                        AND MONTH(p1.fecha) = $valor2 
+                        AND p1.tipo_cobro IN ('00', '05', '06', '80', '82', 'TR') 
+                     GROUP BY YEAR(p1.fecha),
+                        MONTH(p1.fecha),
+                        DAY(p1.fecha)) AS p1 
+                     ON t.año = p1.año 
+                     AND t.mes = p1.mes 
+                     AND t.dia = p1.dia SET t.total_produccion = IFNULL(p.produccion, 0),
+                     t.total_ventas = IFNULL(v.venta, 0),
+                     t.total_ventas_soles = IFNULL(v1.ventas_soles, 0),
+                     t.total_pagos_soles = IFNULL(p1.pagos_soles, 0) 
+                  WHERE t.año = $valor1 
+                     AND t.mes = $valor2";
 
 		$stmt=Conexion::conectar()->prepare($sql);
 

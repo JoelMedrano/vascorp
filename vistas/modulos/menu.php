@@ -15,6 +15,17 @@
 
             </li>
 
+            <li class="active">
+
+                <a href="inicio-gerencia">
+
+                    <i class="fa fa-home"></i>
+                    <span>Inicio Gerencia</span>
+
+                </a>
+
+            </li>
+            
             <?php
 
                 if($_SESSION["perfil"] == "Sistemas"){
