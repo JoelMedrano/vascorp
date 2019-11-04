@@ -4,21 +4,17 @@
 * datos para las cajas
 */
 
-$ventas = ControladorMovimientos::ctrTotUndVen();
+$valor = null;
 
-$produccion = ControladorMovimientos::ctrTotUndProd();
+$ventas = ControladorMovimientos::ctrTotUndVen($valor);
+
+$produccion = ControladorMovimientos::ctrTotUndProd($valor);
 
 $articulosP = controladorArticulos::ctrArticulosPedidos();
 
-/* var_dump("articulosP", $articulosP); */
-
 $articulosF = controladorArticulos::ctrArticulosFaltantes();
 
-/* var_dump("articulosF", $articulosF); */
-
 $porcentaje =number_format($articulosF["faltantes"]*100/$articulosP["pedidos"],2) ;
-
-/* var_dump("porcentaje", $porcentaje); */
 
 
 ?>

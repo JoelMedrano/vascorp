@@ -3,7 +3,7 @@
     todo: sacamos los totales del 1er año
     */
 
-    $ano1 = ControladorMovimientos::ctrTotalesSolesVenta();
+    $ano1 = ControladorMovimientos::ctrTotalesSolesPagos();
 
     /* var_dump("ano1", $ano1); */
 
@@ -23,7 +23,7 @@
     todo: sacamos los totales del 2do año
     */
 
-    $ano2 = ControladorMovimientos::ctrTotalesSolesVenta();
+    $ano2 = ControladorMovimientos::ctrTotalesSolesPagos();
 
     /* var_dump("ano2", $ano2); */
 
@@ -43,7 +43,7 @@
     todo: sacamos los totales del 2do año
     */
 
-    $ano3 = ControladorMovimientos::ctrTotalesSolesVenta();
+    $ano3 = ControladorMovimientos::ctrTotalesSolesPagos();
 
     /* var_dump("ano3", $ano3); */
 
@@ -66,14 +66,14 @@
 
     <div class="box-header with-border">
 
-        <h3 class="box-title">Ventas por Año</h3>
+        <h3 class="box-title">Pagos por Año</h3>
 
     </div>
 
     <div class="box-body">
 
         <div class="chart">
-            <canvas id="lineChartVenta" style="height: 400px;"></canvas>
+            <canvas id="lineChart" style="height: 400px;"></canvas>
         </div>
 
     </div>
@@ -82,7 +82,7 @@
 
 <script>
 
-    var lineChartCanvas          = $('#lineChartVenta').get(0).getContext('2d')
+    var lineChartCanvas          = $('#lineChart').get(0).getContext('2d')
     var lineChart                = new Chart(lineChartCanvas)
 
     var areaChartData = {

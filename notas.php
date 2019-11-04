@@ -15,7 +15,7 @@ todo: TARJETAS
 todo: ESCRITORIO
 * hacer escritorio - cajas superiores - ok
 * hacer escritorio - graficos. ok
-* hacer escritorio con datos para gerencia
+* hacer escritorio con datos para gerencia - seguir agregando
 // cargar escritorio - barra de progreso - toma el mismo tiempo
 
 

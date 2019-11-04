@@ -43,7 +43,7 @@
 
     <div class="row">
 
-        <div class="col-lg-12">
+        <div class="col-lg-6">
 
             <?php
 
@@ -54,8 +54,22 @@
         </div>
 
 
-    </div>
 
+
+        <div class="col-lg-6">
+
+            <?php
+
+                include "reportes/pagos-ano.php";
+
+            ?>
+
+        </div>
+
+
+    </div>
+    
+    
 </section>
 
 </div>

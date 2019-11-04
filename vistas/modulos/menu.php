@@ -15,16 +15,26 @@
 
             </li>
 
-            <li class="active">
+            <?php
+            
+                if( $_SESSION["perfil"] == "Supervisores" ||
+                    $_SESSION["perfil"] == "Sistemas"){
 
-                <a href="inicio-gerencia">
+                        echo '<li class="active">
 
-                    <i class="fa fa-home"></i>
-                    <span>Inicio Gerencia</span>
+                                <a href="inicio-gerencia">
+                
+                                    <i class="fa fa-globe"></i>
+                                    <span>Analisis</span>
+                
+                                </a>
+                
+                            </li>';
 
-                </a>
 
-            </li>
+                }
+
+            ?>
             
             <?php
 
@@ -49,7 +59,7 @@
             
                                 <i class="fa fa-code"></i>
             
-                                <span>BACKEND</span>
+                                <span>Backend</span>
             
                                 <span class="pull-right-container">
             

@@ -5,11 +5,11 @@ class ControladorMovimientos{
     /* 
     * total unidades vendidas del mes actual
     */
-    static public function ctrTotUndVen(){
+    static public function ctrTotUndVen($valor){
 
         $tabla = "totalesjf";
 
-        $respuesta = ModeloMovimientos::mdlTotUndVen($tabla);
+        $respuesta = ModeloMovimientos::mdlTotUndVen($tabla, $valor);
 
         return $respuesta;
 
@@ -18,11 +18,11 @@ class ControladorMovimientos{
     /* 
     * total unidades producidas del mes actual
     */
-    static public function ctrTotUndProd(){
+    static public function ctrTotUndProd($valor){
 
-        $tabla = "movimientosjf";
+        $tabla = "totalesjf";
 
-        $respuesta = ModeloMovimientos::mdlTotUndProd($tabla);
+        $respuesta = ModeloMovimientos::mdlTotUndProd($tabla, $valor);
 
         return $respuesta;
 
@@ -78,5 +78,68 @@ class ControladorMovimientos{
 
     }
 
+    /* 
+    * sacamos los totales por mes de la  nueva tabla TOTALES
+    */
+    static public function ctrTotalesSolesVenta(){
+
+        $tabla = "totalesjf";
+
+        $respuesta = ModeloMovimientos::mdlTotalesSolesVenta($tabla);
+
+        return $respuesta;
+
+    }
+
+    /* 
+    * sacamos los totales por mes de la  nueva tabla TOTALES
+    */
+    static public function ctrTotalesSolesPagos(){
+
+        $tabla = "totalesjf";
+
+        $respuesta = ModeloMovimientos::mdlTotalesSolesPagos($tabla);
+
+        return $respuesta;
+
+    }
+
+    /* 
+    * sacamos los totales por mes de la  nueva tabla TOTALES
+    */
+    static public function ctrTotDiasProd($valor){
+
+        $tabla = "totalesjf";
+
+        $respuesta = ModeloMovimientos::mdlTotDiasProd($tabla, $valor);
+
+        return $respuesta;
+
+    }
+
+    /* 
+    * sacamos los totales por mes de la  nueva tabla TOTALES
+    */
+    static public function ctrMovMes($valor){
+
+        $tabla = "movimientosjf";
+
+        $respuesta = ModeloMovimientos::mdlMovMes($tabla, $valor);
+
+        return $respuesta;
+
+    }
+    /* 
+    * sacamos los totales por mes de la  nueva tabla TOTALES
+    */
+    static public function ctrSumaUnd($valor){
+
+        $tabla = "totalesjf";
+
+        $respuesta = ModeloMovimientos::mdlSumaUnd($tabla, $valor);
+
+        return $respuesta;
+
+    }         
 
 }

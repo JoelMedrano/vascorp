@@ -2,7 +2,7 @@
 
         <section class="content-header">
             <h1>
-                Dashboard
+                Dashboard Mes Actual
 
                 <small>Página de control</small>
 
@@ -65,6 +65,60 @@
 
 
             </div>
+         
+            <div class="row">
+
+                <div class="col-lg-6">
+
+                    <?php
+
+                        include "reportes/vtas-modA.php";
+
+                    ?>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+        <section class="content-header">
+
+            <h1>
+                Dashboard Mes Pasado
+            </h1>
+       
+        </section>
+
+        <section class="content">
+
+
+            <div class="row">
+
+                <?php
+
+                    include "inicio/cajas-inferiores.php";
+
+                ?>
+
+            </div> 
+
+            <div class="row">
+
+                <div class="col-lg-6">
+
+                    <?php
+
+                        include "reportes/vtas-modP.php";
+
+                    ?>
+
+                </div>
+
+
+            </div>            
 
         </section>
 

@@ -23,27 +23,31 @@ $sumaPagosMes = array();
 
 foreach ($respuesta as $key => $value) {
 
-	#Capturamos sólo el año y el mes
-	$fecha = substr($value["fecha"],0,7);
+		$fecha = substr($value["fecha"],0,7);
 
-	#Introducir las fechas en arrayFechas
-	array_push($arrayFechas, $fecha);
+	  array_push($arrayFechas, $fecha);
+    
+    $arrayVentas = array($fecha => $value["total"]);
+    
+    /* var_dump("arrayVentas", $arrayVentas); */
 
-	#Capturamos las ventas
-	$arrayVentas = array($fecha => $value["total"]);
+    
+    foreach ($arrayVentas as $key => $value) {
+      
+      $sumaPagosMes[$key] += $value;
+      
+    }
 
-	#Sumamos los pagos que ocurrieron el mismo mes
-	foreach ($arrayVentas as $key => $value) {
-		
-		$sumaPagosMes[$key] += $value;
-	}
+  /* var_dump("sumaPagosMes", $sumaPagosMes[$key]); */
 
 }
 
-var_dump("arrayFechas", $arrayFechas);
+/* var_dump("arrayFechas", $arrayFechas); */
 
 
 $noRepetirFechas = array_unique($arrayFechas);
+
+/* var_dump("noRepetirFechas", $noRepetirFechas); */
 
 
 ?>
