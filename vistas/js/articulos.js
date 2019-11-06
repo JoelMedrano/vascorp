@@ -13,7 +13,9 @@ CARGAR LA TABLA DINÁMICA DE ARTICULOS
 
 }) */
 
-
+/* 
+* tabla paraa cargar la lista de articulos
+*/
 $('.tablaArticulos').DataTable( {
     "ajax": "ajax/datatable-articulos.ajax.php?perfil="+$("#perfilOculto").val(),
     "deferRender": true,

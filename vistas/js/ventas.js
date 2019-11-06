@@ -49,6 +49,7 @@ AGREGANDO PRODUCTOS A LA VENTA DESDE LA TABLA
 =============================================*/
 
 $(".tablaVentas tbody").on("click", "button.agregarProducto", function() {
+
   var idProducto = $(this).attr("idProducto");
 
   /* console.log("idProducto", idProducto); */
@@ -93,42 +94,46 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function() {
       }
 
       $(".nuevoProducto").append(
+
         '<div class="row" style="padding:5px 15px">' +
+
           "<!-- Descripción del producto -->" +
+
           '<div class="col-xs-6" style="padding-right:0px">' +
-          '<div class="input-group">' +
-          '<span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto="' +
-          idProducto +
-          '"><i class="fa fa-times"></i></button></span>' +
-          '<input type="text" class="form-control nuevaDescripcionProducto" idProducto="' +
-          idProducto +
-          '" name="agregarProducto" value="' +
-          descripcion +
-          '" codigoP="' +
-          codigo +
-          '" readonly required>' +
+
+            '<div class="input-group">' +
+
+              '<span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto="' + idProducto + '"><i class="fa fa-times"></i></button></span>' +
+
+              '<input type="text" class="form-control nuevaDescripcionProducto" idProducto="' + idProducto + '" name="agregarProducto" value="' + descripcion + '" codigoP="' + codigo + '" readonly required>' +
+
+            "</div>" +
+
           "</div>" +
-          "</div>" +
+
           "<!-- Cantidad del producto -->" +
+
           '<div class="col-xs-3">' +
-          '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="1" stock="' +
-          stock +
-          '" nuevoStock="' +
-          Number(stock - 1) +
-          '" required>' +
+
+          '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="1" stock="' + stock + '" nuevoStock="' + Number(stock - 1) + '" required>' +
+
           "</div>" +
+
           "<!-- Precio del producto -->" +
+
           '<div class="col-xs-3 ingresoPrecio" style="padding-left:0px">' +
-          '<div class="input-group">' +
-          '<span class="input-group-addon"><i class="fa fa-money"></i></span>' +
-          '<input type="text" class="form-control nuevoPrecioProducto" precioReal="' +
-          precio +
-          '" name="nuevoPrecioProducto" value="' +
-          precio +
-          '" readonly required>' +
+
+            '<div class="input-group">' +
+
+            '<span class="input-group-addon"><i class="fa fa-money"></i></span>' +
+
+            '<input type="text" class="form-control nuevoPrecioProducto" precioReal="' + precio + '" name="nuevoPrecioProducto" value="' + precio + '" readonly required>' +
+
+            "</div>" +
+
           "</div>" +
-          "</div>" +
-          "</div>"
+
+        "</div>"
       );
 
       // SUMAR TOTAL DE PRECIOS
@@ -146,6 +151,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function() {
       // PONER FORMATO AL PRECIO DE LOS PRODUCTOS
 
       $(".nuevoPrecioProducto").number(true, 2);
+
     }
   });
 });
@@ -450,7 +456,7 @@ SUMAR TODOS LOS PRECIOS
 function sumarTotalPrecios() {
   var precioItem = $(".nuevoPrecioProducto");
 
-  /* console.log("precioitem", precioItem); */
+ /*  console.log("precioitem", precioItem); */
 
   var arraySumaPrecio = [];
 
@@ -458,7 +464,7 @@ function sumarTotalPrecios() {
     arraySumaPrecio.push(Number($(precioItem[i]).val()));
   }
 
-  /*     console.log("arraySumaPrecio", arraySumaPrecio); */
+  /* console.log("arraySumaPrecio", arraySumaPrecio); */
 
   function sumaArrayPrecios(total, numero) {
     return total + numero;

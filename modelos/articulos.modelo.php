@@ -4,10 +4,9 @@ require_once "conexion.php";
 
 class ModeloArticulos{
 
-	/*=============================================
-	MOSTRAR ARTICULOS
-	=============================================*/
-
+	/* 
+	* MOSTRAR ARTICULOS
+	*/
 	static public function mdlMostrarArticulos($tabla, $item, $valor){
 
 		if($item != null){
@@ -22,7 +21,8 @@ class ModeloArticulos{
 
 		}else{
 
-			$stmt = Conexion::conectar()->prepare("SELECT 	a.id,
+			$stmt = Conexion::conectar()->prepare("SELECT 
+															a.id,
 															a.articulo,
 															a.id_marca,
 															m.marca,
@@ -35,24 +35,27 @@ class ModeloArticulos{
 															a.estado,
 															a.stock,
 															IFNULL(v.ult_mes, 0) AS ventas,
+															a.urgencia,
+															ROUND(
+															(
+																IFNULL(v.ult_mes, 0) * a.urgencia / 100
+															),
+															0
+															) AS configuracion,
 															a.tipo,
 															a.imagen 
 														FROM
-															$tabla a 
+															articulojf a 
 															LEFT JOIN marcasjf m 
 															ON a.id_marca = m.id 
 															LEFT JOIN 
 															(SELECT 
 																m.articulo,
-																SUM(m.cantidad)/3 AS ult_mes 
+																SUM(m.cantidad) AS ult_mes 
 															FROM
 																movimientosjf m 
 															WHERE m.tipo IN ('S02', 'S03', 'S70') 
-																AND YEAR(m.fecha) = '2019' 
-																AND (
-																MONTH(m.fecha) BETWEEN MONTH(NOW()) - 3 
-																AND MONTH(NOW()) - 1
-																) 
+																AND DATEDIFF(DATE(NOW()), m.fecha) <= 31 
 															GROUP BY m.articulo) v 
 															ON a.articulo = v.articulo 
 														ORDER BY a.articulo ASC");
@@ -69,9 +72,9 @@ class ModeloArticulos{
 
 	}
 
-	/*=============================================
-	MOSTRAR CANTIDAD DE PEDIDOS
-	=============================================*/
+	/*
+	* MOSTRAR CANTIDAD DE PEDIDOS
+	*/
 	static public function mdlArticulosPedidos($tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT 
@@ -90,9 +93,9 @@ class ModeloArticulos{
 
     }
 
-	/*=============================================
-	MOSTRAR CANTIDAD DE FALTANTES
-	=============================================*/
+	/*
+	* MOSTRAR CANTIDAD DE FALTANTES
+	*/
 	static public function mdlArticulosFaltantes($tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT
@@ -112,13 +115,9 @@ class ModeloArticulos{
 
     }
 
-	
-
-
-	/*=============================================
-	MOSTRAR ARTICULOS PENDIENTES DE TARJETAS
-	=============================================*/
-
+	/*
+	* MOSTRAR ARTICULOS PENDIENTES DE TARJETAS
+	*/
 	static public function mdlMostrarSinTarjeta($tabla, $item, $valor){
 
 		if($item != null){
@@ -161,10 +160,9 @@ class ModeloArticulos{
 
 	}	
 	
-
-	/*=============================================
-	REGISTRO DE ARTICULO
-	=============================================*/
+	/*
+	* REGISTRO DE ARTICULO
+	*/
 	static public function mdlIngresarArticulo($tabla, $datos){
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (articulo, id_marca, modelo, nombre, cod_color, color, cod_talla, talla, tipo, imagen) VALUES (:articulo, :id_marca, :modelo, :nombre, :cod_color, :color, :cod_talla, :talla, :tipo, :imagen)");
@@ -195,8 +193,9 @@ class ModeloArticulos{
 
 	}	
 
-	
-	// Método para activar y desactivar un usuario
+	/* 
+	* Método para activar y desactivar un usuario
+	*/
 	static public function mdlActualizarArticulo($tabla,$item1,$valor1,$item2,$valor2){
 
 		$sql="UPDATE $tabla SET $item1=:$item1 WHERE $item2=:$item2";
@@ -218,9 +217,9 @@ class ModeloArticulos{
 		$stmt=null;
 	}
 
-	/*=============================================
-	EDITAR ARTICULO
-	=============================================*/
+	/* 
+	* EDITAR ARTICULO
+	*/
 	static public function mdlEditarArticulo($tabla, $datos){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, imagen = :imagen WHERE articulo = :articulo");
@@ -245,10 +244,9 @@ class ModeloArticulos{
 
 	}	
 
-	/*=============================================
-	BORRAR ARTICULO
-	=============================================*/
-
+	/* 
+	* BORRAR ARTICULO
+	*/
 	static public function mdlEliminarArticulo($tabla, $datos){
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
@@ -271,7 +269,9 @@ class ModeloArticulos{
 
 	}
 
-	// Método para actualizar un dato CON EL ID
+	/* 
+	* Método para actualizar un dato CON EL articulo
+	*/
 	static public function mdlActualizarUnDato($tabla,$item1,$valor1,$valor2){
 
 		$sql="UPDATE $tabla SET $item1=:$item1 WHERE articulo=:id";
@@ -287,5 +287,108 @@ class ModeloArticulos{
 
 	}
 
+	/* 
+	* METODO PARA VER LA CONFIGURACION DE LAS URGENCIAS
+	*/
+	static public function mdlConfiguracion($tabla){
+
+		$sql="SELECT DISTINCT 
+								urgencia 
+							FROM
+								$tabla";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+		
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt->close();
+
+		$stmt=null;
+
+	}
+
+	/* 
+	* CONFIGURAR PORCENTAJE DE URGENCIAS
+	*/
+	static public function mdlConfigurarUrgencia($tabla, $dato){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET urgencia = $dato");
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			return "error";
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+
+
+	}
+
+	/* 
+	* CONFIGURAR PORCENTAJE DE URGENCIAS
+	*/
+	static public function mdlMostrarArticulosUrgencia($tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT 
+														a.articulo,
+														m.marca,
+														a.modelo,
+														a.nombre,
+														a.color,
+														a.talla,
+														a.stock,
+														a.pedidos,
+														a.ord_corte,
+														a.alm_corte,
+														a.taller,
+														IFNULL(v.ult_mes, 0) AS ventas,
+														a.urgencia,
+														ROUND(
+														(
+															IFNULL(v.ult_mes, 0) * a.urgencia / 100
+														),
+														0
+														) AS configuracion,
+														a.tipo 
+													FROM
+														articulojf a 
+														LEFT JOIN marcasjf m 
+														ON a.id_marca = m.id 
+														LEFT JOIN 
+														(SELECT 
+															m.articulo,
+															SUM(m.cantidad) AS ult_mes 
+														FROM
+															movimientosjf m 
+														WHERE m.tipo IN ('S02', 'S03', 'S70') 
+															AND DATEDIFF(DATE(NOW()), m.fecha) <= 31 
+														GROUP BY m.articulo) v 
+														ON a.articulo = v.articulo 
+													WHERE ROUND(
+														(
+															IFNULL(v.ult_mes, 0) * a.urgencia / 100
+														),
+														0
+														) > a.stock 
+														AND estado = 'ACTIVO' 
+													ORDER BY a.articulo ASC");
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt->close();
+		$stmt = null;
+
+
+	}
     
 }    

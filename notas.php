@@ -14,6 +14,7 @@ todo: TARJETAS
 
 todo: ESCRITORIO
 * hacer escritorio - cajas superiores - ok
+* hacer escritorio - cajas inferiores - ok
 * hacer escritorio - graficos. ok
 * hacer escritorio con datos para gerencia - seguir agregando
 // cargar escritorio - barra de progreso - toma el mismo tiempo
@@ -27,6 +28,10 @@ todo: ARTICULOS
 ! copiar articulos
 ! sacar informacion en un modal
 ! hacer reportes en excel
+
+todo: PRODUCCION
+* configurar % de urgencias
+! produccion
 
 
 todo: OTROS

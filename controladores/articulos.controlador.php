@@ -2,10 +2,9 @@
 
 class controladorArticulos{
 
-	/*=============================================
-	MOSTRAR ARTICULOS
-	=============================================*/
-
+	/* 
+	* MOSTRAR ARTICULOS
+	*/
 	static public function ctrMostrarArticulos($item, $valor){
 
 		$tabla = "articulojf";
@@ -16,10 +15,9 @@ class controladorArticulos{
 
 	}
 
-	/*=============================================
-	MOSTRAR SIN TARJETA
-	=============================================*/
-
+	/* 
+	* MOSTRAR SIN TARJETA
+	*/
 	static public function ctrMostrarSinTarjeta($item, $valor){
 
 		$tabla = "articulojf";
@@ -30,10 +28,9 @@ class controladorArticulos{
 
 	}	
 
-	/*=============================================
-	MOSTRAR CANTIDAD DE PEDIDOS
-	=============================================*/
-
+	/* 
+	* MOSTRAR CANTIDAD DE PEDIDOS
+	*/
 	static public function ctrArticulosPedidos(){
 
 		$tabla = "articulojf";
@@ -44,10 +41,9 @@ class controladorArticulos{
 
 	}	
 
-	/*=============================================
-	MOSTRAR CANTIDAD DE FALTANTES
-	=============================================*/
-
+	/* 
+	* MOSTRAR CANTIDAD DE FALTANTES
+	*/
 	static public function ctrArticulosFaltantes(){
 
 		$tabla = "articulojf";
@@ -58,10 +54,9 @@ class controladorArticulos{
 
 	}	
 
-	/*=============================================
-	CREAR ARTICULO
-	=============================================*/
-
+	/* 
+	* CREAR ARTICULO
+	*/
 	static public function ctrCrearArticulo(){
 
         if(isset($_POST["nuevaDescripcion"])){
@@ -197,11 +192,9 @@ class controladorArticulos{
 
 	}
 
-
-	/*=============================================
-		EDITAR ARTICULO
-	=============================================*/
-
+	/* 
+	* EDITAR ARTICULO
+	*/
 	static public function ctrEditarArticulo(){
 
 		if(isset($_POST["editarDescripcion"])){
@@ -340,10 +333,9 @@ class controladorArticulos{
 
 	}	
 
-
-	/*=============================================
-	BORRAR ARTICULO
-	=============================================*/
+	/* 
+	* BORRAR ARTICULO
+	*/
 	static public function ctrEliminarArticulo(){
 
 		if(isset($_GET["idArticulo"])){
@@ -385,6 +377,71 @@ class controladorArticulos{
 
 	}	
 
+	/* 
+	* SACAR CONFIGURACION DE URGENCIAS
+	*/
+	static public function ctrConfiguracion(){
+
+		$tabla = "articulojf";
+
+		$respuesta = ModeloArticulos::mdlConfiguracion($tabla);
+
+		return $respuesta;
+
+	}
+
+    /* 
+    * CONFIGURAR PORCENTAJE 
+    */
+    static public function ctrConfigurarUrgencia(){
+
+        if(isset($_POST["urgencia"])){
+
+            $tabla = "articulojf";
+
+			$dato = $_POST["urgencia"];
+			
+			var_dump("dato", $dato);
+
+			$respuesta = ModeloArticulos::mdlConfigurarUrgencia($tabla, $dato);
+			
+			if ($respuesta == "ok"){
+
+				echo	'<script>
+
+							swal({
+								type: "success",
+								title: "El porcentaje de urgencias ha sido configurado correctamente",
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar"
+								}).then(function(result){
+											if (result.value) {
+
+											window.location = "crear-ordencorte";
+
+											}
+										})
+
+						</script>';
+
+			}
+
+        }
+
+	}
+	
+	/* 
+	* MOSTRAR ARTICULOS PARA LA URGENCIA
+	*/	
+	static public function ctrMostrarArticulosUrgencia(){
+
+		$tabla = "articulojf";
+
+		$respuesta = ModeloArticulos::mdlMostrarArticulosUrgencia($tabla);
+
+		return $respuesta;
+		
+	}
 
 }
 

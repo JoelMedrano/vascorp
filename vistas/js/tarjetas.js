@@ -189,23 +189,23 @@ $(".tablaMateriaPrimaTarjetas tbody").on("click", "button.agregarMP", function (
 $(".tablaMateriaPrimaTarjetas").on("draw.dt", function () {
 
 	/* console.log("tabla"); */
-  
-	if (localStorage.getItem("quitarMP") != null) {
-  
-	  var listaIdMateriaPrima = JSON.parse(localStorage.getItem("quitarMP"));
-  
-	  for (var i = 0; i < listaIdMateriaPrima.length; i++) {
-  
-		$("button.recuperarBoton[idMateriaPrima='" + listaIdMateriaPrima[i]["idMateriaPrima"] + "']").removeClass('btn-default');
 
-		$("button.recuperarBoton[idMateriaPrima='" + listaIdMateriaPrima[i]["idMateriaPrima"] + "']").addClass('btn-primary agregarMP');
-  
-	  }
-  
-  
+	if (localStorage.getItem("quitarMP") != null) {
+
+		var listaIdMateriaPrima = JSON.parse(localStorage.getItem("quitarMP"));
+
+		for (var i = 0; i < listaIdMateriaPrima.length; i++) {
+
+			$("button.recuperarBoton[idMateriaPrima='" + listaIdMateriaPrima[i]["idMateriaPrima"] + "']").removeClass('btn-default');
+
+			$("button.recuperarBoton[idMateriaPrima='" + listaIdMateriaPrima[i]["idMateriaPrima"] + "']").addClass('btn-primary agregarMP');
+
+		}
+
+
 	}
-  
-  })
+
+})
 
 /* 
 * QUITAR MATERIA PRIMA DE LA TARJETA Y RECUPERAR BOTÓN

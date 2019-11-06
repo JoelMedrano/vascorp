@@ -72,6 +72,8 @@
 
                       $ult_codigo = ControladorTarjetas::ctrUltimoCodigoTarjeta();
 
+                      /* var_dump("ult_codigo", $ult_codigo); */
+
                       if(!$ult_codigo){
 
                         echo '<input type="text" class="form-control" id="nuevaTarjeta" name="nuevaTarjeta" value="10001" readonly>';
@@ -168,14 +170,6 @@
                 </div>
 
                 <input type="hidden" id="listaMP" name="listaMP">                
-
-                <!--=====================================
-                BOTÓN PARA AGREGAR MATERIA PRIMA
-                ======================================-->
-
-                <button type="button" class="btn btn-default hidden-lg btnAgregarMP">Agregar producto</button>
-
-                <hr>
 
                 <div class="row">
 

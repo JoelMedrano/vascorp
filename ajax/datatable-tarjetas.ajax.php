@@ -80,7 +80,7 @@ class TablaTarjetas{
             /* 
             todo: PARA SUPER-SISTEMAS-COSTOS-DISEÑO TIENEN ACCESO TOTAL
             */
-            if( $_GET["perfil"]=="Supervisor" ||
+            if( $_GET["perfil"]=="Supervisores" ||
                 $_GET["perfil"]=="Sistemas" ||
                 $_GET["perfil"]=="Costos" ||
                 $_GET["perfil"]=="Udp"){

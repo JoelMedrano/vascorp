@@ -175,6 +175,46 @@
             
             ?>
 
+            <li class="treeview">
+
+                <a href="#">
+
+                    <i class="fa fa-cogs"></i> <span>Producción</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+
+                </a>
+
+                <ul class="treeview-menu">
+
+                    <li class="treeview">
+
+                        <a href="#"><i class="fa fa-scissors"></i> Ordenes de Corte
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+
+                        <ul class="treeview-menu">
+
+                            <li>
+                                <a href="ordencorte">
+                                <i class="fa fa-circle-o"></i> Ord. de Corte
+                            </a>
+                        </li>
+                            <li>
+                                <a href="crear-ordencorte">
+                                    <i class="fa fa-circle-o"></i> Crear Ord. de Corte
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                </ul>
+            </li>
+
             <?php
             
                 if( $_SESSION["perfil"] == "Sistemas" || 

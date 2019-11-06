@@ -1,6 +1,5 @@
 <?php
 
-
 class ControladorTarjetas{
 
 	/* 
@@ -160,6 +159,7 @@ class ControladorTarjetas{
 									window.location="tarjetas";}
 							});
 						</script>';
+						
 					}else{
 
 					# Mostramos una alerta suave

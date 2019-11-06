@@ -34,7 +34,7 @@ class TablaArticulos{
         STOCK
         =============================================*/ 
 
-        if($articulos[$i]["stock"] <= $articulos[$i]["ventas"] ){
+        if($articulos[$i]["stock"] <= $articulos[$i]["configuracion"] ){
 
             $stock = "<button class='btn btn-danger btn-xs'>".$articulos[$i]["stock"]."</button>";
 

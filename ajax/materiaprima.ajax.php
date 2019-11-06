@@ -116,7 +116,7 @@ if(isset($_POST["articuloMP"])){
 */
 if(isset($_POST["articuloMPDetalle"])){
 
-  $visualizarMateriaPrimaDetalle = new AjaxMateriaPrima();
+  	$visualizarMateriaPrimaDetalle = new AjaxMateriaPrima();
 	$visualizarMateriaPrimaDetalle -> articuloMPDetalle = $_POST["articuloMPDetalle"];
 	$visualizarMateriaPrimaDetalle -> ajaxVisualizarMateriaPrimaDetalle();
   
