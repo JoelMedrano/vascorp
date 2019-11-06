@@ -3,6 +3,19 @@
 class ControladorOrdenCorte{
 
     /* 
+    * MOSTRAR DATOS DE LAS ORDENES DE CORTE
+    */
+    static public function ctrMostrarOrdenCorte($item, $valor){
+
+        $tabla = "ordencortejf";
+
+        $respuesta = ModeloOrdenCorte::mdlMostarOrdenCorte($tabla, $item, $valor);
+
+        return $respuesta;
+
+    }
+
+    /* 
     * SACAR EL ULTIMO CODIGO
     */
     static public function ctrUltimoCodigoOC(){

@@ -27,24 +27,13 @@ class TablaTarjetas{
             ESTADO TARJETA
             =============================================*/ 
 
-                if($tarjetas[$i]["estado_tarjeta"] == "RE"){
-    
-                    $estado_tarjeta = "<button class='btn btn-warning btn-xs btnActivarT' idTarjeta='".$tarjetas[$i]["id"]."' estadoTarjeta='AC'>Revisar</button>";
-        
-                }else{
-        
-                    $estado_tarjeta = "<button class='btn btn-primary btn-xs' idTarjeta='".$tarjetas[$i]["id"]."' estadoTarjeta='RE'>Aprobado</button>";
-        
-                }
-
-    
             if($tarjetas[$i]["estado_tarjeta"] == "RE"){
-    
+
                 $estado_tarjeta = "<button class='btn btn-warning btn-xs btnActivarT' idTarjeta='".$tarjetas[$i]["id"]."' estadoTarjeta='AC'>Revisar</button>";
     
             }else{
     
-                $estado_tarjeta = "<button class='btn btn-primary btn-xs btnActivarT' idTarjeta='".$tarjetas[$i]["id"]."' estadoTarjeta='RE'>Aprobado</button>";
+                $estado_tarjeta = "<button class='btn btn-primary btn-xs' idTarjeta='".$tarjetas[$i]["id"]."' estadoTarjeta='RE'>Aprobado</button>";
     
             }
 

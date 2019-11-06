@@ -30,8 +30,9 @@ todo: ARTICULOS
 ! hacer reportes en excel
 
 todo: PRODUCCION
-* configurar % de urgencias
-! produccion
+* configurar % de urgencias - ok
+* crear orden de corte - ok
+* listar ordenes de corte
 
 
 todo: OTROS

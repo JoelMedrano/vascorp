@@ -4,7 +4,51 @@
 
 class ModeloOrdenCorte{
 
-   /* 
+	/* 
+	* Método para mostrar los datos de las ordenes de corte
+	*/
+	static public function mdlMostarOrdenCorte($tabla, $item, $valor){
+
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id DESC");
+
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+			$stmt -> execute();
+
+			return $stmt -> fetch();
+
+		}else{
+
+			$stmt = Conexion::conectar()->prepare("SELECT 
+															oc.codigo,
+															oc.usuario,
+															u.nombre,
+															oc.total,
+															oc.saldo,
+															oc.configuracion,
+															oc.estado,
+															DATE(oc.fecha) AS fecha 
+														FROM
+															ordencortejf oc 
+															LEFT JOIN usuariosjf u 
+																ON oc.usuario = u.id");
+
+			$stmt -> execute();
+
+			return $stmt -> fetchAll();
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;		
+
+
+	}
+
+  	/* 
 	* Método para sacar el ultimo id de la tarjeta
 	*/	
 	static public function mdlUltimoCodigoOC($tabla){
