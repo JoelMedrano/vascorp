@@ -111,7 +111,8 @@ class ControladorOrdenCorte{
 
                             $datosD = array("ordencorte"=>$ultimoId[0]["ult_codigo"],
                                             "articulo"=>$value["articulo"],
-                                            "cantidad"=>$value["cantidad"]);
+                                            "cantidad"=>$value["cantidad"],
+                                            "saldo"=>$value["cantidad"]);
 
                             #var_dump("datosD", $datosD);
 

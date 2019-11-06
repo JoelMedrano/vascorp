@@ -138,15 +138,16 @@ class ModeloOrdenCorte{
 	*/
 	static public function mdlGuardarDetallesOrdenCorte($tabla,$datos){
 
-		$sql="INSERT INTO $tabla (ordencorte, articulo, cantidad) 
+		$sql="INSERT INTO $tabla (ordencorte, articulo, cantidad, saldo) 
 		VALUES
-		  (:ordencorte, :articulo, :cantidad)";
+		  (:ordencorte, :articulo, :cantidad, :saldo)";
 
 		$stmt=Conexion::conectar()->prepare($sql);
 
 		$stmt->bindParam(":ordencorte",$datos["ordencorte"],PDO::PARAM_INT);
 		$stmt->bindParam(":articulo",$datos["articulo"],PDO::PARAM_INT);
 		$stmt->bindParam(":cantidad",$datos["cantidad"],PDO::PARAM_INT);
+		$stmt->bindParam(":saldo",$datos["saldo"],PDO::PARAM_INT);
 
 
 		if($stmt->execute()){
