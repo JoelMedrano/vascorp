@@ -264,7 +264,7 @@ class ControladorOrdenCorte{
                     todo: Editamos los cambios del detalle Ordenes de Corte, primero eliminamos los detalles
                     */
 
-                    #$eliminarDato = ModeloOrdenCorte::mdlEliminarDato("detalles_ordencortejf", "ordencorte", $_POST["editarCodigo"]);
+                    $eliminarDato = ModeloOrdenCorte::mdlEliminarDato("detalles_ordencortejf", "ordencorte", $_POST["editarCodigo"]);
 
                     $eliminarDato = "ok";
 
@@ -272,21 +272,32 @@ class ControladorOrdenCorte{
 
                         foreach($listaArticulosOC as $key=>$value){
 
-                            var_dump("listaArticulosOC", $listaArticulosOC);
+                            #var_dump("listaArticulosOC", $listaArticulosOC);
 
                             $datosD = array("ordencorte"=>$_POST["editarCodigo"],
                                             "articulo"=>$value["articulo"],
                                             "cantidad"=>$value["cantidad"],
                                             "saldo"=>$value["cantidad"]);
 
-                            var_dump("datosD", $datosD);
+                            #var_dump("datosD", $datosD);
 
                             ModeloOrdenCorte::mdlGuardarDetallesOrdenCorte("detalles_ordencortejf", $datosD);
 
                         }
 
                         # Mostramos una alerta suave
-                        echo 'hola';                           
+                        echo '<script>
+                                swal({
+                                    type: "success",
+                                    title: "Felicitaciones",
+                                    text: "¡La información fue Actualizada con éxito!",
+                                    showConfirmButton: true,
+                                    confirmButtonText: "Cerrar"
+                                }).then((result)=>{
+                                    if(result.value){
+                                        window.location="ordencorte";}
+                                });
+                            </script>';                     
 
 
                     }else{

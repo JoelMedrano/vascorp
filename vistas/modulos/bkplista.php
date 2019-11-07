@@ -1,5 +1,5 @@
 <?php
-	$formatos   = array('.gz');
+	$formatos   = array('.gz','.sql');
 	$directorio = 'E:/backup'; 
 	if (isset($_POST['boton'])){
 		$nombreArchivo    = $_FILES['archivo']['name'];
@@ -7,12 +7,50 @@
 		$ext              = substr($nombreArchivo, strrpos($nombreArchivo, '.'));
 		if (in_array($ext, $formatos)){
 			if (move_uploaded_file($nombreTmpArchivo, "$directorio/$nombreArchivo")){
-				echo "Felicitaciones, archivo $nombreArchivo subido exitosamente";
+                
+                echo '<script>
+                        swal({
+                            type: "success",
+                            title: "Felicitaciones",
+                            text: "¡El Backup '.$nombreArchivo.' se subio con éxito!",
+                            showConfirmButton: true,
+                            confirmButtonText: "Cerrar"
+                        }).then((result)=>{
+                            if(result.value){
+                                window.location="bkplista";}
+                        });
+                    </script>';
+
 			}else{
-				echo 'Ocurrió un error subiendo el archivo, valida los permisos de la carpeta "archivos"';
+
+                echo '<script>
+                        swal({
+                            type: "error",
+                            title: "Error",
+                            text: "El archivo presento problemas",
+                            showConfirmButton: true,
+                            confirmButtonText: "Cerrar"
+                        }).then((result)=>{
+                            if(result.value){
+                                window.location="bkplista";}
+                        });
+                    </script>';
 			}
 		}else{
-			echo 'Aquí va el mensaje que quieres mostrar cuando un usuario suba un archivo con una extensión diferente';
+
+            echo '<script>
+                    swal({
+                        type: "warning",
+                        title: "Alerta",
+                        text: "¡Debe seleccionar el archivo un backup valido .gz o .sql!",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+                    }).then((result)=>{
+                        if(result.value){
+                            window.location="bkplista";}
+                    });
+                </script>';
+
 		}
 	}
 ?>
@@ -48,7 +86,7 @@
 
                 </div>
 
-                <button type="submit" class="btn btn-primary" name="boton"><i class="fa fa-upload"></i> Subir archivo</button>
+                <button type="submit" class="btn btn-primary" name="boton"><i class="fa fa-upload"></i> Subir BackUp</button>
                 <a href="backupDB" id="bkp" name="bkp" class="btn btn-success"><i class="fa fa-database"></i> Hacer BackUp</a>
 
             </form>
@@ -64,7 +102,7 @@
                     if ($archivo != '.' && $archivo != '..'){
                         //este div es para darle caché y que se vea bien en todos los dispositivos. son clases del nuevo bootstrap -> framewrok css
                         echo '<div>';
-                            echo "Archivo: <span style='font-size:100%' class='label label-primary'>$archivo</span><br />";
+                            echo "Archivo: <span style='font-size:100%' class='label label-default'>$archivo</span><br />";
                             
                         echo '</div>';
                     }

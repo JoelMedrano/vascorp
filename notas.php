@@ -45,7 +45,8 @@ todo: BACKEND SISTEMAS
 
 * actualizar totales unidades - ok
 * actualizar totales soles - ok
-* hacer backup automatico
+* hacer backup automatico - ok
+* listar backups disponibles - ok
 
 todo: ROLES
 * SISTEMAS
