@@ -20,7 +20,7 @@
     define("DB_PASSWORD", 'joel123');
     define("DB_NAME", 'vasco');
     define("DB_HOST", '192.168.1.18');
-    define("BACKUP_DIR", 'backup'); // Comment this line to use same script's directory ('.')
+    define("BACKUP_DIR", 'E:/backup'); // Comment this line to use same script's directory ('.')
     define("TABLES", '*'); // Full backup
     //define("TABLES", 'table1, table2, table3'); // Partial backup
     define("CHARSET", 'utf8');

@@ -165,6 +165,7 @@ CUERPO DOCUMENTO
             $_GET["ruta"] == "colores" ||
             $_GET["ruta"] == "movimientos" ||
             $_GET["ruta"] == "backupDB" ||
+            $_GET["ruta"] == "bkplista" ||
             $_GET["ruta"] == "ordencorte" ||
             $_GET["ruta"] == "crear-ordencorte" ||
             $_GET["ruta"] == "editar-ordencorte"){

@@ -91,7 +91,18 @@
             
                                     </a>
             
-                                </li>                                
+                                </li>
+
+                                <li>
+            
+                                    <a href="bkplista">
+            
+                                        <i class="fa fa-circle-o"></i>
+                                        <span>Backup - Listos</span>
+            
+                                    </a>
+            
+                                </li>                                 
 
                             </ul>
             
