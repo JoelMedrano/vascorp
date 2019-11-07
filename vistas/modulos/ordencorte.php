@@ -47,8 +47,8 @@
          <tr>
            
            <th>Orden de Corte</th>
-           <th>Responsa</th>
-           <th>Cantidad Total</th>
+           <th>Responsable</th>
+           <th><center>Cantidad Total</center></th>
            <th>Saldo</th> 
            <th>Estado</th>
            <th>Fecha</th>

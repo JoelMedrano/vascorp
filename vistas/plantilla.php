@@ -164,8 +164,10 @@ CUERPO DOCUMENTO
             $_GET["ruta"] == "marcas" ||
             $_GET["ruta"] == "colores" ||
             $_GET["ruta"] == "movimientos" ||
+            $_GET["ruta"] == "backupDB" ||
             $_GET["ruta"] == "ordencorte" ||
-            $_GET["ruta"] == "crear-ordencorte"){
+            $_GET["ruta"] == "crear-ordencorte" ||
+            $_GET["ruta"] == "editar-ordencorte"){
 
           include "modulos/".$_GET["ruta"].".php";
 

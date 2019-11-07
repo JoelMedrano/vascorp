@@ -230,7 +230,7 @@ class ControladorVentas{
 					# Actualizamos el stock en la tabla productos
 					$item2="stock";
 					$valor2=$value["cantidad"]+$infoProducto["stock"];
-					ModeloVentas::mdlActualizarUnDato("productos",$item2,$valor2,$valor);
+					ModeloVentas::mdlActualizarUnDato("productosjf",$item2,$valor2,$valor);
 
 				}
 				# Actualizamos el compras en la tabla Clientes

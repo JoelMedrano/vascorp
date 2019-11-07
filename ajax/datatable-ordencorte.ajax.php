@@ -44,16 +44,21 @@ class TablaOrdenCorte{
                 $estadoOC = "<span style='font-size:85%' class='label label-primary'>Parcial</span>";
 
             }
+            /* 
+            todo: orden de corte
+            */
+             $codigo = "<b>OC - ".$ordencorte[$i]["codigo"]."</b>";   
+
 
             /* 
             todo: Traemos las acciones
             */
-                $botones =  "<div class='btn-group'><button class='btn btn-warning  btnEditarTarjeta' title='Editar Tarjeta' idTarjeta='".$ordencorte[$i]["codigo"]."'><i class='fa fa-pencil'></i></button><button class='btn btn-danger  btnEliminarTarjeta' title='Eliminar Tarjeta' idTarjeta='".$ordencorte[$i]["codigo"]."'><i class='fa fa-times'></i></button></div>";
+                $botones =  "<div class='btn-group'><button class='btn btn-warning  btnEditarOC' title='Editar Orden de Corte' codigo='".$ordencorte[$i]["codigo"]."'><i class='fa fa-pencil'></i></button><button class='btn btn-danger  btnEliminarOC' title='Eliminar Orden de Corte' codigo='".$ordencorte[$i]["codigo"]."'><i class='fa fa-times'></i></button></div>";
 
                 $datosJson .= '[
-                "'.$ordencorte[$i]["codigo"].'",
+                "'.$codigo.'",
                 "'.$ordencorte[$i]["nombre"].'",
-                "'.$total.'",
+                "<center><b>'.$total.'</b></center>",
                 "'.$saldo.'",
                 "'.$estadoOC.'",
                 "'.$ordencorte[$i]["fecha"].'",

@@ -32,7 +32,9 @@ todo: ARTICULOS
 todo: PRODUCCION
 * configurar % de urgencias - ok
 * crear orden de corte - ok
-* listar ordenes de corte
+* listar ordenes de corte - ok
+* editar orden de corte
+! ver el detalle de la Orden de corte 
 
 
 todo: OTROS
@@ -43,6 +45,7 @@ todo: BACKEND SISTEMAS
 
 * actualizar totales unidades - ok
 * actualizar totales soles - ok
+* hacer backup automatico
 
 todo: ROLES
 * SISTEMAS
@@ -68,5 +71,78 @@ todo: ROLES
 * VENTAS
 
 */
+
+
+SELECT 
+  doc.ordencorte,
+  a.modelo,
+  a.nombre,
+  a.color,
+  SUM(
+    CASE
+      WHEN a.cod_talla = '1' 
+      THEN doc.saldo 
+      ELSE 0 
+    END
+  ) AS t1,
+  SUM(
+    CASE
+      WHEN a.cod_talla = '2' 
+      THEN doc.saldo 
+      ELSE 0 
+    END
+  ) AS t2,
+  SUM(
+    CASE
+      WHEN a.cod_talla = '3' 
+      THEN doc.saldo 
+      ELSE 0 
+    END
+  ) AS t3,
+  SUM(
+    CASE
+      WHEN a.cod_talla = '4' 
+      THEN doc.saldo 
+      ELSE 0 
+    END
+  ) AS t4,
+  SUM(
+    CASE
+      WHEN a.cod_talla = '5' 
+      THEN doc.saldo 
+      ELSE 0 
+    END
+  ) AS t5,
+  SUM(
+    CASE
+      WHEN a.cod_talla = '6' 
+      THEN doc.saldo 
+      ELSE 0 
+    END
+  ) AS t6,
+  SUM(
+    CASE
+      WHEN a.cod_talla = '7' 
+      THEN doc.saldo 
+      ELSE 0 
+    END
+  ) AS t7,
+  SUM(
+    CASE
+      WHEN a.cod_talla = '8' 
+      THEN doc.saldo 
+      ELSE 0 
+    END
+  ) AS t8,
+  SUM(doc.saldo) AS subtotal 
+FROM
+  detalles_ordencortejf doc 
+  LEFT JOIN articulojf a 
+    ON doc.articulo = a.articulo 
+WHERE doc.ordencorte = '1011' 
+GROUP BY doc.ordencorte,
+  a.modelo,
+  a.nombre,
+  a.color ;
 
 

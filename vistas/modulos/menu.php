@@ -82,6 +82,17 @@
             
                                 </li>
 
+                                <li>
+            
+                                    <a href="backupDB">
+            
+                                        <i class="fa fa-circle-o"></i>
+                                        <span>Backup</span>
+            
+                                    </a>
+            
+                                </li>                                
+
                             </ul>
             
                         </li>

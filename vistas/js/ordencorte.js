@@ -336,3 +336,54 @@ function listarArticulosOC() {
   
     $("#listaArticulosOC").val(JSON.stringify(listaArticulos));
   }
+
+/* 
+* BOTON EDITAR ORDEN DE CORTE
+*/
+$(".tablaOrdenCorte").on("click", ".btnEditarOC", function () {
+
+	var codigo = $(this).attr("codigo");
+
+  window.location = "index.php?ruta=editar-ordencorte&codigo=" + codigo;
+  
+})
+
+/* 
+*FUNCIÓN PARA DESACTIVAR LOS BOTONES AGREGAR CUANDO EL ARTICULO YA HABÍA SIDO SELECCIONADO EN LA CARPETA
+*/
+function quitarAgregarArticuloOC() {
+
+	//Capturamos todos los id de productos que fueron elegidos en la venta
+	var articuloOC = $(".quitarOC");
+
+	//Capturamos todos los botones de agregar que aparecen en la tabla
+	var botonesTablaOC = $(".tablaArticulosOrdenCorte tbody button.agregarArt");
+
+	//Recorremos en un ciclo para obtener los diferentes articuloOC que fueron agregados a la venta
+	for (var i = 0; i < articuloOC.length; i++) {
+
+		//Capturamos los Id de los productos agregados a la venta
+		var boton = $(articuloOC[i]).attr("articuloOC");
+
+		//Hacemos un recorrido por la tabla que aparece para desactivar los botones de agregar
+		for (var j = 0; j < botonesTablaOC.length; j++) {
+
+			if ($(botonesTablaOC[j]).attr("articuloOC") == boton) {
+
+				$(botonesTablaOC[j]).removeClass("btn-primary agregarMP");
+				$(botonesTablaOC[j]).addClass("btn-default");
+
+			}
+		}
+
+	}
+
+}
+
+/* 
+* CADA VEZ QUE CARGUE LA TABLA CUANDO NAVEGAMOS EN ELLA EJECUTAR LA FUNCIÓN:
+*/
+$(".tablaArticulosOrdenCorte").on("draw.dt", function() {
+    quitarAgregarArticuloOC();
+  });
+  

@@ -73,6 +73,7 @@ class ModeloOrdenCorte{
 	* Método para pedir último Id de orden de corte
 	*/
 	static public function mdlUltimoId(){
+
 		$sql="SELECT MAX(codigo) AS ult_codigo
 					FROM
 						ordencortejf";
@@ -134,7 +135,7 @@ class ModeloOrdenCorte{
 	}
 	
 	/* 
-	* Método para guardar detalle de las ordenes de corte
+	* Guardar detalle de las ordenes de corte
 	*/
 	static public function mdlGuardarDetallesOrdenCorte($tabla,$datos){
 
@@ -164,6 +165,77 @@ class ModeloOrdenCorte{
 
 	}	
 	
+	/* 
+	* Método para Mostrar los detalles de orden de corte
+	*/
+	static public function mdlMostraDetallesOrdenCorte($tabla,$item,$valor){
+
+		$sql="SELECT * FROM $tabla WHERE $item=:$item ORDER BY id ASC";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->bindParam(":".$item,$valor,PDO::PARAM_STR);
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt=null;
+
+	}
+
+	/* 
+	* Método para editar las ventas
+	*/
+	static public function mdlEditarOrdenCorte($tabla,$datos){
+
+		$sql="UPDATE $tabla SET usuario=:usuario, total=:total, saldo=:saldo, lastUpdate=:lastUpdate WHERE codigo=:codigo";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->bindParam(":usuario",$datos["usuario"],PDO::PARAM_STR);
+		$stmt->bindParam(":codigo",$datos["codigo"],PDO::PARAM_STR);
+		$stmt->bindParam(":total",$datos["total"],PDO::PARAM_STR);
+		$stmt->bindParam(":saldo",$datos["saldo"],PDO::PARAM_STR);
+		$stmt->bindParam(":lastUpdate",$datos["lastUpdate"],PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			return "error";
+		}
+
+		$stmt=null;
+		
+	}
+
+	/* 
+	* Método para eliminar los detalles de la orden de corte
+	*/
+	static public function mdlEliminarDato($tabla,$item,$valor){
+
+		$sql="DELETE FROM $tabla WHERE $item=:$item";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->bindParam(":".$item,$valor,PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";
+		
+		}
+
+		$stmt=null;
+	}	
+
 
 
 }

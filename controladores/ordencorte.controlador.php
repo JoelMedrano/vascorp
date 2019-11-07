@@ -161,6 +161,178 @@ class ControladorOrdenCorte{
 
     }
 
+	/* 
+	* MOSTRAR DATOS DEL DETALLE DE LAS TARJETAS
+	*/
+	static public function ctrMostrarDetallesOrdenCorte($item,$valor){
 
+		$tabla = "detalles_ordencortejf";
+
+		$respuesta = ModeloOrdenCorte::mdlMostraDetallesOrdenCorte($tabla,$item,$valor);
+
+		return $respuesta;
+
+    }
+    
+    /* 
+    * Editar Orden de Corte
+    */
+    static public function ctrEditarOrdenCorte(){
+
+        if(isset($_POST["editarCodigo"]) && isset($_POST["idUsuario"]) && isset($_POST["listaArticulosOC"])){
+
+            #var_dump($_POST["editarCodigo"], $_POST["idUsuario"],$_POST["listaArticulosOC"]);
+
+            if($_POST["listaArticulosOC"] == ""){
+
+				echo '<script>
+						swal({
+							type: "error",
+							title: "Error",
+							text: "¡No se cambio ninguna materia prima. Por favor, intenteló de nuevo!",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar"
+						}).then((result)=>{
+							if(result.value){
+								window.location="index.php?ruta=editar-ordencorte&codigo='.$_POST["codigoE"].'";}
+						});
+					</script>';              
+
+            }else{
+
+                /* 
+                todo: Traemos los datos del detalle de Orden de Corte
+                */
+                $detaOC = ModeloOrdenCorte::mdlMostraDetallesOrdenCorte("detalles_ordencortejf", "ordencorte", $_POST["editarCodigo"]);
+                #var_dump("detaOC", $detaOC);
+
+                /* 
+                todo: Cabiamos los codigos de al lista por los codigos de articulos
+                */
+                foreach($detaOC as $key=>$value){
+
+                    $infoArt = controladorArticulos::ctrMostrarArticulos("articulo",$value["articulo"]);
+                    $detaOC[$key]["articulo"]=$infoArt["articulo"];
+                    #var_dump("detaOC", $detaOC[$key]["articulo"]);
+
+                }
+
+                if($_POST["listaArticulosOC"] == ""){
+
+                    $listaArticulosOC = $detaOC;
+                    $validarCambio = false;
+
+                }else{
+
+                    $listaArticulosOC = json_decode($_POST["listaArticulosOC"], true);
+                    $validarCambio = true;
+
+                }
+
+                if($validarCambio){
+
+                    /* 
+                    todo: Actualizamos en articulos las ord_Corte
+                    */
+                    foreach($listaArticulosOC as $key=>$value){
+
+                        $item1 = "ord_corte";
+                        $valor1 = $value["ord_corte"];
+                        $valor2 = $value["articulo"];
+
+                        ModeloArticulos::mdlActualizarUnDato("articulojf", $item1, $valor1, $valor2);
+
+                    }
+
+                }
+
+                /* 
+                todo: Editamos los cambios de la cabecera Orden de Corte
+                */
+                $datos = array( "codigo"=>$_POST["editarCodigo"],
+                                "usuario"=>$_POST["idUsuario"],
+                                "total"=>$_POST["totalOrdenCorte"],
+                                "saldo"=>$_POST["totalOrdenCorte"],
+                                "lastUpdate"=>$_POST["fechaActual"]);
+                #var_dump("datos", $datos);
+
+                $respuesta = ModeloOrdenCorte::mdlEditarOrdenCorte("ordencortejf", $datos);
+
+                if($respuesta == "ok"){
+
+                    /* 
+                    todo: Editamos los cambios del detalle Ordenes de Corte, primero eliminamos los detalles
+                    */
+
+                    #$eliminarDato = ModeloOrdenCorte::mdlEliminarDato("detalles_ordencortejf", "ordencorte", $_POST["editarCodigo"]);
+
+                    $eliminarDato = "ok";
+
+                    if($eliminarDato == "ok"){
+
+                        foreach($listaArticulosOC as $key=>$value){
+
+                            var_dump("listaArticulosOC", $listaArticulosOC);
+
+                            $datosD = array("ordencorte"=>$_POST["editarCodigo"],
+                                            "articulo"=>$value["articulo"],
+                                            "cantidad"=>$value["cantidad"],
+                                            "saldo"=>$value["cantidad"]);
+
+                            var_dump("datosD", $datosD);
+
+                            ModeloOrdenCorte::mdlGuardarDetallesOrdenCorte("detalles_ordencortejf", $datosD);
+
+                        }
+
+                        # Mostramos una alerta suave
+                        echo 'hola';                           
+
+
+                    }else{
+
+					# Mostramos una alerta suave
+					echo '<script>
+							swal({
+								type: "error",
+								title: "Error",
+								text: "¡La información presento problemas y no se registro adecuadamente. Por favor, intenteló de nuevo!",
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar"
+							}).then((result)=>{
+								if(result.value){
+									window.location="ordencorte";}
+							});
+						</script>';
+
+                    }
+
+
+                }else{
+
+				echo '<script>
+						swal({
+							type: "error",
+							title: "Error",
+							text: "¡La información presento problemas y no se actualizó adecuadamente. Por favor, intenteló de nuevo!",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar"
+						}).then((result)=>{
+							if(result.value){
+								window.location="ordencorte";}
+						});
+					</script>';
+
+                }
+
+                
+
+                                
+
+            }
+
+        }
+
+    }
 
 }
