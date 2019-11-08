@@ -441,3 +441,154 @@ $(".tablaOrdenCorte").on("click", ".btnEliminarOC", function() {
 	});
 
   });
+
+
+/* 
+* VISUALIZAR DETALLE DE LA ORDEN DE CORTE
+*/ 
+$(".tablaOrdenCorte").on("click", ".btnVisualizarOC", function () {
+
+	var codigoOC = $(this).attr("codigo");
+    //console.log("codigoOC", codigoOC);
+    
+    var datos = new FormData();
+	datos.append("codigoOC", codigoOC);
+
+	$.ajax({
+
+		url:"ajax/ordencorte.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType:"json",
+		success:function(respuesta){
+
+			//console.log("respuesta", respuesta);
+
+            $("#ordencorte").val(respuesta["codigo"]);
+            $("#fecha").val(respuesta["fecha"]);
+            $("#configuracion").val(respuesta["configuracion"]);
+            $("#nombre").val(respuesta["nombre"]);
+            $("#cantidad").val(respuesta["total"]);
+            $("#saldo").val(respuesta["saldo"]);
+            $("#estado").val(respuesta["estado"]);
+
+            $("#cantidad").number(true, 0);
+            $("#saldo").number(true, 0);
+			
+		}
+
+    })
+    
+    var codigoDOC = $(this).attr("codigo");	
+    //console.log("codigoDOC", codigoDOC);
+
+    var datosDOC = new FormData();
+    datosDOC.append("codigoDOC", codigoDOC);
+    
+    $.ajax({
+
+		url:"ajax/ordencorte.ajax.php",
+		method: "POST",
+		data: datosDOC,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType:"json",
+		success:function(respuestaDetalle){
+
+			//console.log("respuestaDetalle", respuestaDetalle);
+
+            $(".detalleMP").remove();
+            
+			for(var id of respuestaDetalle){
+
+                if(id.t1 > 0){
+
+                    var t1 = id.t1;
+                }else
+
+                    var t1 = "";
+
+                if(id.t2 > 0){
+
+                    var t2 = id.t2;
+                }else
+
+                    var t2 = "";
+                    
+                if(id.t3 > 0){
+
+                    var t3 = id.t3;
+                }else
+
+                    var t3 = "";
+                    
+                if(id.t4 > 0){
+
+                    var t4 = id.t4;
+                }else
+
+                    var t4 = "";    
+                    
+                if(id.t5 > 0){
+
+                    var t5 = id.t5;
+                }else
+
+                    var t5 = "";
+                    
+                if(id.t6 > 0){
+
+                    var t6 = id.t6;
+                }else
+
+                    var t6 = "";
+                    
+                if(id.t7 > 0){
+
+                    var t7 = id.t7;
+                }else
+
+                    var t7 = "";
+                    
+                if(id.t8 > 0){
+
+                    var t8 = id.t8;
+                }else
+
+                    var t8 = "";                    
+
+				$('.tablaDetalleOC').append(
+
+					'<tr class="detalleMP">' +
+						'<td>' + id.ordencorte + ' </td>' +
+						'<td><b>' + id.modelo + ' </b></td>' +
+						'<td>' + id.nombre + ' </td>' +
+						'<td>' + id.color + ' </td>' +
+						'<td><b>' + t1 + ' </b></td>' +
+						'<td><b>' + t2 + ' </b></td>' +
+						'<td><b>' + t3 + ' </b></td>' +
+                        '<td><b>' + t4 + ' </b></td>' +
+                        '<td><b>' + t5 + ' </b></td>' +
+                        '<td><b>' + t6 + ' </b></td>' +
+                        '<td><b>' + t7 + ' </b></td>' +
+                        '<td><b>' + t8 + ' </b></td>' +
+					'</tr>'
+
+
+				)
+
+			}            
+
+
+
+		}
+
+	})
+
+
+  
+})

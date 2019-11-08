@@ -53,7 +53,7 @@ class TablaOrdenCorte{
             /* 
             todo: Traemos las acciones
             */
-                $botones =  "<div class='btn-group'><button class='btn btn-warning  btnEditarOC' title='Editar Orden de Corte' codigo='".$ordencorte[$i]["codigo"]."'><i class='fa fa-pencil'></i></button><button class='btn btn-danger  btnEliminarOC' title='Eliminar Orden de Corte' codigo='".$ordencorte[$i]["codigo"]."'><i class='fa fa-times'></i></button></div>";
+                $botones =  "<div class='btn-group'><button class='btn btn-info btnVisualizarOC' title='Visualizar Orden Corte' data-toggle='modal' data-target='#modalVisualizarOC' codigo='".$ordencorte[$i]["codigo"]."'><i class='fa fa-eye'></i></button><button class='btn btn-warning  btnEditarOC' title='Editar Orden de Corte' codigo='".$ordencorte[$i]["codigo"]."'><i class='fa fa-pencil'></i></button><button class='btn btn-danger  btnEliminarOC' title='Eliminar Orden de Corte' codigo='".$ordencorte[$i]["codigo"]."'><i class='fa fa-times'></i></button></div>";
 
                 $datosJson .= '[
                 "'.$codigo.'",

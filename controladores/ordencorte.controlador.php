@@ -396,6 +396,32 @@ class ControladorOrdenCorte{
 
         return $respuesta;
 
-    }    
+    }
+    
+	/* 
+	* VISUALIZAR DATOS DE LA ORDEN DE CORTE - CABECERA
+	*/
+	static public function ctrVisualizaOrdenCorte($item, $valor){
+
+		$tabla = "ordencortejf";
+
+        $respuesta = ModeloOrdenCorte::mdlVisualizaOrdenCorte($tabla, $item, $valor);
+        
+		return $respuesta;
+
+    }
+    
+	/* 
+	* VISUALIZAR DATOS DE LA ORDEN DE CORTE DETALLE
+	*/
+	static public function ctrVisualizarOrdenCorteDetalle($item, $valor){
+
+		$tabla = "detalles_ordencortejf";
+
+        $respuesta = ModeloOrdenCorte::mdlVisualizarOrdenCorteDetalle($tabla, $item, $valor);
+        
+		return $respuesta;
+
+	}    
 
 }
