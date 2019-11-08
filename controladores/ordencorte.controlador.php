@@ -334,16 +334,68 @@ class ControladorOrdenCorte{
 						});
 					</script>';
 
-                }
-
-                
-
-                                
+                }                                
 
             }
 
         }
 
     }
+
+    /* 
+    *Método para eliminar las ordenes de corte
+    */
+    static public function ctrEliminarOrdenCorte($codigo){
+
+        $item = "codigo";
+        $infoOC = ModeloOrdenCorte::mdlMostraDetallesOrdenCorte("ordencortejf", $item, $codigo);
+        #var_dump("infoOC", $infoOC);
+
+        $detaOC = ModeloOrdenCorte::mdlMostraDetallesOrdenCorte("detalles_ordencortejf", "ordencorte", $codigo);
+        #var_dump("detaOC", $detaOC);
+
+        /* 
+        todo: Actualizamos orden de corte en Articulojf
+        */
+        foreach($detaOC as $key=>$value){
+
+            $itemA = "articulo";
+            $valorA = $value["articulo"];
+    
+            $infoA = ModeloArticulos::mdlMostrarArticulos("articulojf", $itemA, $valorA);
+            #var_dump("infoA", $infoA);
+
+            $ord_corte = $infoA["ord_corte"] - $value["cantidad"];
+            #var_dump("ord_corte", $ord_corte);
+
+            ModeloArticulos::mdlActualizarUnDato("articulojf", "ord_corte", $ord_corte, $value["articulo"]);
+
+        }
+
+        /* 
+        todo: Eliminamos la cabecera de Orden de corte
+        */
+        $tablaOC = "ordencortejf";
+        $itemOC = "codigo";
+        $valorOC = $codigo;
+
+        $respuesta = ModeloOrdenCorte::mdlEliminarDato($tablaOC, $itemOC, $valorOC);
+
+        if($respuesta == "ok"){
+
+            /* 
+            todo: Eliminamos el detalle de Orden de corte
+            */
+            $tablaDOC = "detalles_ordencortejf";
+            $itemDOC = "ordencorte";
+            $valorDOC = $codigo;
+
+            ModeloOrdenCorte::mdlEliminarDato($tablaDOC, $itemDOC, $valorDOC);
+
+        }
+
+        return $respuesta;
+
+    }    
 
 }

@@ -234,6 +234,29 @@ class ModeloOrdenCorte{
 		}
 
 		$stmt=null;
+	}
+	
+	/* 
+	* Método para eliminar la orden de corte
+	*/
+	static public function mdlEliminarOrdenCorte($tabla, $item, $valor){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE $item = $valor");
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
 	}	
 
 

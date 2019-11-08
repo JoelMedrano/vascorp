@@ -387,3 +387,57 @@ $(".tablaArticulosOrdenCorte").on("draw.dt", function() {
     quitarAgregarArticuloOC();
   });
   
+
+/*=============================================
+BORRAR VENTA
+=============================================*/
+$(".tablaOrdenCorte").on("click", ".btnEliminarOC", function() {
+    var codigo = $(this).attr("codigo");
+
+    /* console.log("codigo", codigo); */
+
+    swal({
+		type: "warning",
+		title: "Advertencia",
+		text: "¿Está seguro de eliminar la Orden de Corte? ¡Si no está seguro, puede cancelar la acción!",
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: "¡Si, eliminar Orden de Corte!",
+		cancelButtonText: "Cancelar",
+	}).then(function (result) {
+		if (result.value) {
+			var datos = new FormData();
+			datos.append("codigo", codigo);
+			$.ajax({
+				url: "ajax/ordencorte.ajax.php",
+				type: "POST",
+				data: datos,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function (respuesta) {
+
+                    /* console.log("respuestaaaaaa", respuesta); */
+                    
+                    if (respuesta == "ok") {
+						swal({
+							type: "success",
+							title: "¡Ok!",
+							text: "¡La información fue Eliminada con éxito!",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar"
+						}).then((result) => {
+							if (result.value) {
+								window.location = "ordencorte";
+							}
+						});
+					}
+
+
+				}
+			});
+		}
+	});
+
+  });

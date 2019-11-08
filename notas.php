@@ -33,7 +33,8 @@ todo: PRODUCCION
 * configurar % de urgencias - ok
 * crear orden de corte - ok
 * listar ordenes de corte - ok
-* editar orden de corte
+* editar orden de corte - ok
+* eliminar orden de corte
 ! ver el detalle de la Orden de corte 
 
 
