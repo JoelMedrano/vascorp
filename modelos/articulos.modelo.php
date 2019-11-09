@@ -333,7 +333,7 @@ class ModeloArticulos{
 	}
 
 	/* 
-	* CONFIGURAR PORCENTAJE DE URGENCIAS
+	* MOSTRAR ARTICULOS PARA LA TABLA DE ORDENES DE CORTE
 	*/
 	static public function mdlMostrarArticulosUrgencia($tabla){
 
@@ -346,6 +346,7 @@ class ModeloArticulos{
 														a.talla,
 														a.stock,
 														a.pedidos,
+														(a.stock - a.pedidos) AS stockB,
 														a.ord_corte,
 														a.alm_corte,
 														a.taller,
@@ -359,7 +360,7 @@ class ModeloArticulos{
 														) AS configuracion,
 														a.tipo 
 													FROM
-														articulojf a 
+														$tabla a 
 														LEFT JOIN marcasjf m 
 														ON a.id_marca = m.id 
 														LEFT JOIN 
@@ -372,13 +373,8 @@ class ModeloArticulos{
 															AND DATEDIFF(DATE(NOW()), m.fecha) <= 31 
 														GROUP BY m.articulo) v 
 														ON a.articulo = v.articulo 
-													WHERE ROUND(
-														(
-															IFNULL(v.ult_mes, 0) * a.urgencia / 100
-														),
-														0
-														) > a.stock 
-														AND estado = 'ACTIVO' 
+													WHERE a.estado = 'ACTIVO' 
+														AND a.id_marca NOT IN ('4', '5', '6') 
 													ORDER BY a.articulo ASC");
 
 		$stmt -> execute();
@@ -390,5 +386,92 @@ class ModeloArticulos{
 
 
 	}
+
+	/* 
+	* MOSTRAR ARTICULOS PARA LA TABLA URGENCIA
+	*/
+	static public function mdlMostrarUrgencia($tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT 
+														a.articulo,
+														a.id_marca,
+														m.marca,
+														a.modelo,
+														a.nombre,
+														a.cod_color,
+														a.color,
+														a.cod_talla,
+														a.talla,
+														a.estado,
+														a.urgencia,
+														ROUND(
+														(
+															IFNULL(v.ult_mes, 0) * a.urgencia / 100
+														),
+														0
+														) AS configuracion,
+														CASE
+														WHEN a.stock < 0 
+														THEN 0 
+														ELSE a.stock 
+														END AS stock,
+														(a.stock - a.pedidos) AS stockB,
+														a.pedidos,
+														a.tipo,
+														a.taller,
+														a.alm_corte,
+														a.ord_corte,
+														a.proyeccion,
+														IFNULL(p.prod, 0) AS prod,
+														IFNULL(
+														ROUND(
+															(IFNULL(p.prod, 0) / a.proyeccion) * 100,
+															2
+														),
+														0
+														) AS avance,
+														IFNULL(v.ult_mes, 0) AS ult_mes 
+													FROM
+														$tabla a 
+														LEFT JOIN marcasjf m 
+														ON a.id_marca = m.id 
+														LEFT JOIN 
+														(SELECT 
+															m.articulo,
+															SUM(m.cantidad) AS prod 
+														FROM
+															movimientosjf m 
+														WHERE YEAR(m.fecha) = '2019' 
+															AND MONTH(m.fecha) >= 7 
+															AND tipo = 'E20' 
+														GROUP BY m.articulo) AS p 
+														ON a.articulo = p.articulo 
+														LEFT JOIN 
+														(SELECT 
+															m.articulo,
+															SUM(m.cantidad) AS ult_mes 
+														FROM
+															movimientosjf m 
+														WHERE m.tipo IN ('S02', 'S03', 'S70') 
+															AND DATEDIFF(DATE(NOW()), m.fecha) <= 31 
+														GROUP BY m.articulo) AS v 
+														ON a.articulo = v.articulo 
+													WHERE ROUND(
+														(
+															IFNULL(v.ult_mes, 0) * a.urgencia / 100
+														),
+														0
+														) > (a.stock - a.pedidos) 
+														AND a.estado = 'Activo'");
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt->close();
+		$stmt = null;
+
+
+	}	
     
 }    

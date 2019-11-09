@@ -27,26 +27,22 @@ class TablaArticulosOrdenCorte{
         /* 
         todo: PEDIDOS
         */
-        if( $articulos[$i]["pedidos"] >= $articulos[$i]["stock"] ){
-
-            $pedidos = "<center><span class='label label-danger'>".$articulos[$i]["pedidos"]."</span></center>";
-
-        }else{
-
             $pedidos = "<center>".$articulos[$i]["pedidos"]."</center>";
-
-        }
 
         /* 
         todo: STOCK
         */
-        if( $articulos[$i]["stock"] <= 0){
+        if( $articulos[$i]["stockB"] <= 0){
 
-            $stock = "<center><span class='label label-danger'>".$articulos[$i]["stock"]."</span></center>";
+            $stock = "<center><span class='label label-danger'>".$articulos[$i]["stockB"]."</span></center>";
+
+        }else if( $articulos[$i]["stockB"] < $articulos[$i]["configuracion"]){
+
+            $stock = "<center><b><span class='text-danger'>".$articulos[$i]["stockB"]."</span></b></center>";
 
         }else{
 
-            $stock = "<center><b>".$articulos[$i]["stock"]."</b></center>";
+            $stock = "<center>".$articulos[$i]["stockB"]."</center>";
 
         }
 

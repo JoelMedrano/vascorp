@@ -391,7 +391,7 @@ class controladorArticulos{
 	}
 
     /* 
-    * CONFIGURAR PORCENTAJE 
+    * CONFIGURAR PORCENTAJE SALTA A CREAR OC
     */
     static public function ctrConfigurarUrgencia(){
 
@@ -429,9 +429,49 @@ class controladorArticulos{
         }
 
 	}
+
+    /* 
+    * CONFIGURAR PORCENTAJE SALTA A CREAR OC
+    */
+    static public function ctrConfigurarUrgenciaLista(){
+
+        if(isset($_POST["urgencia"])){
+
+            $tabla = "articulojf";
+
+			$dato = $_POST["urgencia"];
+			
+			var_dump("dato", $dato);
+
+			$respuesta = ModeloArticulos::mdlConfigurarUrgencia($tabla, $dato);
+			
+			if ($respuesta == "ok"){
+
+				echo	'<script>
+
+							swal({
+								type: "success",
+								title: "El porcentaje de urgencias ha sido configurado correctamente",
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar"
+								}).then(function(result){
+											if (result.value) {
+
+											window.location = "urgencias";
+
+											}
+										})
+
+						</script>';
+
+			}
+
+        }
+
+	}	
 	
 	/* 
-	* MOSTRAR ARTICULOS PARA LA URGENCIA
+	* MOSTRAR ARTICULOS PARA LA TABLA DE ORDENES DE CORTE
 	*/	
 	static public function ctrMostrarArticulosUrgencia(){
 
@@ -442,6 +482,19 @@ class controladorArticulos{
 		return $respuesta;
 		
 	}
+
+	/* 
+	* MOSTRAR ARTICULOS PARA LA TABLA URGENCIA
+	*/	
+	static public function ctrMostrarUrgencia(){
+
+		$tabla = "articulojf";
+
+		$respuesta = ModeloArticulos::mdlMostrarUrgencia($tabla);
+
+		return $respuesta;
+		
+	}	
 
 }
 

@@ -221,10 +221,17 @@
                         <ul class="treeview-menu">
 
                             <li>
+                                <a href="urgencias">
+                                    <i class="fa fa-circle-o"></i> Urgencias
+                                </a>
+                            </li>                        
+
+                            <li>
                                 <a href="ordencorte">
-                                <i class="fa fa-circle-o"></i> Ord. de Corte
-                            </a>
-                        </li>
+                                    <i class="fa fa-circle-o"></i> Ord. de Corte
+                                </a>
+                            </li>
+
                             <li>
                                 <a href="crear-ordencorte">
                                     <i class="fa fa-circle-o"></i> Crear Ord. de Corte
