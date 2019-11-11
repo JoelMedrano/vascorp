@@ -4,7 +4,7 @@
     
     <h1>
       
-      Urgencias
+      Urgencias Articulos
     
     </h1>
 
@@ -26,7 +26,7 @@
   
         <button class="btn btn-success" data-toggle="modal" data-target="#modalConfigurarUrgencia">
 
-        Configuracion Actual
+        Configuracion Actual: 
 
         <?php
         
@@ -187,6 +187,277 @@ MODAL CONFIGURAR % DE URGENCIAS
 
       ?>  
 
+
+    </div>
+
+  </div>
+
+</div>
+
+<!--=====================================
+MODAL VISUALIZAR MP URGENCIA
+======================================-->
+
+<div id="modalVisualizarUrgencias" class="modal fade" role="dialog">
+  
+  <div class="modal-dialog" style="width: 70% !important;">
+
+    <div class="modal-content">
+
+      <form role="form" method="post" class="modalSimulacion">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title">Detalle de Tarjeta</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+
+          <div class="box-body">
+
+            <!-- ENTRADA PARA CODIGO DEL ARTICULO-->
+            
+            <div class="form-group col-lg-2">
+              
+              <label>Artículo</label>
+
+              <div class="input-group">
+
+              <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <b><input type="text" class="form-control input-sm" name="articulo" id="articulo" required readonly></b>
+
+              </div>
+
+            </div>          
+
+            <!-- ENTRADA PARA EL MODELO-->
+            
+            <div class="form-group col-lg-2">
+              
+              <label>Modelo</label>
+
+              <div class="input-group">
+
+              <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <input type="text" class="form-control input-sm" name="modelo" id="modelo" required readonly>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA LA DESCRIPCION-->
+            
+            <div class="form-group col-lg-4">
+
+              <label>Descripción</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <b><input type="text" class="form-control input-sm" name="nombre" id="nombre" required readonly></b>
+
+              </div>
+
+            </div>            
+
+            <!-- ENTRADA PARA EL COLOR -->
+            
+            <div class="form-group col-lg-2">
+
+              <label>Color</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <b><input type="text" class="form-control input-sm" name="color" id="color" required readonly></b>
+
+              </div>
+
+            </div>      
+            
+            <!-- ENTRADA PARA LA TALLA-->
+            
+            <div class="form-group col-lg-2">
+
+              <label>Talla</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <b><input type="text" class="form-control input-sm" name="talla" id="talla" required readonly></b>
+
+              </div>
+
+            </div>
+            
+            <!-- ENTRADA PARA EL STOCK-->
+            
+            <div class="form-group col-lg-2">
+
+              <label>Stock</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <b><input type="text" class="form-control input-sm" name="stock" id="stock" required readonly></b>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA LOS PEDIDOS-->
+            
+            <div class="form-group col-lg-2">
+
+              <label>Pedidos</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <input type="text" class="form-control input-sm" name="pedidos" id="pedidos" required readonly>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EN TALLER-->
+            
+            <div class="form-group col-lg-2">
+
+              <label>En Taller</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <input type="text" class="form-control input-sm" name="taller" id="taller" required readonly>
+
+              </div>
+
+            </div>       
+            
+            <!-- ENTRADA PARA EN ALM. CORTE-->
+            
+            <div class="form-group col-lg-2">
+
+              <label>Alm. Corte</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <input type="text" class="form-control input-sm" name="alm_corte" id="alm_corte" required readonly>
+
+              </div>
+
+            </div>                
+                       
+            <!-- ENTRADA PARA EN ORD. CORTE-->
+            
+            <div class="form-group col-lg-2">
+
+              <label>Ord. Corte</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <input type="text" class="form-control input-sm" name="ord_corte" id="ord_corte" required readonly>
+
+              </div>
+
+            </div>     
+            
+            <!-- ENTRADA PARA ESTADO-->
+            
+            <div class="form-group col-lg-2">
+
+              <label>Estado</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <b><input type="text" class="form-control input-sm" name="estado" id="estado" required readonly></b>
+
+              </div>
+
+            </div>                
+            
+
+
+            <!-- TABLA DE DETALLES -->
+
+            <div class="form-group col-lg-12">
+            <label>TABLA DETALLES</label>
+            </div>
+
+            <div class="box-body">
+
+              <table class="table table-bordered table-striped dt-responsive tablaDetalleUrgencia">
+
+                <thead>
+
+                  <tr>
+
+                    <th>CodPro</th>
+                    <th>Materia Prima</th>
+                    <th>Consumo</th>
+                    <th>Unidad</th>
+                    <th>Stock</th>
+                    <th>Tej. Princ.</th>
+                    <th>Urgencia</th>
+                    <th>Alerta</th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody>
+
+
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Salir</button>
+
+        </div>
+
+
+
+      </form>
 
     </div>
 

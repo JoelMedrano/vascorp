@@ -486,15 +486,29 @@ class controladorArticulos{
 	/* 
 	* MOSTRAR ARTICULOS PARA LA TABLA URGENCIA
 	*/	
-	static public function ctrMostrarUrgencia(){
+	static public function ctrMostrarUrgencia($valor){
 
 		$tabla = "articulojf";
-
-		$respuesta = ModeloArticulos::mdlMostrarUrgencia($tabla);
+		
+		$respuesta = ModeloArticulos::mdlMostrarUrgencia($tabla,$valor);
 
 		return $respuesta;
 		
 	}	
+
+
+	/* 
+	* MOSTRAR ARTICULOS PARA LA TABLA URGENCIA
+	*/	
+	static public function ctrMostrarUrgenciaDetalle($valor){
+
+		$tabla = "detalles_tarjetajf";
+		
+		$respuesta = ModeloArticulos::mdlVisualizarUrgenciasDetalle($tabla,$valor);
+
+		return $respuesta;
+		
+	}		
 
 }
 

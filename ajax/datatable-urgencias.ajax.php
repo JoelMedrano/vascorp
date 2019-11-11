@@ -11,7 +11,8 @@ class TablaUrgencias{
 
     public function mostrarUrgencias(){
 
-        $articulos = controladorArticulos::ctrMostrarUrgencia();	
+        $valor = null;
+        $articulos = controladorArticulos::ctrMostrarUrgencia($valor);	
 
         #var_dump("articulos", $articulos);
 
@@ -150,7 +151,7 @@ class TablaUrgencias{
             /* 
             todo: BOTONES
             */                
-            $botones =  "<div class='btn-group'><button class='btn btn-warning btnEditarArticulo' idArticulo='".$articulos[$i]["articulo"]."' data-toggle='modal' data-target='#modalEditarArticulo'><i class='fa fa-pencil'></i></button></div>"; 
+            $botones =  "<div class='btn-group'><button class='btn btn-info btnVerUrgencias' codigo='".$articulos[$i]["articulo"]."' data-toggle='modal' data-target='#modalVisualizarUrgencias'><i class='fa fa-eye'></i></button></div>"; 
             
                 $datosJson .= '[
                 "'.$modelo.'",

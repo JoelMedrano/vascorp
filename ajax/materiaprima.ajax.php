@@ -45,15 +45,14 @@ class AjaxMateriaPrima{
 	* VISUALIZAR LA CABECERA DE LA MATERIA PRIMA
 	*/
 	public $articuloMP;
+	public function ajaxVisualizarMateriaPrima(){
 
-		public function ajaxVisualizarMateriaPrima(){
+		$item = "codpro";
+		$valor = $this->articuloMP;
 
-			$item = "codpro";
-			$valor = $this->articuloMP;
+		$respuesta = ControladorMateriaPrima::ctrVisualizarMateriaPrima($item, $valor);
 
-			$respuesta = ControladorMateriaPrima::ctrVisualizarMateriaPrima($item, $valor);
-
-			echo json_encode($respuesta);
+		echo json_encode($respuesta);
 	
 	}
 
@@ -96,9 +95,6 @@ if(isset($_POST["materiaPrima"])){
 	$editarMateriaPrimaCostos -> ajaxEditarMateriaPrimaCostos();
   
 }
-
-
-
 
 /* 
  * VISUALIZAR LA CABECERA DE LA MATERIA PRIMA
