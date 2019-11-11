@@ -1,5 +1,5 @@
 /* 
- * BOTON VISUALIZAR URGENCIAS
+ * BOTON VISUALIZAR URGENCIAS APT
  */
 $(".tablaUrgencias").on("click", ".btnVerUrgencias", function () {
 
@@ -81,6 +81,137 @@ $(".tablaUrgencias").on("click", ".btnVerUrgencias", function () {
 		}
 
 	})
+
+
+})
+
+/* 
+ * BOTON VISUALIZAR URGENCIAS AMP
+ */
+$(".tablaUrgenciasAMP").on("click", ".btnVerUrgenciasAMP", function () {
+
+	var codigoAMP = $(this).attr("codigoAMP");
+    //console.log("codigoAMP", codigoAMP);
+
+	var datosA = new FormData();
+	datosA.append("codigoAMP", codigoAMP);
+
+	$.ajax({
+
+		url:"ajax/urgencias.ajax.php",
+		method: "POST",
+		data: datosA,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType:"json",
+		success:function(respuestaA){
+
+            //console.log("respuestaA", respuestaA);
+            
+            $("#codpro").val(respuestaA["codpro"]);			
+			$("#codLinea").val(respuestaA["codlinea"]);
+			$("#linea").val(respuestaA["linea"]);
+			$("#codfab").val(respuestaA["codfab"]);
+			$("#descripcion").val(respuestaA["descripcion"]);
+			$("#unidad").val(respuestaA["unidad"]);
+			$("#color").val(respuestaA["color"]);
+			$("#stock").val(respuestaA["stockMP"]);
+			$("#proveedor").val(respuestaA["proveedor"]);
+
+		}
+
+    })
+    
+    var codigoOC = $(this).attr("codigoAMP");
+    //console.log("codigoOC", codigoOC);
+
+	var datosB = new FormData();
+	datosB.append("codigoOC", codigoOC);
+
+	$.ajax({
+
+		url:"ajax/urgencias.ajax.php",
+		method: "POST",
+		data: datosB,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType:"json",
+		success:function(respuestaB){
+
+			//console.log("respuestaB", respuestaB);
+
+			$(".detalleOC").remove();
+
+			for(var id of respuestaB){
+
+				$('.tablaDetalleOC').append(
+
+					'<tr class="detalleOC">' +
+						'<td><b>' + id.nro + ' </b></td>' +
+						'<td>' + id.emision + ' </td>' +
+						'<td>' + id.llegada + ' </td>' +
+						'<td><b>' + id.razpro + ' </b></td>' +
+						'<td>' + id.cantidad_pedida + ' </td>' +
+						'<td>' + id.saldo + ' </td>' +
+						'<td>' + id.estac + ' </td>' +
+					'</tr>'
+
+
+				)
+
+			}
+
+		}
+
+	})    
+
+    var codigoART = $(this).attr("codigoAMP");
+    console.log("codigoART", codigoART);
+
+	var datosC = new FormData();
+	datosC.append("codigoART", codigoART);
+
+	$.ajax({
+
+		url:"ajax/urgencias.ajax.php",
+		method: "POST",
+		data: datosC,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType:"json",
+		success:function(respuestaC){
+
+			console.log("respuestaC", respuestaC);
+
+			$(".detalleART").remove();
+
+			for(var id of respuestaC){
+
+				$('.tablaDetalleART').append(
+
+					'<tr class="detalleART">' +
+						'<td>' + id.articulo + ' </td>' +
+                        '<td><b>' + id.modelo + ' </b></td>' +
+                        '<td>' + id.nombre + ' </td>' +
+						'<td>' + id.color + ' </td>' +
+						'<td>' + id.talla + ' </td>' +
+						'<td>' + id.stockB + ' </td>' +
+						'<td>' + id.pedidos + ' </td>' +
+					'</tr>'
+
+
+				)
+
+			}
+
+		}
+
+	}) 
+
+
 
 
 })

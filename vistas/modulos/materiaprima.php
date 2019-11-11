@@ -263,7 +263,7 @@ MODAL VISUALIZAR INFORMACION
             
             <!-- ENTRADA PARA LA DESCRIPCION-->
             
-            <div class="form-group col-lg-9">
+            <div class="form-group col-lg-6">
 
               <label>Descripcion</label>
               
@@ -276,6 +276,22 @@ MODAL VISUALIZAR INFORMACION
               </div>
 
             </div>     
+
+            <!-- ENTRADA PARA LA UNIDAD-->
+            
+            <div class="form-group col-lg-3">
+
+              <label>Unidad</label>
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <input type="text" class="form-control input-sm" name="unidad" id="unidad" required readonly>
+
+              </div>
+
+            </div>              
 
             <!-- ENTRADA PARA EL COLOR-->
             

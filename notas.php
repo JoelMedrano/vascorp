@@ -39,7 +39,7 @@ todo: PRODUCCION
 * ver el detalle de la Orden de corte -ok
 * hacer tabla de urgencias articulo - ok
 * ver materia prima faltante - ok
-* hacer tabla urgencias mp
+* hacer tabla urgencias mp - ok
 
 todo: OTROS
 * etiquetar codigo - ok

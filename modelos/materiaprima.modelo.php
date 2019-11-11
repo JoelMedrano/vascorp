@@ -261,8 +261,217 @@ class ModeloMateriaPrima{
 		$stmt->close();
 		$stmt = null;
 
-	}	
+	}
 	
+	/* 
+	* MOSTRAR MATERIA PRIMA PARA LA TABLA URGENCIA
+	*/
+	static public function mdlMostrarUrgenciaAMP($tabla, $valor){
+
+		if ($valor == null) {
+
+			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT 
+														dt.mat_pri,
+														mp.linea,
+														mp.codfab,
+														mp.descripcion,
+														mp.color,
+														mp.unidad,
+														COUNT(dt.mat_pri) items
+													FROM
+														$tabla dt 
+														LEFT JOIN 
+														(SELECT DISTINCT 
+															p.codpro,
+															tblin.des_larga AS linea,
+															SUBSTRING(p.codfab, 1, 6) AS codlinea,
+															p.codfab,
+															p.despro AS descripcion,
+															p.codalm01 AS stockMP,
+															tbund.des_corta AS unidad,
+															tbcol.des_larga AS color,
+															IFNULL(pmp.proveedores, 'Pendiente') AS proveedor 
+														FROM
+															producto p 
+															LEFT JOIN 
+															(SELECT 
+																codpro,
+																CONCAT_WS('   -   ', prov1.razpro) AS proveedores 
+															FROM
+																preciomp pmp 
+																LEFT JOIN proveedor prov1 
+																ON pmp.codprov1 = prov1.codruc 
+															GROUP BY pmp.codpro) AS pmp 
+															ON pmp.codpro = p.codpro 
+															INNER JOIN tabla_m_detalle AS tbund 
+															ON p.undpro = tbund.cod_argumento 
+															AND (tbund.Cod_Tabla = 'TUND') 
+															INNER JOIN tabla_m_detalle AS tbcol 
+															ON p.ColPro = tbcol.cod_argumento 
+															AND (tbcol.Cod_Tabla = 'TCOL') 
+															INNER JOIN tabla_m_detalle AS tblin 
+															ON LEFT(p.codfab, 3) = tblin.des_corta 
+															AND (tblin.cod_tabla = 'Tlin') 
+														WHERE p.estpro = '1') AS mp 
+														ON dt.mat_pri = mp.codpro 
+														LEFT JOIN 
+														(SELECT 
+															a.articulo 
+														FROM
+															articulojf a 
+															LEFT JOIN 
+															(SELECT 
+																m.articulo,
+																SUM(m.cantidad) AS ult_mes 
+															FROM
+																movimientosjf m 
+															WHERE m.tipo IN ('S02', 'S03', 'S70') 
+																AND DATEDIFF(DATE(NOW()), m.fecha) <= 31 
+															GROUP BY m.articulo) AS v 
+															ON a.articulo = v.articulo 
+														WHERE ROUND(
+															(
+																IFNULL(v.ult_mes, 0) * a.urgencia / 100
+															),
+															0
+															) > (a.stock - a.pedidos) 
+															AND a.estado = 'Activo') AS a 
+														ON dt.articulo = a.articulo 
+													WHERE a.articulo IS NOT NULL 
+														AND dt.consumo > mp.stockMP 
+														GROUP BY dt.mat_pri
+														ORDER BY mp.linea");
+
+			$stmt->execute();
+
+			return $stmt->fetchAll();
+		} else {
+
+			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT 
+														p.codpro,
+														SUBSTRING(p.codfab, 1, 6) AS codlinea,
+														tblin.des_larga AS linea,
+														p.codfab,
+														p.despro AS descripcion,
+														p.codalm01 AS stockMP,
+														tbund.des_corta AS unidad,
+														tbcol.des_larga AS color,
+														IFNULL(pmp.proveedores, 'Pendiente') AS proveedor 
+													FROM
+														producto p 
+														LEFT JOIN 
+														(SELECT 
+															codpro,
+															CONCAT_WS('   -   ', prov1.razpro) AS proveedores 
+														FROM
+															preciomp pmp 
+															LEFT JOIN proveedor prov1 
+															ON pmp.codprov1 = prov1.codruc 
+														GROUP BY pmp.codpro) AS pmp 
+														ON pmp.codpro = p.codpro 
+														INNER JOIN tabla_m_detalle AS tbund 
+														ON p.undpro = tbund.cod_argumento 
+														AND (tbund.Cod_Tabla = 'TUND') 
+														INNER JOIN tabla_m_detalle AS tbcol 
+														ON p.ColPro = tbcol.cod_argumento 
+														AND (tbcol.Cod_Tabla = 'TCOL') 
+														INNER JOIN tabla_m_detalle AS tblin 
+														ON LEFT(p.codfab, 3) = tblin.des_corta 
+														AND (tblin.cod_tabla = 'Tlin') 
+													WHERE p.estpro = '1' 
+														AND p.codpro = $valor");
+
+			$stmt->execute();
+
+			return $stmt->fetch();
+		}
+
+		$stmt->close();
+		$stmt = null;
+	}
+	
+	/* 
+	* MOSTRAR EL DETALLE DE LAS URGENCIAS TABLA ORDEN DE COMPRA
+	*/
+	static public function mdlVisualizarUrgenciasAMPDetalleOC($tabla, $valor){
+
+		$sql="SELECT 
+						ocd.codpro,
+						ocd.nro,
+						DATE(oc.fecemi) AS emision,
+						DATE(oc.fecllegada) AS llegada,
+						p.razpro,
+						FORMAT(ocd.canpro,2) AS cantidad_pedida,
+  						FORMAT(ocd.cantni,2) AS saldo,
+						oc.estac 
+					FROM
+						$tabla ocd 
+						LEFT JOIN ocompra oc 
+						ON ocd.nro = oc.nro 
+						LEFT JOIN proveedor p 
+						ON oc.codruc = p.codruc 
+					WHERE oc.estac IN ('ABI', 'PAR') 
+						AND ocd.estac IN ('ABI', 'PAR') 
+						AND oc.estoco = '03' 
+						AND ocd.estoco = '03' 
+						AND YEAR(oc.fecemi) = '2019' 
+						AND ocd.codpro = $valor";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt=null;
+
+	}
+	
+	/* 
+	* MOSTRAR EL DETALLE DE LAS URGENCIAS TABLA ORDEN DE COMPRA
+	*/
+	static public function mdlVisualizarUrgenciasAMPDetalleART($tabla, $valor){
+
+		$sql="SELECT 
+						a.articulo,
+						a.modelo,
+						a.nombre,
+						a.color,
+						a.talla,
+						a.stock - a.pedidos AS stockB,
+						a.pedidos 
+					FROM
+						$tabla a 
+						LEFT JOIN 
+						(SELECT 
+							m.articulo,
+							SUM(m.cantidad) AS ult_mes 
+						FROM
+							movimientosjf m 
+						WHERE m.tipo IN ('S02', 'S03', 'S70') 
+							AND DATEDIFF(DATE(NOW()), m.fecha) <= 31 
+						GROUP BY m.articulo) AS v 
+						ON a.articulo = v.articulo 
+						LEFT JOIN detalles_tarjetajf dt 
+						ON a.articulo = dt.articulo 
+					WHERE ROUND(
+						(
+							IFNULL(v.ult_mes, 0) * a.urgencia / 100
+						),
+						0
+						) > (a.stock - a.pedidos) 
+						AND a.estado = 'Activo' 
+						AND dt.mat_pri = $valor";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt=null;
+
+	}	
 
 
 }

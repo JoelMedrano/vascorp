@@ -177,6 +177,47 @@ class ControladorMateriaPrima{
 
 		}
 
+	}
+	
+	/* 
+	* MOSTRAR ARTICULOS PARA LA TABLA URGENCIA
+	*/	
+	static public function ctrMostrarUrgenciaAMP($valor){
+
+		$tabla = "detalles_tarjetajf";
+		
+		$respuesta = ModeloMateriaPrima::mdlMostrarUrgenciaAMP($tabla,$valor);
+
+		return $respuesta;
+		
 	}	
+	
+	/* 
+	* MOSTRAR EL DETALLE DE LAS URGENCIAS TABLA ORDEN DE COMPRA
+	*/	
+	static public function ctrVisualizarUrgenciasAMPDetalleOC($valor){
+
+		$tabla = "ocomdet";
+		
+		$respuesta = ModeloMateriaPrima::mdlVisualizarUrgenciasAMPDetalleOC($tabla,$valor);
+
+		return $respuesta;
+		
+	}	
+	
+	/* 
+	* MOSTRAR EL DETALLE DE LAS URGENCIAS TABLA ORDEN DE COMPRA
+	*/	
+	static public function ctrVisualizarUrgenciasAMPDetalleART($valor){
+
+		$tabla = "articulojf";
+		
+		$respuesta = ModeloMateriaPrima::mdlVisualizarUrgenciasAMPDetalleART($tabla,$valor);
+
+		return $respuesta;
+		
+	}	
+	
+
 
 }

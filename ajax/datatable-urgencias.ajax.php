@@ -146,8 +146,6 @@ class TablaUrgencias{
 
             }
 
-
-    
             /* 
             todo: BOTONES
             */                
@@ -184,7 +182,7 @@ class TablaUrgencias{
 }
 
 /*=============================================
-ACTIVAR TABLA DE MATERIA PRIMA TARJETAS
+ACTIVAR TABLA DE URGENCIAS  APT
 =============================================*/ 
 $activarUrgencias = new TablaUrgencias();
 $activarUrgencias -> mostrarUrgencias();

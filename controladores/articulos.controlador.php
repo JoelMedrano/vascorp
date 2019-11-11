@@ -498,7 +498,7 @@ class controladorArticulos{
 
 
 	/* 
-	* MOSTRAR ARTICULOS PARA LA TABLA URGENCIA
+	* MOSTRAR ARTICULOS PARA LA TABLA URGENCIA - DETALLE
 	*/	
 	static public function ctrMostrarUrgenciaDetalle($valor){
 
