@@ -22,19 +22,31 @@
 
     <div class="box">
 
-      <div class="box-header with-border">
+    <?php
+    
+    if( $_SESSION["perfil"] == "Sistemas" || 
+        $_SESSION["perfil"] == "Supervisores" || 
+        $_SESSION["perfil"] == "Produccion" || 
+        $_SESSION["perfil"] == "Udp" || 
+        $_SESSION["perfil"] == "Costos"){
+
+          echo '<div class="box-header with-border">
   
-        <a href="crear-tarjeta">
+                  <a href="crear-tarjeta">
+          
+                    <button class="btn btn-primary">
+                      
+                      Agregar Tarjetas
+          
+                    </button>
+          
+                  </a>
+          
+                </div>';
 
-          <button class="btn btn-primary">
-            
-            Agregar Tarjetas
-
-          </button>
-
-        </a>
-
-      </div>
+    }
+    
+    ?>
 
       <div class="box-body">
 

@@ -22,28 +22,34 @@
 
     <div class="box">
 
-      <div class="box-header with-border">
+      <?php
+      
+      if( $_SESSION["perfil"] == 'Supervisores' ||
+          $_SESSION["perfil"] == 'Sistemas'){
+
+        echo '<div class="box-header with-border">
   
-        <button class="btn btn-success" data-toggle="modal" data-target="#modalConfigurarUrgencia">
+                <button class="btn btn-success" data-toggle="modal" data-target="#modalConfigurarUrgencia">
 
-        Configuracion Actual: 
+                Configuracion Actual: ';
 
-        <?php
+                $configuracion = controladorArticulos::ctrConfiguracion();
+
+                #var_dump("configuracion", $configuracion);
         
-        $configuracion = controladorArticulos::ctrConfiguracion();
+                $urgencia = $configuracion["urgencia"];
 
-        #var_dump("configuracion", $configuracion);
+                $urgencia;
 
-        $urgencia = $configuracion["urgencia"];
+                echo $urgencia;
 
+        echo ' %</button>
 
-        ?>
-          
-          <?=$urgencia;?> %
+               </div>';
 
-        </button>
+      }
 
-      </div>
+      ?>
 
       <div class="box-body">
 

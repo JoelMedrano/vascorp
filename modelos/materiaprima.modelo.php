@@ -461,7 +461,8 @@ class ModeloMateriaPrima{
 						0
 						) > (a.stock - a.pedidos) 
 						AND a.estado = 'Activo' 
-						AND dt.mat_pri = $valor";
+						AND dt.mat_pri = $valor
+						ORDER BY a.articulo";
 
 		$stmt=Conexion::conectar()->prepare($sql);
 

@@ -197,78 +197,95 @@
             
             ?>
 
-            <li class="treeview">
+            <?php
 
-                <a href="#">
+                if( $_SESSION["perfil"] == "Sistemas" || 
+                    $_SESSION["perfil"] == "Supervisores" || 
+                    $_SESSION["perfil"] == "Produccion" || 
+                    $_SESSION["perfil"] == "Logistica" || 
+                    $_SESSION["perfil"] == "Costos"){
 
-                    <i class="fa fa-cogs"></i> <span>Producción</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
+                        echo '<li class="treeview">
 
-                </a>
+                                    <a href="#">
+                    
+                                        <i class="fa fa-cogs"></i> <span>Producción</span>
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                    
+                                    </a>
+                    
+                                    <ul class="treeview-menu">';
+                    
+                                        if( $_SESSION["perfil"] == "Sistemas" || 
+                                            $_SESSION["perfil"] == "Supervisores" || 
+                                            $_SESSION["perfil"] == "Produccion" || 
+                                            $_SESSION["perfil"] == "Costos"){
 
-                <ul class="treeview-menu">
+                                                echo '<li class="treeview">
+                                                        <a href="#"><i class="fa fa-scissors"></i> Ordenes de Corte
+                                                            <span class="pull-right-container">
+                                                                <i class="fa fa-angle-left pull-right"></i>
+                                                            </span>
+                                                        </a>
+                                
+                                                        <ul class="treeview-menu">
+                                               
+                                                            <li>
+                                                                <a href="ordencorte">
+                                                                    <i class="fa fa-circle-o"></i> Ord. de Corte
+                                                                </a>
+                                                            </li>
+                                
+                                                            <li>
+                                                                <a href="crear-ordencorte">
+                                                                    <i class="fa fa-circle-o"></i> Crear Ord. de Corte
+                                                                </a>
+                                                            </li>
+                                
+                                                        </ul>
+                                                    </li>';
 
-                    <li class="treeview">
 
-                        <a href="#"><i class="fa fa-scissors"></i> Ordenes de Corte
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
+                                        }
+                                       
+                                        echo '<li class="treeview">
+                    
+                                            <a href="#"><i class="fa fa-file-o"></i> Reportes
+                                                <span class="pull-right-container">
+                                                    <i class="fa fa-angle-left pull-right"></i>
+                                                </span>
+                                            </a>
+                    
+                                            <ul class="treeview-menu">
+                    
+                                                <li>
+                                                    <a href="urgencias">
+                                                        <i class="fa fa-circle-o"></i> Urgencias APT
+                                                    </a>
+                                                </li>                        
+                    
+                                                <li>
+                                                    <a href="urgenciasamp">
+                                                        <i class="fa fa-circle-o"></i> Urgencias AMP
+                                                    </a>
+                                                </li>
+                    
+                                            </ul>
+                                        </li>                    
+                    
+                                    </ul>
+                    
+                                </li>';
 
-                        <ul class="treeview-menu">
 
-                            <li>
-                                <a href="urgencias">
-                                    <i class="fa fa-circle-o"></i> Urgencias
-                                </a>
-                            </li>                        
 
-                            <li>
-                                <a href="ordencorte">
-                                    <i class="fa fa-circle-o"></i> Ord. de Corte
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="crear-ordencorte">
-                                    <i class="fa fa-circle-o"></i> Crear Ord. de Corte
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
-
-                    <li class="treeview">
-
-                        <a href="#"><i class="fa fa-file-o"></i> Reportes
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-
-                        <ul class="treeview-menu">
-
-                            <li>
-                                <a href="urgencias">
-                                    <i class="fa fa-circle-o"></i> Urgencias APT
-                                </a>
-                            </li>                        
-
-                            <li>
-                                <a href="urgenciasamp">
-                                    <i class="fa fa-circle-o"></i> Urgencias AMP
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>                    
-
-                </ul>
-
-            </li>
+                    }
+            
+            
+            
+            ?>
 
             <?php
             
