@@ -349,7 +349,7 @@ class ModeloArticulos
 															AND DATEDIFF(DATE(NOW()), m.fecha) <= 31 
 														GROUP BY m.articulo) v 
 														ON a.articulo = v.articulo 
-													WHERE a.estado = 'ACTIVO' 
+													WHERE a.estado = 'CAMPAÑAD' 
 														AND a.id_marca NOT IN ('4', '5', '6') 
 													ORDER BY a.articulo ASC");
 

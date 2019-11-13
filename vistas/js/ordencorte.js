@@ -578,17 +578,25 @@ $(".tablaOrdenCorte").on("click", ".btnVisualizarOC", function () {
                         '<td><b>' + t8 + ' </b></td>' +
 					'</tr>'
 
-
 				)
 
 			}            
 
-
-
 		}
 
 	})
+  
+})
 
 
+/* 
+* BOTON REPORTE DE ORDEN DE CORTE
+*/
+$(".tablaOrdenCorte").on("click", ".btnReporteOC", function () {
+
+    var codigo = $(this).attr("codigo");
+    console.log("codigo", codigo);
+
+    window.location = "vistas/reportes_excel/rpt_ordencorte.php?codigo=" + codigo;
   
 })
