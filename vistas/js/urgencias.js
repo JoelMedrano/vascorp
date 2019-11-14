@@ -211,7 +211,5 @@ $(".tablaUrgenciasAMP").on("click", ".btnVerUrgenciasAMP", function () {
 
 	}) 
 
-
-
-
 })
+

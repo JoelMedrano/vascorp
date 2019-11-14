@@ -40,7 +40,8 @@ todo: PRODUCCION
 * hacer tabla de urgencias articulo - ok
 * ver materia prima faltante - ok
 * hacer tabla urgencias mp - ok
-* sacar reporte a excel
+* sacar reporte de orden de corte a excel - ok
+* sacar reporte de urgencias.
 
 todo: OTROS
 * etiquetar codigo - ok

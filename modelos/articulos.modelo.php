@@ -43,7 +43,19 @@ class ModeloArticulos
 															0
 															) AS configuracion,
 															a.tipo,
-															a.imagen 
+															a.imagen,
+															CASE
+																WHEN a.tarjeta = 'si' 
+																AND a.estado IN ('activo', 'campañad') 
+																THEN 'Listo' 
+																WHEN a.tarjeta = 'no' 
+																AND a.estado = 'descontinuado' 
+																THEN 'No Necesario' 
+																WHEN a.tarjeta = 'si' 
+																AND a.estado = 'descontinuado' 
+																THEN 'Listo' 
+																ELSE 'Pendiente' 
+															END AS tarjeta 
 														FROM
 															articulojf a 
 															LEFT JOIN marcasjf m 
@@ -349,7 +361,7 @@ class ModeloArticulos
 															AND DATEDIFF(DATE(NOW()), m.fecha) <= 31 
 														GROUP BY m.articulo) v 
 														ON a.articulo = v.articulo 
-													WHERE a.estado = 'CAMPAÑAD' 
+													WHERE a.estado = 'ACTIVO' 
 														AND a.id_marca NOT IN ('4', '5', '6') 
 													ORDER BY a.articulo ASC");
 

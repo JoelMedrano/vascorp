@@ -1,19 +1,19 @@
 <div class="content-wrapper">
 
   <section class="content-header">
-    
+
     <h1>
-      
+
       Administrar Artículos
-    
+
     </h1>
 
     <ol class="breadcrumb">
-      
+
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
-      
+
       <li class="active">Administrar artículos</li>
-    
+
     </ol>
 
   </section>
@@ -23,9 +23,9 @@
     <div class="box">
 
       <div class="box-header with-border">
-  
+
         <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarArticulo">
-          
+
           Agregar artículos
 
         </button>
@@ -34,46 +34,37 @@
 
       <div class="box-body">
 
-        <input type="hidden" value="<?=$_SESSION["perfil"];?>" id="perfilOculto"> 
+        <input type="hidden" value="<?= $_SESSION["perfil"]; ?>" id="perfilOculto">
 
-       <table class="table table-bordered table-striped dt-responsive tablaArticulos" width="100%">
-         
-        <thead>
+        <table class="table table-bordered table-striped dt-responsive tablaArticulos" width="100%">
 
-          <tr>
-           
-           <th style="width:10px">#</th>
-           <th>Imagen</th>
-           <th>Artículo</th>
-           <th>Marca</th>
-           <th>Modelo</th>
-           <th>Nombre</th>
-           <th>Color</th>
-           <th>Talla</th>
-           <th>Tipo</th>
-           <th>Estado</th>
-           <th>Stock</th>
-           <th>Acciones</th>
+          <thead>
 
-         </tr>
+            <tr>
 
-          <!-- <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Extn.</th>
-            <th>Start date</th>
-            <th>Salary</th>
-          </tr> -->
+              <th style="width:10px">#</th>
+              <th>Imagen</th>
+              <th>Artículo</th>
+              <th>Marca</th>
+              <th>Modelo</th>
+              <th>Nombre</th>
+              <th>Color</th>
+              <th>Talla</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+              <th>Stock</th>
+              <th>Tarjeta</th>
+              <th>Acciones</th>
 
-        </thead>
+            </tr>
 
-        <tbody>
+          </thead>
 
-        
-        </tbody>
+          <tbody>
 
-       </table>
+          </tbody>
+
+        </table>
 
       </div>
 
@@ -88,7 +79,7 @@ MODAL AGREGAR ARTICULO
 ======================================-->
 
 <div id="modalAgregarArticulo" class="modal fade" role="dialog">
-  
+
   <div class="modal-dialog">
 
     <div class="modal-content">
@@ -119,13 +110,13 @@ MODAL AGREGAR ARTICULO
             <!-- ENTRADA PARA SELECCIONAR CATEGORÍA -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
                 <select class="form-control input-lg" id="nuevaMarca" name="nuevaMarca" required>
-                  
+
                   <option value="">Seleccionar marca</option>
 
                   <?php
@@ -136,12 +127,12 @@ MODAL AGREGAR ARTICULO
                   $marcas = ControladorMarcas::ctrMostrarMarcas($item, $valor);
 
                   foreach ($marcas as $key => $value) {
-                    
-                    echo '<option value="'.$value["id"].'">'.$value["marca"].'</option>';
+
+                    echo '<option value="' . $value["id"] . '">' . $value["marca"] . '</option>';
                   }
 
                   ?>
-  
+
                 </select>
 
               </div>
@@ -151,10 +142,10 @@ MODAL AGREGAR ARTICULO
             <!-- ENTRADA PARA EL MODELO -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
 
                 <input type="text" class="form-control input-lg" id="nuevoModelo" name="nuevoModelo" placeholder="Ingresar modelo" required>
 
@@ -165,27 +156,27 @@ MODAL AGREGAR ARTICULO
             <!-- ENTRADA PARA LA DESCRIPCIÓN -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
 
                 <input type="text" class="form-control input-lg" id="nuevaDescripcion" name="nuevaDescripcion" placeholder="Ingresar nombre" required>
 
               </div>
 
-            </div>            
+            </div>
 
             <!-- ENTRADA PARA SELECCIONAR COLOR -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-dashboard"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-dashboard"></i></span>
 
                 <select class="form-control input-lg" id="nuevoColor" name="nuevoColor" required>
-                  
+
                   <option value="">Seleccionar color</option>
 
                   <?php
@@ -196,27 +187,27 @@ MODAL AGREGAR ARTICULO
                   $colores = ControladorColores::ctrMostrarColores($item, $valor);
 
                   foreach ($colores as $key => $value) {
-                    
-                    echo '<option value="'.$value["cod_color"].'">'.$value["cod_color"].' - '.$value["nom_color"].'</option>';
+
+                    echo '<option value="' . $value["cod_color"] . '">' . $value["cod_color"] . ' - ' . $value["nom_color"] . '</option>';
                   }
 
                   ?>
-  
+
                 </select>
 
               </div>
 
             </div>
-            
+
             <input type="hidden" name="color" id="color">
 
             <!-- ENTRADA PARA TALLAS -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-tag"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-tag"></i></span>
 
                 <select class="form-control input-lg" id="nuevaTalla" name="nuevaTalla" required>
 
@@ -268,20 +259,20 @@ MODAL AGREGAR ARTICULO
 
               </div>
 
-            </div>       
+            </div>
 
             <input type="hidden" name="talla" id="talla">
 
             <!-- ENTRADA PARA TIPO -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-text-height"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-text-height"></i></span>
 
                 <select class="form-control input-lg" id="nuevoTipo" name="nuevoTipo">
-                  
+
                   <option value="">Selecionar tipo</option>
 
                   <option value="BRASIER">BRASIER</option>
@@ -304,15 +295,15 @@ MODAL AGREGAR ARTICULO
 
               </div>
 
-            </div>                      
+            </div>
 
             <!-- ENTRADA PARA EL CÓDIGO -->
-            
+
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-code"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-code"></i></span>
 
                 <input type="text" class="form-control input-lg" id="nuevoCodigo" name="nuevoCodigo" placeholder="Ingresar código" readonly required>
 
@@ -322,8 +313,8 @@ MODAL AGREGAR ARTICULO
 
             <!-- ENTRADA PARA SUBIR FOTO -->
 
-             <div class="form-group">
-              
+            <div class="form-group">
+
               <div class="panel">SUBIR IMAGEN</div>
 
               <input type="file" class="nuevaImagen" name="nuevaImagen">
@@ -353,10 +344,10 @@ MODAL AGREGAR ARTICULO
       </form>
       <?php
 
-        $crearArticulo = new ControladorArticulos();
-        $crearArticulo -> ctrCrearArticulo();
+      $crearArticulo = new ControladorArticulos();
+      $crearArticulo->ctrCrearArticulo();
 
-      ?>  
+      ?>
 
 
     </div>
@@ -371,7 +362,7 @@ MODAL EDITAR ARTICULO
 ======================================-->
 
 <div id="modalEditarArticulo" class="modal fade" role="dialog">
-  
+
   <div class="modal-dialog">
 
     <div class="modal-content">
@@ -402,15 +393,15 @@ MODAL EDITAR ARTICULO
             <!-- ENTRADA PARA SELECCIONAR MARCA -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
                 <select class="form-control input-lg" name="editarMarca" required readonly>
-                  
+
                   <option id="editarMarca"></option>
- 
+
                 </select>
 
               </div>
@@ -420,10 +411,10 @@ MODAL EDITAR ARTICULO
             <!-- ENTRADA PARA EL MODELO -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
 
                 <input type="text" class="form-control input-lg" id="editarModelo" name="editarModelo" placeholder="Ingresar modelo" required readonly>
 
@@ -434,47 +425,47 @@ MODAL EDITAR ARTICULO
             <!-- ENTRADA PARA LA DESCRIPCIÓN -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
 
                 <input type="text" class="form-control input-lg" id="editarDescripcion" name="editarDescripcion" placeholder="Ingresar nombre" required>
 
               </div>
 
-            </div>            
+            </div>
 
             <!-- ENTRADA PARA SELECCIONAR COLOR -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-dashboard"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-dashboard"></i></span>
 
                 <select class="form-control input-lg" name="editarColor" required readonly>
-                  
+
                   <option id="editarColor"></option>
 
-  
+
                 </select>
 
               </div>
 
             </div>
-            
-            
+
+
 
             <!-- ENTRADA PARA TALLAS -->
 
             <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-tag"></i></span> 
 
-                <select class="form-control input-lg"  name="editarTalla" required readonly>
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+
+                <select class="form-control input-lg" name="editarTalla" required readonly>
 
                   <option id="editarTalla"></option>
 
@@ -482,33 +473,33 @@ MODAL EDITAR ARTICULO
 
               </div>
 
-            </div>       
+            </div>
 
             <!-- ENTRADA PARA TIPO -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-text-height"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-text-height"></i></span>
 
                 <select class="form-control input-lg" name="editarTipo" required readonly>
-                  
+
                   <option id="editarTipo"></option>
 
                 </select>
 
               </div>
 
-            </div>                      
+            </div>
 
             <!-- ENTRADA PARA EL CÓDIGO -->
-            
+
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-code"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-code"></i></span>
 
                 <input type="text" class="form-control input-lg" id="editarCodigo" name="editarCodigo" placeholder="Ingresar código" readonly required>
 
@@ -518,8 +509,8 @@ MODAL EDITAR ARTICULO
 
             <!-- ENTRADA PARA SUBIR FOTO -->
 
-             <div class="form-group">
-              
+            <div class="form-group">
+
               <div class="panel">SUBIR IMAGEN</div>
 
               <input type="file" class="nuevaImagen" name="editarImagen">
@@ -543,36 +534,32 @@ MODAL EDITAR ARTICULO
 
         <?php
 
-          if($_SESSION["perfil"] == "Logistica"){
+        if ($_SESSION["perfil"] == "Logistica") {
 
-            echo '<div class="modal-footer">
+          echo '<div class="modal-footer">
 
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
           
                   </div>';
+        } else {
 
-          }else{
-
-            echo '<div class="modal-footer">
+          echo '<div class="modal-footer">
 
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
           
                     <button type="submit" class="btn btn-primary">Guardar artículo</button>
   
                   </div>';
-
-
-
-          }
+        }
         ?>
 
       </form>
       <?php
 
-        $editarArticulo = new ControladorArticulos();
-        $editarArticulo -> ctrEditarArticulo();
+      $editarArticulo = new ControladorArticulos();
+      $editarArticulo->ctrEditarArticulo();
 
-      ?>    
+      ?>
     </div>
 
   </div>
@@ -582,9 +569,7 @@ MODAL EDITAR ARTICULO
 
 <?php
 
-  $eliminarArticulo = new ControladorArticulos();
-  $eliminarArticulo -> ctrEliminarArticulo();
+$eliminarArticulo = new ControladorArticulos();
+$eliminarArticulo->ctrEliminarArticulo();
 
-?> 
-
-
+?>

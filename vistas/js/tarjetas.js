@@ -144,7 +144,7 @@ $(".tablaMateriaPrimaTarjetas tbody").on("click", "button.agregarMP", function (
 		
 				'<div class="col-xs-2">' +
 		
-					'<input type="number" class="form-control input-sm nuevaCantidadProducto" name="nuevaCantidadProducto" value="1" stock="' + stock + '" nuevoStock="' + Number(stock - 1) + '" required>' +
+					'<input type="number" class="form-control input-sm nuevaCantidadProducto" name="nuevaCantidadProducto" value="1" stock="' + stock + '" nuevoStock="' + Number(stock - 1) + '" step="any" required>' +
 		
 				'</div>' +
 		

@@ -45,11 +45,32 @@
 
         echo ' %</button>
 
+                  <a href="vistas/reportes_excel/rpt_urgencias.php" class="btn btn-info">
+
+                    <i class="fa fa-file-excel-o"></i> URGENCIAS
+                  
+                  </a>
+
                </div>';
+
+      }else{
+
+        echo '<div class="box-header with-border">
+
+                <a href="vistas/reportes_excel/rpt_urgencias.php" class="btn btn-info">
+
+                  <i class="fa fa-file-excel-o"></i> URGENCIAS
+                
+                </a>
+  
+            </div>';
 
       }
 
       ?>
+
+
+
 
       <div class="box-body">
 

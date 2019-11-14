@@ -432,7 +432,7 @@ class ModeloMateriaPrima{
 	*/
 	static public function mdlVisualizarUrgenciasAMPDetalleART($tabla, $valor){
 
-		$sql="SELECT 
+		$sql="SELECT DISTINCT
 						a.articulo,
 						a.modelo,
 						a.nombre,

@@ -42,13 +42,12 @@ class TablaOrdenCorte{
             }else{
 
                 $estadoOC = "<span style='font-size:85%' class='label label-primary'>Parcial</span>";
-
+                
             }
             /* 
             todo: orden de corte
             */
              $codigo = "<b>OC - ".$ordencorte[$i]["codigo"]."</b>";   
-
 
             /* 
             todo: url

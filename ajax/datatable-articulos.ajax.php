@@ -48,21 +48,40 @@ class TablaArticulos{
         ESTADO
         =============================================*/ 
 
-        if($articulos[$i]["estado"] == "DESCONTINUADO"){
+        if($articulos[$i]["estado"] == "Descontinuado"){
 
             /* $estado = "<button class='btn btn-danger btn-xs btnActivar'>".$articulos[$i]["id"]."</button>"; */
             $estado = "<button class='btn btn-danger btn-xs btnActivar' idArticulo='".$articulos[$i]["id"]."' estadoArticulo='Activo'>Inactivo</button>";
 
-        }else if($articulos[$i]["estado"] == "CAMPAÑAD"){
+        }else if($articulos[$i]["estado"] == "CampañaD"){
 
-            $estado = "<button class='btn btn-warning btn-xs'>CAMPAÑAD</button>";
+            $estado = "<button class='btn btn-warning btn-xs'>CampañaD</button>";
 
         }else{
 
             /* $estado = "<button class='btn btn-success btn-xs btnActivar'>".$articulos[$i]["id"]."</button>"; */
-            $estado = "<button class='btn btn-success btn-xs btnActivar' idArticulo='".$articulos[$i]["id"]."' estadoArticulo='DESCONTINUADO'>Activo</button>";
+            $estado = "<button class='btn btn-success btn-xs btnActivar' idArticulo='".$articulos[$i]["id"]."' estadoArticulo='Descontinuado'>Activo</button>";
 
         }
+
+        /*=============================================
+        TARJETA
+        =============================================*/ 
+
+        if($articulos[$i]["tarjeta"] == "Pendiente"){
+
+
+            $tarjeta = "<span style='font-size:85%' class='label label-danger'>Pendiente</span>";
+
+        }elseif($articulos[$i]["tarjeta"] == "No Necesario"){
+
+            $tarjeta = "<span style='font-size:85%' class='label label-default'>No Necesario</span>";
+
+        }else{
+
+            $tarjeta = "<span style='font-size:85%' class='label label-info'>Listo</span>";
+
+        }        
 
 
         /*=============================================
@@ -94,6 +113,7 @@ class TablaArticulos{
             "'.$articulos[$i]["tipo"].'",
             "'.$estado.'",
             "'.$stock.'",
+            "'.$tarjeta.'",
             "'.$botones.'"
             ],';        
             }
