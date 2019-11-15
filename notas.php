@@ -13,6 +13,7 @@ todo: TARJETAS
 
 
 todo: ESCRITORIO
+* cambiar imagen del login - ok
 * hacer escritorio - cajas superiores - ok
 * hacer escritorio - cajas inferiores - ok
 * hacer escritorio - graficos. ok

@@ -4,19 +4,19 @@
 
   <div class="login-logo">
 
-    <img src="vistas/img/plantilla/logo-blanco-bloque.png" class="img-responsive" style="padding:30px 100px 0px 100px">
+    <img src="vistas/img/plantilla/jackyform_letras.png" class="img-responsive" style="padding:0px 0px 0px 0px">
 
   </div>
 
   <div class="login-box-body">
 
-    <p class="login-box-msg">Ingresar al sistema</p>
+    <b><p class="login-box-msg">Ingresar al sistema</p></b>
 
     <form method="post">
 
       <div class="form-group has-feedback">
 
-        <input type="text" class="form-control" placeholder="Usuario" name="ingUsuario" required>
+        <input type="text" class="form-control" placeholder="Usuario" name="ingUsuario" autofocus required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
 
       </div>

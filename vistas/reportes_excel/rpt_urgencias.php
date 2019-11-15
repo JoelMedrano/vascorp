@@ -300,6 +300,7 @@ $objPHPExcel->getActiveSheet()->getPageMargins()->setRight($marginV);
 
 # Establecer cabecera de cada Hoja
 $objPHPExcel->getActiveSheet()->getPageSetup()->setRowsToRepeatAtTopByStartAndEnd(1, 8);
+$objPHPExcel->getActiveSheet()->freezePaneByColumnAndRow(0,9);
 
 
 # Incluir una imagen
