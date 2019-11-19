@@ -97,7 +97,7 @@ $(".tablas").on("click", ".btnEditarUsuario", function(){
 /*=============================================
 ACTIVAR USUARIO
 =============================================*/
-$(".tablas").on("click", ".btnActivar", function(){
+$(".tablas").on("click", ".btnActivarUS", function(){
 
 	var idUsuario = $(this).attr("idUsuario");
 	var estadoUsuario = $(this).attr("estadoUsuario");

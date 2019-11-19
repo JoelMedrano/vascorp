@@ -8,7 +8,7 @@ todo: TARJETAS
 * asignar tejido principal - ok
 * visualizar detale de tarjeta - ok
 * calcular cantidad que necesita cierta cantidad de prendas - ok
-! sacar  reporte en excel
+! sacar reporte en excel
 // se puede poner la cantidad de prendas que rinden por kilo? en tarjeta.
 
 
@@ -42,11 +42,12 @@ todo: PRODUCCION
 * ver materia prima faltante - ok
 * hacer tabla urgencias mp - ok
 * sacar reporte de orden de corte a excel - ok
-* sacar reporte de urgencias.
+* sacar reporte de urgencias - ok.
 
 todo: OTROS
 * etiquetar codigo - ok
 * asginar roles - MANTENER SIEMPRE ACTIVO
+* notificaar el porque de la anulacion - YUDY
 
 todo: BACKEND SISTEMAS
 
@@ -55,28 +56,39 @@ todo: BACKEND SISTEMAS
 * hacer backup automatico - ok
 * listar backups disponibles - ok
 
+todo: TICKETS:
+
+* Permitir cambiar imagen de usuario y contraseña - ok
+* hacer bandeja de entrada
+
 todo: ROLES
 * SISTEMAS
-    - TODOS LOS MODULOS / TODOS LOS BOTONES - CONTROL TOTAL
+- TODOS LOS MODULOS / TODOS LOS BOTONES - CONTROL TOTAL
 * SUPERVISORES
-    - QUITAR LOS MODULOS DE PRUEBA
+- QUITAR LOS MODULOS DE PRUEBA
 * PRODUCCION
-    - ESCRITORIO - UNIDADES
-    - MODULOS: MAESTROS - TARJETAS
-    - QUITAR BOTONES ELIMINAR  DE TODO MENOS DE ARTICULOS
+- ESCRITORIO - UNIDADES
+- MODULOS: MAESTROS - TARJETAS
+- QUITAR BOTONES ELIMINAR DE TODO MENOS DE ARTICULOS
 * LOGISTICA
-    - ESCRITORIO - UNIDADES
-    - MODULOS: MAESTROS - TARJETAS - QUITAR CREAR TARJETAS
-    - QUITAR BOTONES ELIMINAR  DE TODO
+- ESCRITORIO - UNIDADES
+- MODULOS: MAESTROS - TARJETAS - QUITAR CREAR TARJETAS
+- QUITAR BOTONES ELIMINAR DE TODO
 * DISEÑO
 - ESCRITORIO - UNIDADES
-    - MODULOS: MAESTROS - TARJETAS
-    - QUITAR BOTONES ELIMINAR  DE TODO MENOS DE TARJETAS
+- MODULOS: MAESTROS - TARJETAS
+- QUITAR BOTONES ELIMINAR DE TODO MENOS DE TARJETAS
 * COSTOS
-    - ESCRITORIO - UNIDADES
-    - MODULOS: MAESTROS - TARJETAS
-    - QUITAR BOTONES ELIMINAR  DE TODO MENOS DE TARJETAS
+- ESCRITORIO - UNIDADES
+- MODULOS: MAESTROS - TARJETAS
+- QUITAR BOTONES ELIMINAR DE TODO MENOS DE TARJETAS
 * VENTAS
 
 */
 
+<a href="compose.html" class="btn btn-primary btn-block margin-bottom">Compose</a>
+
+<div class="col-md-6">
+   
+</div>
+<!-- /.col -->

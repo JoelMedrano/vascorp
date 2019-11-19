@@ -16,11 +16,13 @@
             </li>
 
             <?php
-            
-                if( $_SESSION["perfil"] == "Supervisores" ||
-                    $_SESSION["perfil"] == "Sistemas"){
 
-                        echo '<li class="active">
+            if (
+                $_SESSION["perfil"] == "Supervisores" ||
+                $_SESSION["perfil"] == "Sistemas"
+            ) {
+
+                echo '<li class="active">
 
                                 <a href="inicio-gerencia">
                 
@@ -30,17 +32,15 @@
                                 </a>
                 
                             </li>';
-
-
-                }
+            }
 
             ?>
-            
+
             <?php
 
-                if($_SESSION["perfil"] == "Sistemas"){
+            if ($_SESSION["perfil"] == "Sistemas") {
 
-                    echo '<li>
+                echo '<li>
 
                             <a href="usuarios">
             
@@ -108,22 +108,23 @@
             
                         </li>
             
-                        <!-- fin maestros -->   ';
-
-                }
+                        <!-- fin backend -->   ';
+            }
 
             ?>
 
             <?php
-            
-                if( $_SESSION["perfil"] == "Sistemas" || 
-                    $_SESSION["perfil"] == "Supervisores" || 
-                    $_SESSION["perfil"] == "Produccion" || 
-                    $_SESSION["perfil"] == "Logistica" || 
-                    $_SESSION["perfil"] == "Udp" || 
-                    $_SESSION["perfil"] == "Costos"){
 
-                        echo '<!-- maestros Joel -->
+            if (
+                $_SESSION["perfil"] == "Sistemas" ||
+                $_SESSION["perfil"] == "Supervisores" ||
+                $_SESSION["perfil"] == "Produccion" ||
+                $_SESSION["perfil"] == "Logistica" ||
+                $_SESSION["perfil"] == "Udp" ||
+                $_SESSION["perfil"] == "Costos"
+            ) {
+
+                echo '<!-- maestros Joel -->
 
                         <li class="treeview">
             
@@ -192,20 +193,21 @@
                         </li>
             
                         <!-- fin maestros -->';
+            }
 
-                }
-            
             ?>
 
             <?php
 
-                if( $_SESSION["perfil"] == "Sistemas" || 
-                    $_SESSION["perfil"] == "Supervisores" || 
-                    $_SESSION["perfil"] == "Produccion" || 
-                    $_SESSION["perfil"] == "Logistica" || 
-                    $_SESSION["perfil"] == "Costos"){
+            if (
+                $_SESSION["perfil"] == "Sistemas" ||
+                $_SESSION["perfil"] == "Supervisores" ||
+                $_SESSION["perfil"] == "Produccion" ||
+                $_SESSION["perfil"] == "Logistica" ||
+                $_SESSION["perfil"] == "Costos"
+            ) {
 
-                        echo '<li class="treeview">
+                echo '<li class="treeview">
 
                                     <a href="#">
                     
@@ -217,13 +219,15 @@
                                     </a>
                     
                                     <ul class="treeview-menu">';
-                    
-                                        if( $_SESSION["perfil"] == "Sistemas" || 
-                                            $_SESSION["perfil"] == "Supervisores" || 
-                                            $_SESSION["perfil"] == "Produccion" || 
-                                            $_SESSION["perfil"] == "Costos"){
 
-                                                echo '<li class="treeview">
+                if (
+                    $_SESSION["perfil"] == "Sistemas" ||
+                    $_SESSION["perfil"] == "Supervisores" ||
+                    $_SESSION["perfil"] == "Produccion" ||
+                    $_SESSION["perfil"] == "Costos"
+                ) {
+
+                    echo '<li class="treeview">
                                                         <a href="#"><i class="fa fa-scissors"></i> Ordenes de Corte
                                                             <span class="pull-right-container">
                                                                 <i class="fa fa-angle-left pull-right"></i>
@@ -246,11 +250,9 @@
                                 
                                                         </ul>
                                                     </li>';
+                }
 
-
-                                        }
-                                       
-                                        echo '<li class="treeview">
+                echo '<li class="treeview">
                     
                                             <a href="#"><i class="fa fa-file-o"></i> Reportes
                                                 <span class="pull-right-container">
@@ -278,25 +280,24 @@
                                     </ul>
                     
                                 </li>';
+            }
 
 
 
-                    }
-            
-            
-            
             ?>
 
             <?php
-            
-                if( $_SESSION["perfil"] == "Sistemas" || 
-                    $_SESSION["perfil"] == "Supervisores" || 
-                    $_SESSION["perfil"] == "Produccion" || 
-                    $_SESSION["perfil"] == "Logistica" || 
-                    $_SESSION["perfil"] == "Udp" || 
-                    $_SESSION["perfil"] == "Costos"){
 
-                        echo '<!-- inicio tarjetas -->
+            if (
+                $_SESSION["perfil"] == "Sistemas" ||
+                $_SESSION["perfil"] == "Supervisores" ||
+                $_SESSION["perfil"] == "Produccion" ||
+                $_SESSION["perfil"] == "Logistica" ||
+                $_SESSION["perfil"] == "Udp" ||
+                $_SESSION["perfil"] == "Costos"
+            ) {
+
+                echo '<!-- inicio tarjetas -->
 
                         <li class="treeview">
             
@@ -327,13 +328,15 @@
             
                                 </li>';
 
-                                if( $_SESSION["perfil"] == "Sistemas" || 
-                                    $_SESSION["perfil"] == "Supervisores" || 
-                                    $_SESSION["perfil"] == "Produccion" || 
-                                    $_SESSION["perfil"] == "Udp" || 
-                                    $_SESSION["perfil"] == "Costos"){
+                if (
+                    $_SESSION["perfil"] == "Sistemas" ||
+                    $_SESSION["perfil"] == "Supervisores" ||
+                    $_SESSION["perfil"] == "Produccion" ||
+                    $_SESSION["perfil"] == "Udp" ||
+                    $_SESSION["perfil"] == "Costos"
+                ) {
 
-                                        echo '<li>
+                    echo '<li>
             
                                                 <a href="crear-tarjeta">
                         
@@ -343,24 +346,24 @@
                                                 </a>
                         
                                             </li>';
-                                }
-                                
-                            echo '</ul>
+                }
+
+                echo '</ul>
             
                         </li>
             
                         <!-- fin tarjetas -->';
+            }
 
-
-                }
-            
             ?>
 
             <?php
-            
-            if( $_SESSION["perfil"] == "Sistemas" ||
-                $_SESSION["perfil"] == "Administrador")
-            
+
+            if (
+                $_SESSION["perfil"] == "Sistemas" ||
+                $_SESSION["perfil"] == "Administrador"
+            )
+
                 echo '  <li>
 
                             <a href="categorias">
@@ -448,10 +451,58 @@
                             </ul>
 
                         </li>';
-            
+
             ?>
 
-     
+            <!-- TICKET Joel -->
+
+            <li class="treeview">
+
+                <a href="#">
+
+                    <i class="fa fa-inbox text-blue"></i>
+
+                    <span>Ticket</span>
+
+                    <span class="pull-right-container">
+
+                        <i class="fa fa-angle-left pull-right"></i>
+
+                    </span>
+
+                </a>
+
+                <ul class="treeview-menu">
+
+                    <li>
+
+                        <a href="contactos">
+
+                            <i class="fa fa-users"></i>
+                            <span>Contactos</span>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="mailbox">
+
+                            <i class="fa fa-envelope-o"></i>
+                            <span>Mailbox</span>
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </li>
+
+            <!-- fin maestros -->
+
+
 
         </ul>
 
