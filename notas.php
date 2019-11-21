@@ -59,7 +59,12 @@ todo: BACKEND SISTEMAS
 todo: TICKETS:
 
 * Permitir cambiar imagen de usuario y contraseña - ok
-* hacer bandeja de entrada
+* hacer bandeja de entrada - ok
+
+todo: HACER MODULO DE VENTAS PARA MEDIAS
+* empezar con clientes - ok
+* modulo de pedidos
+
 
 todo: ROLES
 * SISTEMAS
@@ -86,9 +91,3 @@ todo: ROLES
 
 */
 
-<a href="compose.html" class="btn btn-primary btn-block margin-bottom">Compose</a>
-
-<div class="col-md-6">
-   
-</div>
-<!-- /.col -->

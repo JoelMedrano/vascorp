@@ -9,12 +9,12 @@ class AjaxClientes{
 	EDITAR CLIENTE
 	=============================================*/	
 
-	public $idCliente;
+	public $codigo;
 
 	public function ajaxEditarCliente(){
 
-		$item = "id";
-		$valor = $this->idCliente;
+		$item = "codigo";
+		$valor = $this->codigo;
 
 		$respuesta = ControladorClientes::ctrMostrarClientes($item, $valor);
 
@@ -29,10 +29,10 @@ class AjaxClientes{
 EDITAR CLIENTE
 =============================================*/	
 
-if(isset($_POST["idCliente"])){
+if(isset($_POST["codigo"])){
 
 	$cliente = new AjaxClientes();
-	$cliente -> idCliente = $_POST["idCliente"];
+	$cliente -> codigo = $_POST["codigo"];
 	$cliente -> ajaxEditarCliente();
 
 }

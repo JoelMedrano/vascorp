@@ -1,19 +1,19 @@
 <div class="content-wrapper">
 
   <section class="content-header">
-    
+
     <h1>
-      
+
       Administrar Tarjetas
-    
+
     </h1>
 
     <ol class="breadcrumb">
-      
+
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
-      
+
       <li class="active">Administrar Tarjetas</li>
-    
+
     </ol>
 
   </section>
@@ -22,15 +22,17 @@
 
     <div class="box">
 
-    <?php
-    
-    if( $_SESSION["perfil"] == "Sistemas" || 
-        $_SESSION["perfil"] == "Supervisores" || 
-        $_SESSION["perfil"] == "Produccion" || 
-        $_SESSION["perfil"] == "Udp" || 
-        $_SESSION["perfil"] == "Costos"){
+      <?php
 
-          echo '<div class="box-header with-border">
+      if (
+        $_SESSION["perfil"] == "Sistemas" ||
+        $_SESSION["perfil"] == "Supervisores" ||
+        $_SESSION["perfil"] == "Produccion" ||
+        $_SESSION["perfil"] == "Udp" ||
+        $_SESSION["perfil"] == "Costos"
+      ) {
+
+        echo '<div class="box-header with-border">
   
                   <a href="crear-tarjeta">
           
@@ -43,39 +45,38 @@
                   </a>
           
                 </div>';
+      }
 
-    }
-    
-    ?>
+      ?>
 
       <div class="box-body">
 
-        <input type="hidden" value="<?=$_SESSION["perfil"];?>" id="perfilOculto">
-        
-       <table class="table table-bordered table-striped dt-responsive tablaTarjetas">
-         
-        <thead>
-         
-         <tr>
-           
+        <input type="hidden" value="<?= $_SESSION["perfil"]; ?>" id="perfilOculto">
 
-           <th>Código Interno</th>
-           <th>Estado Tarjeta</th>
-           <th style="width:50px">Fecha</th>
-           <th>Total</th> 
-           <th>Responsable</th>
-           <th>Artículo</th>
-           <th>Modelo</th>
-           <th>Descripcion</th>
-           <th>Color-Talla</th>
-           <th>Estado Artículo</th>
-           <th style="width:150px">Acciones</th>
+        <table class="table table-bordered table-striped dt-responsive tablaTarjetas">
 
-         </tr> 
+          <thead>
 
-        </thead>
+            <tr>
 
-       </table>
+
+              <th>Código Interno</th>
+              <th>Estado Tarjeta</th>
+              <th style="width:50px">Fecha</th>
+              <th>Total</th>
+              <th>Responsable</th>
+              <th>Artículo</th>
+              <th>Modelo</th>
+              <th>Descripcion</th>
+              <th>Color-Talla</th>
+              <th>Estado Artículo</th>
+              <th style="width:150px">Acciones</th>
+
+            </tr>
+
+          </thead>
+
+        </table>
 
       </div>
 
@@ -90,7 +91,7 @@ MODAL VISUALIZAR INFORMACION
 ======================================-->
 
 <div id="modalVisualizarTarjeta" class="modal fade" role="dialog">
-  
+
   <div class="modal-dialog" style="width: 70% !important;">
 
     <div class="modal-content">
@@ -118,14 +119,14 @@ MODAL VISUALIZAR INFORMACION
           <div class="box-body">
 
             <!-- ENTRADA PARA CODIGO DEL ARTICULO-->
-            
+
             <div class="form-group col-lg-4">
-              
+
               <label>Articulo</label>
 
               <div class="input-group">
 
-              <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span>
 
                 <input type="text" class="form-control input-sm" name="articulo" id="articulo" required readonly>
 
@@ -134,115 +135,115 @@ MODAL VISUALIZAR INFORMACION
             </div>
 
             <!-- ENTRADA PARA LA DESCRIPCION-->
-            
+
             <div class="form-group col-lg-8">
 
               <label>Descripción</label>
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span>
 
                 <input type="text" class="form-control input-sm" name="descripcion" id="descripcion" required readonly>
 
               </div>
 
-            </div>            
+            </div>
 
             <!-- ENTRADA PARA LA FECHA-->
-            
+
             <div class="form-group col-lg-4">
 
               <label>Creación</label>
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span>
 
                 <input type="text" class="form-control input-sm" name="fecha" id="fecha" required readonly>
 
               </div>
 
-            </div>      
-            
+            </div>
+
             <!-- ENTRADA PARA EL COSTO-->
-            
+
             <div class="form-group col-lg-4">
 
               <label>Costo x Unidad S/</label>
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span>
 
                 <input type="text" class="form-control input-sm" name="costo" id="costo" required readonly>
 
               </div>
 
             </div>
-            
+
             <!-- ENTRADA PARA EL ESTADO-->
-            
+
             <div class="form-group col-lg-4">
 
               <label>Estado</label>
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span>
 
                 <input type="text" class="form-control input-sm" name="estado" id="estado" required readonly>
 
               </div>
 
-            </div>     
+            </div>
 
             <!-- ENTRADA PARA EL TEJIDO PRINCIPAL-->
-            
+
             <div class="form-group col-lg-8">
 
               <label>Tejido Principal</label>
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span>
 
                 <input type="text" class="form-control input-sm" name="simulacion" id="tejidoPrincipal" required readonly>
 
               </div>
 
             </div>
-            
+
             <!-- ENTRADA PARA LA SIMULACION-->
-            
+
             <div class="form-group col-lg-2">
 
               <label>Simulación</label>
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-caret-square-o-right"></i></span>
 
                 <input type="number" class="form-control input-sm simulacion" min="0" value="0" required>
 
               </div>
 
             </div>
-            
+
             <!-- ENTRADA PARA EL BOTON -->
-            
+
             <div class="form-group col-lg-2">
 
               <br>
-              
+
               <span type="button" class="btn btn-success btnCalcular"><i class="fa fa-refresh"></i> Calcular</span>
-              
+
             </div>
 
             <!-- TABLA DE DETALLES -->
 
             <div class="form-group col-lg-12">
-            <label>TABLA DETALLES</label>
+              <label>TABLA DETALLES</label>
             </div>
 
             <div class="box-body">

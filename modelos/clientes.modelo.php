@@ -40,15 +40,26 @@ class ModeloClientes{
 
 	static public function mdlIngresarCliente($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, documento, email, telefono, direccion, fecha_nacimiento) VALUES (:nombre, :documento, :email, :telefono, :direccion, :fecha_nacimiento)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, nombre, tipo_documento, documento, tipo_persona, ape_paterno, ape_materno, nombres, direccion, ubigeo, telefono, telefono2, email, contacto, vendedor, grupo, lista_precios) VALUES (:codigoCliente, :nombre, :tipo_documento, :documento, :tipo_persona, :ape_paterno, :ape_materno, :nombres, :direccion, :ubigeo, :telefono, :telefono2, :email, :contacto, :vendedor, :grupo, :lista_precios)");
 
+		$stmt->bindParam(":codigoCliente", $datos["codigoCliente"], PDO::PARAM_STR);
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-		$stmt->bindParam(":documento", $datos["documento"], PDO::PARAM_INT);
-		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
-		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
+		$stmt->bindParam(":tipo_documento", $datos["tipo_documento"], PDO::PARAM_STR);
+		$stmt->bindParam(":documento", $datos["documento"], PDO::PARAM_STR);
+		$stmt->bindParam(":tipo_persona", $datos["tipo_persona"], PDO::PARAM_STR);
+		$stmt->bindParam(":ape_paterno", $datos["ape_paterno"], PDO::PARAM_STR);
+		$stmt->bindParam(":ape_materno", $datos["ape_materno"], PDO::PARAM_STR);
+		$stmt->bindParam(":nombres", $datos["nombres"], PDO::PARAM_STR);
 		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
-		$stmt->bindParam(":fecha_nacimiento", $datos["fecha_nacimiento"], PDO::PARAM_STR);
-
+		$stmt->bindParam(":ubigeo", $datos["ubigeo"], PDO::PARAM_STR);
+		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
+		$stmt->bindParam(":telefono2", $datos["telefono2"], PDO::PARAM_STR);
+		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
+		$stmt->bindParam(":contacto", $datos["contacto"], PDO::PARAM_STR);
+		$stmt->bindParam(":vendedor", $datos["vendedor"], PDO::PARAM_STR);
+		$stmt->bindParam(":grupo", $datos["grupo"], PDO::PARAM_STR);
+		$stmt->bindParam(":lista_precios", $datos["lista_precios"], PDO::PARAM_STR);
+		
 		if($stmt->execute()){
 
 			return "ok";
@@ -102,15 +113,26 @@ class ModeloClientes{
 
 	static public function mdlEditarCliente($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, documento = :documento, email = :email, telefono = :telefono, direccion = :direccion, fecha_nacimiento = :fecha_nacimiento WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, tipo_documento = :tipo_documento, documento = :documento, tipo_persona = :tipo_persona, ape_paterno = :ape_paterno, ape_materno = :ape_materno, nombres = :nombres, direccion = :direccion, ubigeo = :ubigeo, telefono = :telefono, telefono2 = :telefono2, email = :email, contacto = :contacto, vendedor = :vendedor, grupo = :grupo, lista_precios = :lista_precios WHERE codigo = :codigoCliente");
 
-		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+		$stmt->bindParam(":codigoCliente", $datos["codigoCliente"], PDO::PARAM_INT);
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-		$stmt->bindParam(":documento", $datos["documento"], PDO::PARAM_INT);
-		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
-		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
+		$stmt->bindParam(":tipo_documento", $datos["tipo_documento"], PDO::PARAM_STR);
+		$stmt->bindParam(":documento", $datos["documento"], PDO::PARAM_STR);
+		$stmt->bindParam(":tipo_persona", $datos["tipo_persona"], PDO::PARAM_STR);
+		$stmt->bindParam(":ape_paterno", $datos["ape_paterno"], PDO::PARAM_STR);
+		$stmt->bindParam(":ape_materno", $datos["ape_materno"], PDO::PARAM_STR);
+		$stmt->bindParam(":nombres", $datos["nombres"], PDO::PARAM_STR);
 		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
-		$stmt->bindParam(":fecha_nacimiento", $datos["fecha_nacimiento"], PDO::PARAM_STR);
+		$stmt->bindParam(":ubigeo", $datos["ubigeo"], PDO::PARAM_STR);
+		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
+		$stmt->bindParam(":telefono2", $datos["telefono2"], PDO::PARAM_STR);
+		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
+		$stmt->bindParam(":contacto", $datos["contacto"], PDO::PARAM_STR);
+		$stmt->bindParam(":vendedor", $datos["vendedor"], PDO::PARAM_INT);
+		$stmt->bindParam(":grupo", $datos["grupo"], PDO::PARAM_STR);
+		$stmt->bindParam(":lista_precios", $datos["lista_precios"], PDO::PARAM_STR);
+
 
 		if($stmt->execute()){
 
@@ -179,6 +201,38 @@ class ModeloClientes{
 
 		$stmt = null;
 
+	}
+	
+	/* 
+	* MOSTRAR UBIGEOS
+	*/	
+	static public function mdlMostrarUbigeos($tabla){
+
+		$sql="SELECT 
+						ub.codigo,
+						CONCAT(
+						ub.departamento,
+						' /',
+						ub.provincia,
+						' /',
+						ub.distrito
+						) AS ubigeo 
+					FROM
+						$tabla ub 
+					WHERE ub.codigo NOT IN ('000000')";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt=null;
+
+
 	}	
+
+
+
     
 }    
