@@ -139,21 +139,26 @@ class ModeloArticulos
 			return $stmt->fetch();
 		} else {
 
-			$stmt = Conexion::conectar()->prepare("SELECT 	a.id,
+			$stmt = Conexion::conectar()->prepare("SELECT 
+															a.id,
 															a.articulo,
-															CONCAT(
-																a.modelo,
-																' - ',
-																a.nombre,
-																' - ',
-																a.color,
-																' - ',
-																a.talla
+															CONCAT(@n := @n + 1, ' - ',
+															a.modelo,
+															' - ',
+															a.nombre,
+															' - ',
+															a.color,
+															' - ',
+															a.talla
 															) AS packing 
 														FROM
-															$tabla a 
-															WHERE a.tarjeta = 'no' 
-  															AND a.estado = 'activo'");
+															$tabla a,
+															(SELECT 
+															@n := 0) m 
+														WHERE a.tarjeta = 'no' 
+															AND a.estado = 'activo' 
+															AND a.cod_color NOT IN ('25') 
+															AND a.id_marca IN ('1','2','3')");
 
 			$stmt->execute();
 
@@ -429,8 +434,8 @@ class ModeloArticulos
 																SUM(m.cantidad) AS prod 
 															FROM
 																movimientosjf m 
-															WHERE YEAR(m.fecha) = '2019' 
-																AND MONTH(m.fecha) >= 7 
+															WHERE YEAR(m.fecha) = '2020' 
+																AND MONTH(m.fecha) >= 1 
 																AND tipo = 'E20' 
 															GROUP BY m.articulo) AS p 
 															ON a.articulo = p.articulo 
@@ -556,7 +561,7 @@ class ModeloArticulos
 							AND ocd.estac IN ('ABI', 'PAR') 
 							AND oc.estoco = '03' 
 							AND ocd.estoco = '03' 
-							AND YEAR(oc.fecemi) = '2019') AS oc 
+							AND YEAR(oc.fecemi) = '2020') AS oc 
 						ON dt.mat_pri = oc.codpro 
 					WHERE dt.articulo = $valor";
 
@@ -570,6 +575,183 @@ class ModeloArticulos
 
 	}
 
+	/* 
+	* MOSTRAR ARTICULOS PARA PEDIDOS
+	*/
+	static public function mdlListaArticulosPedidos($tabla){
+
+		$sql="SELECT 
+						a.modelo,
+						a.nombre,
+						c.cant_color,
+						t.cant_talla 
+					FROM
+						$tabla a 
+						LEFT JOIN marcasjf m 
+						ON a.id_marca = m.id 
+						LEFT JOIN 
+						(SELECT DISTINCT 
+							a.modelo,
+							COUNT(a.cod_color) AS cant_color 
+						FROM
+							articulojf a 
+						WHERE a.estado = 'activo' 
+						GROUP BY a.modelo,
+							a.cod_talla,
+							a.talla) AS c 
+						ON a.modelo = c.modelo 
+						LEFT JOIN 
+						(SELECT DISTINCT 
+							a.modelo,
+							COUNT(a.cod_talla) AS cant_talla 
+						FROM
+							articulojf a 
+						WHERE a.estado = 'activo' 
+						GROUP BY a.modelo,
+							a.cod_color,
+							a.color) AS t 
+						ON a.modelo = t.modelo 
+					WHERE m.venta = '1' 
+					GROUP BY a.modelo";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt=null;
+
+	}
+
+	/* 
+	* MOSTRAR COLORES
+	*/
+	static public function mdlVerColores($tabla, $item, $valor){
+
+		$sql="SELECT 
+						a1.modelo,
+						a1.cod_color,
+						a1.color,
+						SUM(
+						CASE
+							WHEN a1.cod_talla = '1' 
+							THEN '1' 
+							ELSE '0' 
+						END
+						) AS t1,
+						SUM(
+						CASE
+							WHEN a1.cod_talla = '2' 
+							THEN '1' 
+							ELSE '0' 
+						END
+						) AS t2,
+						SUM(
+						CASE
+							WHEN a1.cod_talla = '3' 
+							THEN '1' 
+							ELSE '0' 
+						END
+						) AS t3,
+						SUM(
+						CASE
+							WHEN a1.cod_talla = '4' 
+							THEN '1' 
+							ELSE '0' 
+						END
+						) AS t4,
+						SUM(
+						CASE
+							WHEN a1.cod_talla = '5' 
+							THEN '1' 
+							ELSE '0' 
+						END
+						) AS t5,
+						SUM(
+						CASE
+							WHEN a1.cod_talla = '6' 
+							THEN '1' 
+							ELSE '0' 
+						END
+						) AS t6,
+						SUM(
+						CASE
+							WHEN a1.cod_talla = '7' 
+							THEN '1' 
+							ELSE '0' 
+						END
+						) AS t7,
+						SUM(
+						CASE
+							WHEN a1.cod_talla = '8' 
+							THEN '1' 
+							ELSE '0' 
+						END
+						) AS t8 
+					FROM
+						$tabla a1 
+						LEFT JOIN articulojf a2 
+						ON a1.articulo = a2.articulo 
+					WHERE a1.$item = '$valor' 
+						AND a1.estado = 'activo' 
+					GROUP BY a1.modelo,
+						a1.cod_color,
+						a1.color";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt=null;
+
+	}	
+
+	/* 
+	* MOSTRAR ARTICULOS PARA PEDIDOS
+	*/
+	static public function mdlVerArticulos($tabla, $valor){
+
+		$sql="SELECT a.modelo,
+					a.articulo 
+				FROM
+					$tabla a 
+				WHERE a.modelo = '$valor'";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->execute();
+
+		return $stmt->fetchAll();
+
+		$stmt=null;
+
+	}
+
+	/* 
+	* MOSTRAR PRECIOS
+	*/
+	static public function mdlVerPrecios($tabla, $valor){
+
+		$sql="SELECT DISTINCT
+						a.modelo,
+						a.precio_venta
+						FROM
+						$tabla a 
+						WHERE a.modelo = '$valor'";
+
+		$stmt=Conexion::conectar()->prepare($sql);
+
+		$stmt->execute();
+
+		return $stmt->fetch();
+
+		$stmt=null;
+
+	}	
+	
 
 
 }

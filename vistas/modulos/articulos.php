@@ -342,6 +342,7 @@ MODAL AGREGAR ARTICULO
         </div>
 
       </form>
+      
       <?php
 
       $crearArticulo = new ControladorArticulos();

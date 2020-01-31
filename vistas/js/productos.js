@@ -4,7 +4,7 @@ CARGAR LA TABLA DINÁMICA DE PRODUCTOS
 
 /* $.ajax({
 
-	url: "ajax/datatable-productos.ajax.php",
+	url: "ajax/tabla-productos.ajax.php",
 	success:function(respuesta){
 		
 		console.log("respuesta", respuesta);
@@ -14,7 +14,7 @@ CARGAR LA TABLA DINÁMICA DE PRODUCTOS
 }) */
 
 $('.tablaProductos').DataTable( {
-    "ajax": "ajax/datatable-productos.ajax.php",
+    "ajax": "ajax/tabla-productos.ajax.php",
     "deferRender": true,
 	"retrieve": true,
 	"processing": true,

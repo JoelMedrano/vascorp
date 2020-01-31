@@ -2,7 +2,7 @@
 * CARGAR TABLA TARJETAS
 */
 $('.tablaTarjetas').DataTable({
-	"ajax": "ajax/datatable-tarjetas.ajax.php?perfil=" + $("#perfilOculto").val(),
+	"ajax": "ajax/tabla-tarjetas.ajax.php?perfil=" + $("#perfilOculto").val(),
 	"deferRender": true,
 	"retrieve": true,
 	"processing": true,
@@ -40,7 +40,7 @@ $('.tablaTarjetas').DataTable({
 *CARGAR LA TABLA DE MATERIA PRIMA EN CREAR TARJETA
 */
 $('.tablaMateriaPrimaTarjetas').DataTable( {
-    "ajax": "ajax/datatable-materiaprimaTarjetas.ajax.php",
+    "ajax": "ajax/tabla-materiaprimaTarjetas.ajax.php",
     "deferRender": true,
 	"retrieve": true,
 	"processing": true,
@@ -412,10 +412,7 @@ function listarMP() {
 	  })
   
 	}
-  
-	/* 
-	! comentar luego de prubas
-	*/
+
 	/* console.log("listaMP", JSON.stringify(listaMP)); */
   
 	$("#listaMP").val(JSON.stringify(listaMP));

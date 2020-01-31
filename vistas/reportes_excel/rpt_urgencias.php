@@ -515,8 +515,8 @@ $sqlDetalle = mysql_query("SELECT
                                         SUM(m.cantidad) AS prod 
                                     FROM
                                         movimientosjf m 
-                                    WHERE YEAR(m.fecha) = '2019' 
-                                        AND MONTH(m.fecha) >= 7 
+                                    WHERE YEAR(m.fecha) = '2020' 
+                                        AND MONTH(m.fecha) >= 1 
                                         AND tipo = 'E20' 
                                     GROUP BY m.articulo) AS p 
                                     ON a.articulo = p.articulo 

@@ -48,10 +48,9 @@
 
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                    <input type="text" class="form-control" id="nuevoUsuario" name="nuevoUsuario"
-                      value="<?php echo $_SESSION["nombre"]; ?>" readonly>
+                    <input type="text" class="form-control" id="nuevoUsuario" name="nuevoUsuario" value="<?php echo $_SESSION["nombre"]; ?>" readonly>
 
-                    <input type="hidden" name="idUsuario" value="<?php echo $_SESSION["id"]; ?>">                      
+                    <input type="hidden" name="idUsuario" value="<?php echo $_SESSION["id"]; ?>">
 
                   </div>
 
@@ -70,40 +69,32 @@
                     <?php
 
 
-                      $ult_codigo = ControladorTarjetas::ctrUltimoCodigoTarjeta();
+                    $ult_codigo = ControladorTarjetas::ctrUltimoCodigoTarjeta();
 
-                      /* var_dump("ult_codigo", $ult_codigo); */
+                    /* var_dump("ult_codigo", $ult_codigo); */
 
-                      if(!$ult_codigo){
+                    if (!$ult_codigo) {
 
-                        echo '<input type="text" class="form-control" id="nuevaTarjeta" name="nuevaTarjeta" value="10001" readonly>';
+                      echo '<input type="text" class="form-control" id="nuevaTarjeta" name="nuevaTarjeta" value="10001" readonly>';
+                    } else {
 
+                      foreach ($ult_codigo as $key => $value) { }
 
-                      }else{
+                      $codigo = $value["ultimo_codigo"] + 1;
 
-                        foreach ($ult_codigo as $key => $value) {
-                          
-                          
-                        
-                        }
-
-                        $codigo = $value["ultimo_codigo"]+1;
-
-                        /* 
+                      /* 
                         ! como esta sumando el codigo
                         */
 
-                        /* var_dump("ultimo_codigo", $ult_codigo);
+                      /* var_dump("ultimo_codigo", $ult_codigo);
                         var_dump("ultimo_codigo", $codigo); */
 
 
 
-                        echo '<input type="text" class="form-control" id="nuevaTarjeta" name="nuevaTarjeta" value="'.$codigo.'" readonly>';
+                      echo '<input type="text" class="form-control" id="nuevaTarjeta" name="nuevaTarjeta" value="' . $codigo . '" readonly>';
+                    }
 
-
-                      }
-
-                  ?>
+                    ?>
 
                   </div>
 
@@ -125,23 +116,21 @@
 
                       <?php
 
-                        $item = null;
-                        $valor = null;
+                      $item = null;
+                      $valor = null;
 
-                        $articulos = controladorArticulos::ctrMostrarSinTarjeta($item, $valor);
+                      $articulos = controladorArticulos::ctrMostrarSinTarjeta($item, $valor);
 
-                        foreach ($articulos as $key => $value) {
+                      foreach ($articulos as $key => $value) {
 
-                          echo '<option value="'.$value["articulo"].'">'.$value["packing"].'</option>';
+                        echo '<option value="' . $value["articulo"] . '">' . $value["packing"] . '</option>';
+                      }
 
-                        }
-
-                      ?>                      
+                      ?>
 
                     </select>
 
-                    <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs"
-                        data-toggle="modal" data-target="#modalAgregarArticulo" data-dismiss="modal">Agregar
+                    <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarArticulo" data-dismiss="modal">Agregar
                         Articulo</button></span>
 
                   </div>
@@ -151,15 +140,39 @@
                 <!--=====================================
                 TITULOS
                 ======================================-->
-                
-                <div class="col-lg-12">
-                  <label class="col-lg-6">Materia Prima</label>
-                  <label class="col-lg-2"><center>Tej. Principal</center></label>
-                  <label class="col-lg-2"><center>Consumo</center></label>
-                  <label class="col-lg-2"><center>Costo</center></label>
+
+                <div class="box box-primary">
+
+                  <div class="row">
+
+                    <div class="col-xs-6">
+
+                      <label>Materia Prima</label>
+
+                    </div>
+
+                    <div class="col-xs-2">
+
+                      <label for="">Tej. Principal</label>
+
+                    </div>
+
+                    <div class="col-xs-2">
+
+                      <label for="">Consumo</label>
+
+                    </div>
+
+                    <div class="col-xs-2">
+
+                      <label for="">Costo</label>
+
+                    </div>
+
+                  </div>
 
                 </div>
-         
+
                 <!--=====================================
                 ENTRADA PARA AGREGAR MATERIAPRIMA
                 ======================================-->
@@ -169,7 +182,7 @@
 
                 </div>
 
-                <input type="hidden" id="listaMP" name="listaMP">                
+                <input type="hidden" id="listaMP" name="listaMP">
 
                 <div class="row">
 
@@ -192,43 +205,41 @@
 
                       <tbody>
 
-                      <tr>
+                        <tr>
 
-                        <td style="width: 50%">
+                          <td style="width: 50%">
 
-                          <div class="input-group">
+                            <div class="input-group">
 
-                            <input type="number" class="form-control input-lg" min="0" value="18" id="nuevoImpuestoTarjeta"
-                              name="nuevoImpuestoTarjeta" placeholder="0" required>
+                              <input type="number" class="form-control input-lg" min="0" value="18" id="nuevoImpuestoTarjeta" name="nuevoImpuestoTarjeta" placeholder="0" required>
 
-                            <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" required>
+                              <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" required>
 
-                            <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" required>
-
-
-                            <span class="input-group-addon"><i class="fa fa-percent"></i></span>
-
-                          </div>
-
-                        </td>
-
-                        <td style="width: 50%">
-
-                          <div class="input-group">
-
-                            <span class="input-group-addon"><i class="fa fa-money"></i></span>
-
-                            <input type="text" min="1" class="form-control input-lg" id="nuevoTotalTarjeta"
-                              name="nuevoTotalTarjeta" total="" placeholder="00000" readonly required>
-
-                            <input type="hidden" name="totalTarjeta" id="totalTarjeta">
+                              <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" required>
 
 
-                          </div>
+                              <span class="input-group-addon"><i class="fa fa-percent"></i></span>
 
-                        </td>
+                            </div>
 
-                      </tr>
+                          </td>
+
+                          <td style="width: 50%">
+
+                            <div class="input-group">
+
+                              <span class="input-group-addon"><i class="fa fa-money"></i></span>
+
+                              <input type="text" min="1" class="form-control input-lg" id="nuevoTotalTarjeta" name="nuevoTotalTarjeta" total="" placeholder="00000" readonly required>
+
+                              <input type="hidden" name="totalTarjeta" id="totalTarjeta">
+
+
+                            </div>
+
+                          </td>
+
+                        </tr>
 
                       </tbody>
 
@@ -252,8 +263,8 @@
 
             <div class="box-footer">
 
-              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-floppy-o"></i>  Guardar tarjeta</button>
-              
+              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-floppy-o"></i> Guardar tarjeta</button>
+
               <a href="tarjetas" id="cancel" name="cancel" class="btn btn-danger"><i class="fa fa-times-circle"></i> Cancelar</a>
             </div>
 
@@ -261,10 +272,10 @@
 
           <?php
 
-            $guardarTarjeta = new ControladorTarjetas();
-            $guardarTarjeta -> ctrCrearTarjeta();
+          $guardarTarjeta = new ControladorTarjetas();
+          $guardarTarjeta->ctrCrearTarjeta();
 
-          ?>             
+          ?>
 
         </div>
 
@@ -319,7 +330,7 @@ MODAL AGREGAR ARTICULO
 ======================================-->
 
 <div id="modalAgregarArticulo" class="modal fade" role="dialog">
-  
+
   <div class="modal-dialog">
 
     <div class="modal-content">
@@ -350,13 +361,13 @@ MODAL AGREGAR ARTICULO
             <!-- ENTRADA PARA SELECCIONAR CATEGORÍA -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
                 <select class="form-control input-lg" id="nuevaMarca" name="nuevaMarca" required>
-                  
+
                   <option value="">Seleccionar marca</option>
 
                   <?php
@@ -367,12 +378,12 @@ MODAL AGREGAR ARTICULO
                   $marcas = ControladorMarcas::ctrMostrarMarcas($item, $valor);
 
                   foreach ($marcas as $key => $value) {
-                    
-                    echo '<option value="'.$value["id"].'">'.$value["marca"].'</option>';
+
+                    echo '<option value="' . $value["id"] . '">' . $value["marca"] . '</option>';
                   }
 
                   ?>
-  
+
                 </select>
 
               </div>
@@ -382,10 +393,10 @@ MODAL AGREGAR ARTICULO
             <!-- ENTRADA PARA EL MODELO -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
 
                 <input type="text" class="form-control input-lg" id="nuevoModelo" name="nuevoModelo" placeholder="Ingresar modelo" required>
 
@@ -396,27 +407,27 @@ MODAL AGREGAR ARTICULO
             <!-- ENTRADA PARA LA DESCRIPCIÓN -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
 
                 <input type="text" class="form-control input-lg" id="nuevaDescripcion" name="nuevaDescripcion" placeholder="Ingresar nombre" required>
 
               </div>
 
-            </div>            
+            </div>
 
             <!-- ENTRADA PARA SELECCIONAR COLOR -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-dashboard"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-dashboard"></i></span>
 
                 <select class="form-control input-lg" id="nuevoColor" name="nuevoColor" required>
-                  
+
                   <option value="">Seleccionar color</option>
 
                   <?php
@@ -427,27 +438,27 @@ MODAL AGREGAR ARTICULO
                   $colores = ControladorColores::ctrMostrarColores($item, $valor);
 
                   foreach ($colores as $key => $value) {
-                    
-                    echo '<option value="'.$value["cod_color"].'">'.$value["cod_color"].' - '.$value["nom_color"].'</option>';
+
+                    echo '<option value="' . $value["cod_color"] . '">' . $value["cod_color"] . ' - ' . $value["nom_color"] . '</option>';
                   }
 
                   ?>
-  
+
                 </select>
 
               </div>
 
             </div>
-            
+
             <input type="hidden" name="color" id="color">
 
             <!-- ENTRADA PARA TALLAS -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-tag"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-tag"></i></span>
 
                 <select class="form-control input-lg" id="nuevaTalla" name="nuevaTalla" required>
 
@@ -499,20 +510,20 @@ MODAL AGREGAR ARTICULO
 
               </div>
 
-            </div>       
+            </div>
 
             <input type="hidden" name="talla" id="talla">
 
             <!-- ENTRADA PARA TIPO -->
 
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-text-height"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-text-height"></i></span>
 
                 <select class="form-control input-lg" id="nuevoTipo" name="nuevoTipo">
-                  
+
                   <option value="">Selecionar tipo</option>
 
                   <option value="BRASIER">BRASIER</option>
@@ -535,15 +546,15 @@ MODAL AGREGAR ARTICULO
 
               </div>
 
-            </div>                      
+            </div>
 
             <!-- ENTRADA PARA EL CÓDIGO -->
-            
+
             <div class="form-group">
-              
+
               <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-code"></i></span> 
+
+                <span class="input-group-addon"><i class="fa fa-code"></i></span>
 
                 <input type="text" class="form-control input-lg" id="nuevoCodigo" name="nuevoCodigo" placeholder="Ingresar código" readonly required>
 
@@ -553,8 +564,8 @@ MODAL AGREGAR ARTICULO
 
             <!-- ENTRADA PARA SUBIR FOTO -->
 
-             <div class="form-group">
-              
+            <div class="form-group">
+
               <div class="panel">SUBIR IMAGEN</div>
 
               <input type="file" class="nuevaImagen" name="nuevaImagen">
@@ -584,10 +595,10 @@ MODAL AGREGAR ARTICULO
       </form>
       <?php
 
-        $crearArticulo = new ControladorArticulos();
-        $crearArticulo -> ctrCrearArticulo();
+      $crearArticulo = new ControladorArticulos();
+      $crearArticulo->ctrCrearArticulo();
 
-      ?>  
+      ?>
 
 
     </div>
@@ -595,5 +606,3 @@ MODAL AGREGAR ARTICULO
   </div>
 
 </div>
-
-

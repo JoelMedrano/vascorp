@@ -35,8 +35,8 @@ class ModeloMovimientos{
                                                          SUM(total_ventas) AS total_venta
                                                       FROM
                                                          $tabla t 
-                                                         WHERE año = YEAR(NOW()) 
-                                                         AND mes = MONTH(NOW()) - $valor
+                                                         WHERE año = '2019' /*YEAR(NOW()) */
+                                                         AND mes = '12' /*MONTH(NOW()) - $valor*/
                                                          GROUP BY mes");
 
          $stmt -> execute();
@@ -84,8 +84,8 @@ class ModeloMovimientos{
                                                          SUM(total_produccion) AS total_produccion
                                                       FROM
                                                          $tabla t 
-                                                         WHERE año = YEAR(NOW()) 
-                                                         AND mes = MONTH(NOW()) - $valor
+                                                         WHERE año = '2019' /*YEAR(NOW()) */
+                                                         AND mes = '12' /*MONTH(NOW()) - $valor*/
                                                          GROUP BY mes");
 
          $stmt -> execute();
@@ -463,8 +463,8 @@ class ModeloMovimientos{
                                                       COUNT(*) AS dias_produccion 
                                                    FROM
                                                       $tabla t 
-                                                   WHERE t.año = YEAR(NOW()) 
-                                                      AND t.mes = MONTH(NOW()) - $valor 
+                                                   WHERE t.año = '2019' /*YEAR(NOW()) */
+                                                      AND t.mes = '12' /*MONTH(NOW()) - $valor */
                                                       AND total_produccion > 0");
 
       $stmt -> execute();
@@ -593,6 +593,25 @@ class ModeloMovimientos{
 
 
    }    
+
+   /* 
+   * MOSTRAR ULTIMO NUMERO DE TALONARIO
+   */
+  static public function mdlMostrarTalonario($tabla){
+
+   $stmt = Conexion::conectar()->prepare("SELECT 
+                                                   * 
+                                                FROM
+                                                   $tabla");
+
+   $stmt -> execute();
+
+   return $stmt -> fetch();
+
+   $stmt -> close();
+
+   $stmt = null;
+} 
 
 
 }

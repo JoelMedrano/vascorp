@@ -16,7 +16,7 @@ class ModeloMateriaPrima{
 														SUBSTRING(p.CodFab, 1, 6) AS codlinea,
 														tb4.Des_larga AS linea,
 														p.DesPro,
-														CONCAT(p.DesPro,' - ',tb.Des_Larga) AS descripcion,
+														CONCAT((SUBSTRING(p.CodFab, 1, 6)),' - ',p.DesPro,' - ',tb.Des_Larga, ' - ',tb2.Des_Corta) AS descripcion,
 														p.CodAlm01,
 														tb.Des_Larga AS color,
 														tb2.Des_Corta AS unidad,
@@ -106,7 +106,7 @@ class ModeloMateriaPrima{
 		
 		}
 
-		$stmt->close();
+		$stmt -> close();
 		$stmt = null;
 
 	}
@@ -258,7 +258,7 @@ class ModeloMateriaPrima{
 		
 		}
 
-		$stmt->close();
+		$stmt -> close();
 		$stmt = null;
 
 	}

@@ -29,7 +29,7 @@ class AjaxUrgencias{
 
         $valor = $this->codigoD;
 
-        $respuestaDetalle = controladorArticulos::ctrMostrarUrgenciaDetalle($valor);
+        $respuestaDetalle = controladorArticulos::ctrVisualizarUrgenciasDetalle($valor);
 
         echo json_encode($respuestaDetalle);
 	}

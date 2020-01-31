@@ -232,7 +232,91 @@ class ControladorClientes{
 
 		return $respuesta;
 
-    }
+	}
+	
+	/*=============================================
+	CREAR CLIENTES PARA PEDIDOS
+	=============================================*/
+
+	static public function ctrCrearClienteP(){
+
+		if(isset($_POST["codigoCliente"])){
+			
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚüÜ ]+$/', $_POST["nombre"])){
+
+			   $tabla = "clientesjf";
+
+			   $datos = array("codigoCliente"=>$_POST["codigoCliente"],
+						   "nombre"=>$_POST["nombre"],
+						   "tipo_documento"=>$_POST["tipo_documento"],
+						   "documento"=>$_POST["documento"],
+						   "tipo_persona"=>$_POST["tipo_persona"],
+						   "ape_paterno"=>$_POST["ape_paterno"],
+						   "ape_materno"=>$_POST["ape_materno"],
+						   "nombres"=>$_POST["nombres"],
+						   "direccion"=>$_POST["direccion"],
+						   "ubigeo"=>$_POST["ubigeo"],
+						   "telefono"=>$_POST["telefono"],
+						   "telefono2"=>$_POST["telefono2"],
+						   "email"=>$_POST["email"],
+						   "contacto"=>$_POST["contacto"],
+						   "vendedor"=>$_POST["vendedor"],
+						   "grupo"=>$_POST["grupo"],
+						   "lista_precios"=>$_POST["lista_precios"]);
+			#var_dump("datos", $datos);
+
+			$respuesta = ModeloClientes::mdlIngresarCliente($tabla, $datos);
+
+			if($respuesta == "ok"){
+
+				echo'<script>
+
+				swal({
+					  type: "success",
+					  title: "La marca ha sido guardada correctamente",
+					  showConfirmButton: true,
+					  confirmButtonText: "Cerrar"
+					  }).then(function(result){
+								if (result.value) {
+
+								window.location = "crear-pedidocv";
+
+								}
+							})
+
+				</script>';
+
+			}
+
+
+
+			}else{
+
+				echo'<script>
+
+					swal({
+						type: "error",
+						title: "¡El cliente no puede ir vacío o llevar caracteres especiales!",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+						}).then(function(result){
+							if (result.value) {
+
+							window.location = "crear-pedidocv";
+
+							}
+						})
+
+				</script>';
+
+
+
+			}
+
+
+		}
+
+    } 	
 
     
 

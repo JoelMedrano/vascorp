@@ -42,6 +42,7 @@
            
            <th style="width:10px">#</th>
            <th>Marca</th>
+           <th>Venta</th>
            <th>Acciones</th>
 
          </tr> 
@@ -64,6 +65,18 @@
                       <td>'.($key+1).'</td>
 
                       <td class="text-uppercase">'.$value["marca"].'</td>';
+
+                      if($value["venta"] == "1"){
+
+                        echo '<td><span style="font-size:85%" class="label label-success">Activo</span></td>';
+
+                      }else{
+
+                        echo '<td><span style="font-size:85%" class="label label-danger">Inactivo</span></td>';
+
+                      }
+
+                      
 
                       if( $_SESSION["perfil"] == "Supervisores" ||
                           $_SESSION["perfil"] == "Sistemas"){

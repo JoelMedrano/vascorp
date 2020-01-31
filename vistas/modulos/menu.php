@@ -454,6 +454,65 @@
 
             ?>
 
+            <!-- FACTURACION -->
+
+            <li class="treeview">
+
+                <a href="#">
+
+                    <i class="fa fa-cart-plus text-green"></i>
+
+                    <span>Facturación</span>
+
+                    <span class="pull-right-container">
+
+                        <i class="fa fa-angle-left pull-right"></i>
+
+                    </span>
+
+                </a>
+
+                <ul class="treeview-menu">
+
+                    <li>
+
+                        <a href="pedidoscv">
+
+                            <i class="fa fa-circle-o"></i>
+                            <span>Administrar pedidos</span>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="crear-pedidocv">
+
+                            <i class="fa fa-circle-o"></i>
+                            <span>Crear Pedidos</span>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="reportes">
+
+                            <i class="fa fa-circle-o"></i>
+                            <span>Reporte de ventas</span>
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </li>
+
+            <!-- FIN FACTURACION -->
+
             <!-- TICKET Joel -->
 
             <li class="treeview">

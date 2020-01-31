@@ -2,7 +2,7 @@
 * tabla paraa cargar la lista de contactos
 */
 $('.tablaContactos').DataTable( {
-    "ajax": "ajax/datatable-contactos.ajax.php?perfil="+$("#perfilOculto").val(),
+    "ajax": "ajax/tabla-contactos.ajax.php?perfil="+$("#perfilOculto").val(),
     "deferRender": true,
 	"retrieve": true,
 	"processing": true,

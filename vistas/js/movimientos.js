@@ -2,7 +2,7 @@
 * TABLA CON LAS VENTAS TOTALES POR MES
 */
 $('.tablaMovimientos').DataTable( {
-    "ajax": "ajax/datatable-movimientos.ajax.php",
+    "ajax": "ajax/tabla-movimientos.ajax.php",
     "deferRender": true,
 	"retrieve": true,
     "processing": true,

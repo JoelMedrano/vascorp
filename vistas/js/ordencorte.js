@@ -2,7 +2,7 @@
 * CARGAR TABLA TARJETAS
 */
 $('.tablaOrdenCorte').DataTable({
-	"ajax": "ajax/datatable-ordencorte.ajax.php?perfil=" + $("#perfilOculto").val(),
+	"ajax": "ajax/tabla-ordencorte.ajax.php?perfil=" + $("#perfilOculto").val(),
 	"deferRender": true,
 	"retrieve": true,
 	"processing": true,
@@ -42,7 +42,7 @@ $('.tablaOrdenCorte').DataTable({
 * tabla de articulos con urgencia para orden de corte
 */
 $('.tablaArticulosOrdenCorte').DataTable( {
-    "ajax": "ajax/datatable-articulosordencorte.ajax.php",
+    "ajax": "ajax/tabla-articulosordencorte.ajax.php",
     "deferRender": true,
 	"retrieve": true,
 	"processing": true,

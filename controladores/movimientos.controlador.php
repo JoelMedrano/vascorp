@@ -140,6 +140,20 @@ class ControladorMovimientos{
 
         return $respuesta;
 
+    }
+    
+    /* 
+    * MOSTRAR ULTIMO NUMERO DE TALONARIO
+    */
+    static public function ctrMostrarTalonario(){
+
+        $tabla = "talonariosjf";
+
+        $respuesta = ModeloMovimientos::mdlMostrarTalonario($tabla);
+
+        return $respuesta;
+
     }         
+    
 
 }

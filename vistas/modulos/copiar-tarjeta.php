@@ -169,13 +169,38 @@
                 TITULOS
                 ======================================-->
                 
-                <div class="col-lg-12">
-                  <label class="col-lg-6">Materia Prima</label>
-                  <label class="col-lg-2"><center>Tej. Principal</center></label>
-                  <label class="col-lg-2"><center>Consumo</center></label>
-                  <label class="col-lg-2"><center>Costo</center></label>
+                <div class="box box-primary">
 
-                </div>                 
+                  <div class="row">
+
+                    <div class="col-xs-6">
+
+                      <label>Materia Prima</label>
+
+                    </div>
+
+                    <div class="col-xs-2">
+
+                      <label for="">Tej. Principal</label>
+
+                    </div>
+
+                    <div class="col-xs-2">
+
+                      <label for="">Consumo</label>
+
+                    </div>
+
+                    <div class="col-xs-2">
+
+                      <label for="">Costo</label>
+
+                    </div>
+
+                  </div>
+
+                </div>
+             
 
                 <!--=====================================
                 ENTRADA PARA AGREGAR PRODUCTO
@@ -211,7 +236,7 @@
                   <div class="col-xs-6" style="padding-right:0px">
 
                     <div class="input-group">
-
+ 
                       <span class="input-group-addon input-sm"><button type="button" class="btn btn-danger btn-xs quitarMP" idMateriaPrima="'.$infoProducto["Codpro"].'"><i class="fa fa-times"></i></button></span>
 
                       <input type="text" class="form-control input-sm nuevaDescripcionProducto" idMateriaPrima="'.$infoProducto["Codpro"].'" name="agregarProducto" value="'.$infoProducto["descripcion"].'" codigoP="'.$infoProducto["Codpro"].'" readonly required>

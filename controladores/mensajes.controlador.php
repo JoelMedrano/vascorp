@@ -23,7 +23,7 @@ class ControladorMensajes{
 
         if(isset($_POST["mensaje"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ?¿¡! ]+$/', $_POST["mensaje"])){
+			if(preg_match('/^[-a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ?¿¡!:*.,() ]+$/', $_POST["mensaje"])){
 
                 $respuesta = ModeloMensajes::mdlMostrarMensajes("mailboxjf", $_SESSION["id"], $_POST["para"]);
                 #var_dump("respuesta", $respuesta);

@@ -494,21 +494,75 @@ class controladorArticulos{
 
 		return $respuesta;
 		
-	}	
+	}
+	
+		/* 
+	* MOSTRAR MP DETALLE PARA LA TABLA URGENCIA
+	*/	
+	static public function ctrVisualizarUrgenciasDetalle($valor){
+
+		$tabla = "detalles_tarjetajf";
+		
+		$respuesta = ModeloArticulos::mdlVisualizarUrgenciasDetalle($tabla, $valor);
+
+		return $respuesta;
+		
+	}
 
 
 	/* 
 	* MOSTRAR ARTICULOS PARA LA TABLA URGENCIA - DETALLE
 	*/	
-	static public function ctrMostrarUrgenciaDetalle($valor){
+	static public function ctrListaArticulosPedidos(){
 
-		$tabla = "detalles_tarjetajf";
+		$tabla = "articulojf";
 		
-		$respuesta = ModeloArticulos::mdlVisualizarUrgenciasDetalle($tabla,$valor);
+		$respuesta = ModeloArticulos::mdlListaArticulosPedidos($tabla);
+
+		return $respuesta;
+		
+	}
+	
+	/* 
+	* MOSTRAR  COLORES
+	*/	
+	static public function ctrVerColores($item, $valor){
+
+		$tabla = "articulojf";
+		
+		$respuesta = ModeloArticulos::mdlVerColores($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+	
+	/* 
+	* MOSTRAR  ARTICULOS
+	*/	
+	static public function ctrVerArticulos($valor){
+
+		$tabla = "articulojf";
+		
+		$respuesta = ModeloArticulos::mdlVerArticulos($tabla, $valor);
+
+		return $respuesta;
+		
+	}	
+
+	/* 
+	* MOSTRAR  ARTICULOS
+	*/	
+	static public function ctrVerPrecios($valor){
+
+		$tabla = "articulojf";
+		
+		$respuesta = ModeloArticulos::mdlVerPrecios($tabla, $valor);
 
 		return $respuesta;
 		
 	}		
+	
+
 
 }
 

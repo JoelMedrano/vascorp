@@ -4,7 +4,7 @@ CARGAR LA TABLA DINÁMICA DE VENTAS
 
 /*  $.ajax({
 
- 	url: "ajax/datatable-ventas.ajax.php",
+ 	url: "ajax/tabla-ventas.ajax.php",
  	success:function(respuesta){
 		
  		console.log("respuesta", respuesta);
@@ -14,7 +14,7 @@ CARGAR LA TABLA DINÁMICA DE VENTAS
  })  */
 
 $(".tablaVentas").DataTable({
-  ajax: "ajax/datatable-ventas.ajax.php",
+  ajax: "ajax/tabla-ventas.ajax.php",
   deferRender: true,
   retrieve: true,
   processing: true,

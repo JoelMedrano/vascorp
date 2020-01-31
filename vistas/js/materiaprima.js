@@ -1,5 +1,5 @@
 $('.tablaMateriaPrima').DataTable( {
-    "ajax": "ajax/datatable-materiaprima.ajax.php",
+    "ajax": "ajax/tabla-materiaprima.ajax.php",
     "deferRender": true,
 	"retrieve": true,
 	"processing": true,
@@ -35,7 +35,7 @@ $('.tablaMateriaPrima').DataTable( {
 * tabla paraa cargar la lista de materia - URGENCIA
 */
 $('.tablaUrgenciasAMP').DataTable( {
-    "ajax": "ajax/datatable-urgenciasamp.ajax.php?perfil="+$("#perfilOculto").val(),
+    "ajax": "ajax/tabla-urgenciasamp.ajax.php?perfil="+$("#perfilOculto").val(),
     "deferRender": true,
 	"retrieve": true,
 	"processing": true,

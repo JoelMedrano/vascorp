@@ -9,6 +9,7 @@ todo: TARJETAS
 * visualizar detale de tarjeta - ok
 * calcular cantidad que necesita cierta cantidad de prendas - ok
 ! sacar reporte en excel
+* agregar codigo de linea y unidad de pedido.
 // se puede poner la cantidad de prendas que rinden por kilo? en tarjeta.
 
 
@@ -91,3 +92,12 @@ todo: ROLES
 
 */
 
+if($respuesta = "ok"){
+
+echo '  <script>
+
+         window.location="index.php?ruta=crear-pedidocv&pedido='.$_POST["pedido"].'";
+
+        </script>';
+
+}
